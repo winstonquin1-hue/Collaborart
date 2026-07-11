@@ -1,0 +1,20 @@
+var reader = new FileReader();
+          reader.onloadend = function() {  
+            var byteCharacters = atob(reader.result.slice(reader.result.indexOf(',') + 1));            
+            var byteNumbers = new Array(byteCharacters.length);
+
+            for (var i = 0; i < byteCharacters.length; i++) {              
+              byteNumbers[i] = byteCharacters.charCodeAt(i);              
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+            var blob = new Blob([byteArray], {type: 'video/ogg'});
+            var url = URL.createObjectURL(blob);
+            prevvideo.src = url
+         
+            console.log(path + "File exists");
+            prev = true;
+          }
+          reader.readAsDataURL(http.response);
+		  
+		  /* this needs to be called while on a server. wont work from a file only */
