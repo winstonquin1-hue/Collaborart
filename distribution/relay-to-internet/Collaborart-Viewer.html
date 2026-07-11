@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<title>CollaborArt</title>
+<style>				
+.circle { 
+	width:550px;
+	height: 0px;
+	left:160;
+	top:240;
+	border-radius: 5%;
+	position: absolute;
+	transition: all 0.2s;			
+	font-size: 12pt;
+	}
+		.circle.ui-draggable-dragging {
+		transition: none;
+		}				
+	.squareButton  { 
+		height: 20px; 
+		width : 70px;
+		border-radius: %;
+		border:3;
+		position: absolute;			
+		font-size: 12pt;
+		left:200px;
+		top: 40px;
+		min-width:25px;
+		color: transparent;    
+		background-color: transparent ;		
+		overflow: hidden; 
+		}
+	.squareButton.ui-draggable-dragging {
+			transition: none;
+		}							
+	.squareNotification { 
+		width:10px;
+		height: 14px;
+		left:10;
+		top:226;
+		border-radius: 7%;
+		position: absolute;
+		transition: all 0.7s;			
+		font-size: 12pt;
+		overflow: hidden;
+		background-color:'#e6005c';
+		color:lightgreen;
+		opacity: 0.3;
+		z-index:2001;
+	}
+		.squareNotification.ui-draggable-dragging {
+			transition: none;
+		}							
+	.roundRandom1 { 
+		width:0px;
+		height: 0px;
+		left:-50;
+		top:0;
+		border-radius: 100%;
+		position: absolute;		
+		font-size: 34pt;
+		overflow: none;
+		color: transparent;
+		background-color: transparent;
+		opacity: 0;
+		z-index:3000;
+		text-align:center;
+	}
+	.roundRandom2 { 
+		width:0px;
+		height: 0px;
+		left:-50;
+		top:0;
+		border-radius: 100%;
+		position: absolute;		
+		font-size: 34pt;
+		opacity: 0;
+		overflow: none;
+		color: transparent;
+		background-color:transparent;
+		z-index:3000;
+		text-align:center;
+	}
+	</style>
+</head>
+<body>
+<div src="" class="my-div" />
+<script>
+myDiv = document.querySelector(".my-div");
+var circlesJson =[{"id":"DEA6B8D2-B9F5-4FAC-B1E1-9F908D29BCF9","x":100,"y":20,"width":"425","height":"20","zindex":"2001","color":"#e6005c","doDelete":"notifyblock","text":"&#160;&#160;","extratext":""},{"id":"0B5D0E68-25F9-4FD4-9ED4-7B67D7E43301","x":247,"y":214,"width":"350","height":"0","zindex":"1","color":"#cce6ff","doDelete":"textarea","text":"Joe updates me","extratext":"I am live view"}];
+var j = circlesJson.length;
+for (var i = 0; i < circlesJson.length; i++) {
+var c = circlesJson[i];	
+const a = document.createElement('a');
+a.id = c.id;
+a.innerHTML = "<div class='circle' id="+c.id+" style='left:"+c.x+"px; top:"+c.y+"px; z-index:"+c.zindex +"; width:"+c.width+"; heigth:"+c.height+";  background-color:"+ c.color+";' >"+c.text+"</div>"; 
+document.body.insertBefore(a, myDiv);
+/* console.log("id: "+ c.id + " left: "+ c.x + " top: "+ c.y + " zindex: "+ c.zindex + " width: "+ c.width + " height: "+ c.height + " doDelete: "+ c.doDelete  + " background-color: "+ c.color + " text: "+ c.text + " extratext: "+ c.extratext);  */
+}
+</script>					
+</body>					
+</html>					  

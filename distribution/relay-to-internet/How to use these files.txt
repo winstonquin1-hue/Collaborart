@@ -1,0 +1,117 @@
+These files are for publishing your document on the Internet or an Intranet .
+The following two things must happen for relaying data.
+
+1. In the CollaborArt server the 'Relay' checkbox is checked.
+2. A valid address which points to the saveCollaborart.php either on a localhost or a Internet web server.
+3. The client app (browser design page for CollaborArt) has pressed the Update button.
+4. All the files are on the web server.
+
+A document can be worked on and relayed at the end OR can be published live as an on-the-go
+basis. This means a person can watch from literally anywhere on any device 'as you work' on the document.
+
+This provided some intersting possibilities.
+
+1. A single person publishing a single document.
+2. Multpile people publishing a Collaborart document.
+3. Multiple people from different locations publishing to the same web page 
+
+So for example a company can have different people publishig their update at a given point in time.
+eg. 10am one report from dept x and 11 am a report from dept y and so on.
+One each hour they press update and the web page is updated with the new report.
+
+Another example is something like a VisualRadio Station where a person gets a time slot eg 15 mins.
+The person makes up their audio  visual experience and at the given time slot updates the web page.
+Using events, as shown in other sample collaborart pages, its possible to have an audio visual experience.
+
+The above could also be used in a teaching environment or for presentations.
+
+Heres another scenario:
+Many people publishing to many different web pages and they are all shown in <iframes> in a single web page.
+This could be even used as a chat server wher a few people can have a multi user chat with each in their own 
+display area. 
+
+
+//----------------------- Multiple chat boxes ------------------------
+
+
+This can be done by making copy of the 'file set' and calling them eg.
+live-view1.html
+collaboart_see1.php
+saveCollaborart1.php
+Collaborart-Viewer1.html
+Then change the file contents to reference these files.
+Then use an <iframe> to view the different pages.
+Then in each Collaborart Server the user points to their set of files eg. saveCollaborart1.html
+
+A series of iframes will allow you to have many chat boxes with graphics, data .. whatever in those chats.
+eg. iframe with Collaborart-Viewer1.html and another with Collaborart-Viewer2.html .. and so on.
+It will be possible to have many people interacting in one chat space.
+
+The following files have been included for having multiple users in seperate iframe spaces.
+Two extra sets have been made ofr this and you can add as manu as you like.
+They are:
+
+live-view1.html
+collaboart_see1.php
+saveCollaborart1.php
+Collaborart-Viewer1.html
+
+and
+
+live-view2.html
+collaboart_see2.php
+saveCollaborart2.php
+Collaborart-Viewer2.html
+
+With the above this can be done:
+1. A mother page with two child pages.
+2. The mother page has two iframes. One for live-view1.html and one for live-view2.html
+3. Joe uses his own CollaborArt Server and updates to web server's collaboart_see1.php in the Relay edit box.
+4. Mary uses her own CollaborArt Server and updates to web server's collaboart_see2.php in the Relay edit box.
+5. The mother page is another CollaborArt Server and updates to web server's collaboart_see.php in the Relay edit box. 
+
+This means that the main view is live-view.html
+The main view has two iframes with live-view1.html and live-view2.html in them.
+When Mary and Joe update their pages the changes will show in the main view ie. live-view.html
+
+Scenario:
+A situation report.
+Many locactions can be updating a situation report and the main view sees all reports in one page.
+
+Very basic example:
+20 locations each update their iframe with a color. the ifram is only 30 x 30 pixels.
+20 iframes in one window can show a color status for each location in one window.
+
+Scenario:
+A company has all the directors visit one web page 
+and get all the 'live reports' or updates from many different departments.
+
+------------------------------- =================================== -------------------------------------------
+
+UPLOADING FILES:
+------------------------------- =================================== -------------------------------------------
+
+
+
+UPLOADING FILES:
+
+In Collaborart the 'Publish using' will send a file to a URL: eg localhost/SaveCollaborartVideo.php
+
+
+SaveCollaborartVideo.php is a sample file to go on a web server to receive files from Collaborart.
+You can use any file with any URL to publish. This uses standard http to send files to the server.
+
+
+See the VIDEO-START-STOP-RECORD-WITH_FILE_UPLOAD.html file for a sample implementation.
+
+
+
+
+
+
+
+
+
+
+
+

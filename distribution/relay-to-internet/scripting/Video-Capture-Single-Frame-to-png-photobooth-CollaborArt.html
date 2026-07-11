@@ -1,0 +1,522 @@
+<!-- This text can be copied and pasted into CollaborArt -->
+<html>
+<head>
+
+<style>	
+#video {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width: 320px;
+  height: 210px;
+}
+
+
+
+#canvas {
+  display: none;
+//  h-align: right;
+  margin: auto;
+  width: 100%;
+  border:0;
+  padding: 10px;
+
+}
+.output {
+          //  width: 320px;
+ // display: inline-block;
+ //  vertical-align: left;
+  // margin: auto;
+            //  width: 101%;
+              // border: 3px solid red;
+           // padding: 1px; 
+  
+}
+
+#startbutton {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 32px;
+  background-color: rgb(0 150 0 / 50%);
+  border: 1px solid rgb(255 255 255 / 70%);
+  box-shadow: 0px 0px 1px 2px rgb(0 0 0 / 20%);
+  font-size: 14px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  color: rgb(255 255 255 / 100%);
+}
+
+.contentarea {
+  font-size: 16px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  width: 400px;
+}
+a {
+  text-decoration: inherit !important;
+  color: inherit !important;
+}
+</style>
+</head>
+    <div>
+        Recording format: <select id="codecPreferences" disabled></select>
+    </div>
+<script>
+
+//document.addEventListener('DOMContentLoaded', function() { 
+//document.addEventListener("load", startvideo, false);
+// });
+// window.addEventListener("load", startvideo, false);
+ //     alert("loaded");
+const codecPreferences = document.querySelector('#codecPreferences');
+
+
+/*		function getSupportedMimeTypes() {
+				const possibleTypes = [
+                       'application/png',
+                       'application/x-png'
+											];
+					return possibleTypes.filter(mimeType => {
+					return isTypeSupported(mimeType);
+					});
+		}
+*/
+
+function startProcess(){
+					/*		getSupportedMimeTypes().forEach(mimeType => {
+								const option = document.createElement('option');
+								option.value = mimeType;
+								option.innerText = option.value;
+								codecPreferences.appendChild(option);
+								});
+*/
+startup()
+}
+
+//(() => {
+
+
+             window.addEventListener("message", (event) => {                 
+			 console.log(`Received message: ${event.data}`)
+                    });
+
+	let bw = "";	
+	var nb_record = 1;
+    let name;
+	let blobs = [];
+	
+	
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days =0;// Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours =0;// Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = 0;//Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (50 * 60)) / 1000);
+    
+  // Output the result in an element with id="time"
+  document.getElementById("time").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+   
+  if (seconds = "0") {
+   // clearInterval(x);
+  ///  document.getElementById("time").innerHTML = "EXPIRED";
+  takepicture();  //  <--------------------------------------------------------<<<<<
+  }
+   
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+   // document.getElementById("time").innerHTML = "EXPIRED";
+	//takepicture();
+  }
+}, 5000);
+
+  // The width and height of the captured photo. We will set the
+  // width to the value defined here, but the height will be
+  // calculated based on the aspect ratio of the input stream.
+
+  const width = 320; // We will scale the photo width to this
+  let height = 0; // This will be computed based on the input stream
+
+  // |streaming| indicates whether or not we're currently streaming
+  // video from the camera. Obviously, we start at false.
+
+  let streaming = false;
+
+  // The various HTML elements we need to configure or control. These
+  // will be set by the startup() function.
+
+  let video = null;
+  let canvas = null;
+  let photo = null;
+  let startbutton = null;
+
+  function showViewLiveResultButton() {
+    if (window.self !== window.top) {
+      // Ensure that if our document is in a frame, we get the user
+      // to first open it in its own tab or window. Otherwise, it
+      // won't be able to request permission for camera access.
+      document.querySelector(".contentarea").remove();
+      const button = document.createElement("button");
+      button.textContent = "View live result of the example code above";
+      document.body.append(button);
+      button.addEventListener("click", () => window.open(location.href));
+      return true;
+    }
+    return false;
+  }
+
+  function startup() {
+    if (showViewLiveResultButton()) {
+      return;
+    }
+	
+    video = document.getElementById("video");
+    canvas = document.getElementById("canvas");
+    photo = document.getElementById("photo");
+    startbutton = document.getElementById("startbutton");
+
+///const recorder = new MediaRecorder(mediaStream);
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then((stream) => {
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch((err) => {
+        console.error(`An error occurred: ${err}`);
+      });
+	  
+	  
+
+    video.addEventListener(
+      "canplay",
+      (ev) => {
+        if (!streaming) {
+          height = video.videoHeight / (video.videoWidth / width);
+
+          // Firefox currently has a bug where the height can't be read from
+          // the video, so we will make assumptions if this happens.
+
+          if (isNaN(height)) {
+            height = width / (4 / 3);
+          }
+
+          video.setAttribute("width", width);
+          video.setAttribute("height", height);
+          canvas.setAttribute("width", width);
+          canvas.setAttribute("height", height);
+          streaming = true;
+        }
+      },
+      false,
+    );
+
+    startbutton.addEventListener(
+      "click",
+      (ev) => {
+        takepicture();
+        ev.preventDefault();
+      },
+      false,
+    );
+
+  //  clearphoto();
+  }
+ 
+  // Fill the photo with an indication that none has been captured.
+
+				function clearphoto() {
+					/*	const context = canvas.getContext("2d");
+								context.fillStyle = "#6699ff";
+								context.fillRect(0, 0, canvas.width, canvas.height);
+
+								const data = canvas.toDataURL("image/png");
+							photo.setAttribute("src", data);
+						*/	
+						}
+
+  // Capture a photo by fetching the current contents of the video  and drawing it into a canvas, 
+  // then converting that to a PNG format data URL. 
+  // By drawing it on an offscreen canvas and then  drawing that to the screen, 
+  // Note: can change its size and/or apply other changes before drawing it.
+
+			function takepicture() {
+				
+				const context = canvas.getContext("2d");
+						if (width && height) {
+								canvas.width = 324;// width;
+								canvas.height = 240;//height;
+								
+							//	context.drawImage(video, 0, 0, width, height);
+								context.drawImage(video, 0, 0, 320, 240);
+						//*const canvas = document.getElementById("canvas");
+						
+						
+					const dataURL = canvas.toDataURL();
+	
+	//console.log("Picture dataURL: " +dataURL); 
+	
+	        const canvasRaw = document.getElementById("picraw");  // <---- - - - -- - - -- draw to canvas !!!!!!!!!!
+			// "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
+			//  UAAAAFCAYAAACNbyblAAAADElEQVQImWNgoBMAAABpAAFEI8ARAAAAAElFTkSuQmCC"
+
+				const data = canvas.toDataURL("image/png");
+					//	photo.setAttribute("src", data);
+				
+				canvasRaw.innerHTML = "<img src='"+ data + "'>";// data;					
+		
+				// here it can be streamed to anywhere !!!!!!!!!!!!!!!!????
+				
+//*******sendit(data);  //                   <---------------------------------------------------<)<
+
+save_as(data,"CollaborArt");
+		//document.write(dataURL);		
+			//document.getElementById("Recording").innerHTML = "<img src='"+ data + "'>";	
+			//	let bw =document.getElementById("Recording").innerHTML;
+			
+// here is the point to transmit the data !!!!!!!!
+
+				  
+				} else {
+						clearphoto();
+						}
+			}
+
+  // STARTS HERE !!!! 
+  // Set up our event listener to run the startup process  once loading is complete.
+ // window.addEventListener("load", startup, false);
+//})();
+
+ let mediaStream = new MediaStream;
+ function startvideo(){
+                //window.addEventListener("load", startup, false);
+				
+            const recorder = new MediaRecorder(mediaStream);
+                       ///takepicture();
+
+//startup();
+
+}
+
+ function save_as (blob, name) {
+ 
+
+
+
+// Calculate milliseconds in a year
+const minute = 1000 * 60;
+const hour = minute * 60;
+const day = hour * 24;
+const year = day * 365;
+
+// Divide Date.now() with a year
+//let years = Math.round(Date.now() / year);
+// document.getElementById("datetimeforfile").innerHTML = year+day+hour+minute;
+
+      //  let aDate =  Date("Jan 5, 2030 15:37:25").getTime();
+		//	const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+		//	 blob = new Blob(recordedBlobs, {type: mimeType});
+		//	const url = window.URL.createObjectURL(blob);
+			
+		//---------------------	
+		//  const superBuffer2 = new Blob(recordedBlobs, {type: mimeType});
+       //      receivedVideo.src = null;
+       //      receivedVideo.srcObject = null;
+        //     receivedVideo.src = window.URL.createObjectURL(superBuffer2);
+ // receivedVideo.controls = true;
+ // receivedVideo.play();
+			
+			// socket.send(JSON.stringify({ 
+			//				act: 'broadcast',
+			//				 message: "new file: "+a.download
+			//				        })); 
+	
+//	console.log("Broadcasted " +url);		
+			
+		//	 name= "image";
+			//--------------
+			const a = document.createElement('a');			
+		a.style.display = 'none';
+			a.href = blob;             //    'video_mp4' _ '1wq3.mp4' _ '1wq3
+		  //  let b = "video/mp4 ? "+name+document.getElementById("datetimeforfile").innerHTML+nb_record+".mp4 : "+name+document.getElementById("datetimeforfile").innerHTML+nb_record+".mp4";
+			a.download = name+nb_record+".png";
+			
+			a.target = "_blank";
+			a.style.margin = "3px";
+			a.textContent = "Record " + nb_record;
+			//a.download = mimeType === 'video/mp4' ? 'video.mp4' : '+a.download+';
+			//a.download = mimeType === 'video/mp4' ? 'video_stream.mp4' : 'videoStream/mp4';
+			//a.download = b ;
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(() => {
+				document.body.removeChild(a);
+				//window.URL.revokeObjectURL(url);
+				}, 100);
+
+            nb_record++;
+			
+	// console.log("Saved as: "+ a.download);		
+	// document.getElementById("savedFile").innerHTML = "Saved as: "+ a.download;
+	 // now get the files data into a video tag in the main form
+	 // this should be playing inline
+	 
+	 // There is a blob url 
+	 //
+	 //
+	
+	 								
+    }
+
+
+
+
+
+
+ function sendit(data){
+ 
+  // there is a big problem splitting data because 10 /4 = 2.5 and 1234567890 cannot be split into 4 chunks of 2.5
+  // so a set number needs to be established eg. 3
+  // then data is 123 456 789 and one part remaning
+  //
+  // Which means that firstly the size of the data chunks need to have the ff considered
+  // The picture could be enormous and the max chunks shouldn't be bigger than 4096.
+  //   This means the picture should be copied chunk by chunk - klunk klunk
+  //   until the last chunk is less than the size of the 4096.
+  //    copy first 4096 
+  //    test to see if the left over 'to copy' part is smaller than 4096 or not
+  //    If it is smaller then were left with the tail to send.
+  //    IF not then copy the next 4096 
+  //    test length
+  
+  //   So 
+  // 1 get the length 
+  // 2 divide it by 4096
+  // 3 this will give a fractional number so it needs to be rounded eg 3.65454 to 3 or 4???
+  
+  // or 
+  //  if 1st chunk is larger than 4096 then 8192 
+ //  if 1st chunk is larger than 4096 then 8192... 12288... 16384...  
+  
+  //mydata = "1234567890";
+  
+      // let alength =  data.length; 
+	     
+		// alength = alength / 50000;
+  
+
+									
+  
+	 let a = Math.floor( (data.length / 5) );
+
+	  let b = a * 5;          // b = x times 4096 chunks in data
+	  let c = data.length -b ;   // c = the remaining portion of data 
+	  let d = b + c;             // check !!! --> d = data.length  
+	  
+     let v= "";
+  
+   socket.send(JSON.stringify({
+								      act: 'photo',
+								     // id: $(this).attr('id'),
+								    //  x: 350, // $(this).css('left').replace('px', ''),
+								    //  y: 100, // $(this).css('top').replace('px', ''),
+									  text: "Start Photo: "+ data.length + " Chunks Size: "+ a // data
+                                                     //  "<img src='"+ data + "'>"//    document.getElementById("Recording").innerHTML  //canvasRaw.innerHTML//    "<img src='"+ data + "'>" // 
+							        })); 	
+	
+  console.log("Data: "+ data.length +"\nchunks (a): " + a +"\nsum chunks (b): "+ b + "\ntail (c): "+ c +"\nTail+sumchinks (d): "+d);  	
+	
+	let k = a;  // data.length / 5 - to be increased each time j is increased
+	let j = 0;	
+	let i = 0;
+	
+  //-- make 5 data chunks
+	while (i < 5) {	
+             i++; 
+            
+			v = data.substr(j, k);		
+	//-- now j must become the start point for the next iteration 
+         j = k + 1;  // +1 to start from the next char pos eg. 4500 + 1 starts at 4501 reads next 4500 ...	
+	     k = k + a;  // to start from the next char pos eg. 4500 + 1 starts at 4501 reads next 4500 ...	//-- a is the amount to read	
+      
+	  console.log("Iteration (i): " + i + "\ncount (j) : "+j);	 	
+     //  console.log(v);  
+              socket.send(JSON.stringify({
+								      act: 'photo',
+								     // id: $(this).attr('id'),
+								    //  x: 350, // $(this).css('left').replace('px', ''),
+								    //  y: 100, // $(this).css('top').replace('px', ''),
+									  text:v
+                                                     //  "<img src='"+ data + "'>"//    document.getElementById("Recording").innerHTML  //canvasRaw.innerHTML//    "<img src='"+ data + "'>" // 
+							        }));
+								
+           v = "";
+            }	
+
+
+	                 socket.send(JSON.stringify({
+								      act: 'photo',
+								     // id: $(this).attr('id'),
+								    //  x: 350, // $(this).css('left').replace('px', ''),
+								    //  y: 100, // $(this).css('top').replace('px', ''),
+									  text: "End Photo" // data
+                                                     //  "<img src='"+ data + "'>"//    document.getElementById("Recording").innerHTML  //canvasRaw.innerHTML//    "<img src='"+ data + "'>" // 
+							        }));									
+}
+
+
+
+</script>
+<body>
+	Open the Developer Tools to see the data stream and the video from the device camera is shown on top.<br>
+	The captured frame is shown on the bottom. The time interval between snapshots is shown below the captured frame.<br>
+	Now instead of capturing pictures rather capture video !!!<br>
+
+<center>
+<!--	Start Camera button will restart the streaming.?-->
+
+	<button onclick="startProcess()">Start Camera</button> 
+		
+	<button onclick="startvideo()">reStart Camera</button> 			   
+	
+	<form id="event-form">
+                         <div class="contentarea">  
+							<br>Video Capture
+								<video id="video">Video stream not available.</video>
+								<button id="startbutton">Take Snapshot</button> 
+								<canvas id="canvas"> </canvas>
+							      <div class="output">
+									<!--	<br>Use this picture?<br>
+										<img id="photo" alt="The screen capture will appear in this box." />
+									-->	
+							        <div id="picraw"></div>			
+						          </div>
+						</div>		  
+				</form>
+<br><button onclick="closeWin()">Reset Camera</button>	
+
+<div id="time">
+</div>				
+	</center>		
+	</div></div></div></div>
+	
+	<!--    <div  id="Recording">
+        Recording :
+    </div>
+-->	
+	
+
+	
+</body>
+</html>

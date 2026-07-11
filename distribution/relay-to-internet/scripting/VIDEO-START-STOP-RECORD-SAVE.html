@@ -1,0 +1,283 @@
+<div id="container"><div><button class="hidebutton" id="start">Start camera</button><button class="invisiblebutton" id="play" disabled>Play</button> <button class="hidebutton"  id="record"  disabled>Start recording</button> 		<button class="invisiblebutton"  id="download" disabled  >Download</button><button class="hidebutton" id="stopRefreh"  onclick="myRefreshFunction()">Stop All</button></div><div><br><br>Incoming from camera<br><video  id="gum" width="320" height="240" playsinline autoplay muted></video><video id="recorded" width="0" height="0" ></video><br>Captured video stream plays here. Not buffered.<br><video id="recieved" width="320" height="240" playsinline autoplay controls="none" ></video> </div> <p id="time">Timer will show countdown here </p><p id="datetimeforfile"></p><div>Recording format: <select id="codecPreferences" disabled></select></div><div>Media Stream Constraints - Options<br>Echo cancellation: <input type="checkbox" id="echoCancellation"><p id="savedFile"></p></div><div><span id="errorMsg"></span></div></div>
+<script>window.addEventListener("message", (event) => {console.log(`Received window message: ${event.data}`)});
+let mediaRecorder;
+let recordedBlobs;
+var nb_record = 1;
+let name;
+	var nb_record = 1;
+	let blobs = [];	
+	let thisBlob = window.URL;	
+const codecPreferences = document.querySelector('#codecPreferences');
+const errorMsgElement = document.querySelector('span#errorMsg');
+const recordedVideo = document.querySelector('video#recorded');
+const recordButton = document.querySelector('button#record');
+const receivedVideo = document.querySelector('video#recieved');
+//-- Set the date we're counting down to
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
+// Update the count down every 1 second
+var x = setInterval(function() {
+  // Get today's date and time
+  var now = new Date().getTime();    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;    
+  // Time calculations for days, hours, minutes and seconds
+  var days =0;// Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours =0;// Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = 0;//Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (50 * 60)) / 1000);    
+  // Output the result in an element with id="time"
+  document.getElementById("time").innerHTML = days + "d " + hours + "h "  + minutes + "m " + seconds + "s ";   
+  if (seconds = "0") {
+   // clearInterval(x);
+  ///  document.getElementById("time").innerHTML = "EXPIRED";
+ 
+ //  takepicture(); //
+  stopRecording(); 
+  startRecording();  
+  // here make an event to trigger the buttons start/stop  
+  }   
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+	mediaRecorder.stop();
+   // document.getElementById("time").innerHTML = "EXPIRED";
+	//takepicture();
+  }
+  if (seconds = "2") {
+   // clearInterval(x);
+  ///  document.getElementById("time").innerHTML = "EXPIRED";
+   //       takepicture();  //
+  // here make an event to trigger the buttons start/stop  
+  }  
+}, 2000);
+
+recordButton.addEventListener('click', () => {
+  if (recordButton.textContent === 'Start recording') {
+    startRecording();
+  } else {
+    stopRecording();
+	recordButton.style.top = '-20px';
+    recordButton.textContent = 'Start recording';
+    playButton.disabled = false;
+    downloadButton.disabled = false;
+    codecPreferences.disabled = false;
+  }
+});
+
+const playButton = document.querySelector('button#play');
+playButton.addEventListener('click', () => {
+  const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+  const superBuffer = new Blob(recordedBlobs, {type: mimeType});
+  recordedVideo.src = null;
+  recordedVideo.srcObject = null;
+  recordedVideo.src = window.URL.createObjectURL(superBuffer);
+  recordedVideo.controls = true;
+  recordedVideo.play();
+});
+
+    const downloadButton = document.querySelector('button#download');
+			
+	downloadButton.addEventListener('click', () => {
+			const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+			const blob = new Blob(recordedBlobs, {type: mimeType});
+		   //let blob = new Blob(recordedBlobs, {type: mimeType});
+			//thisBlob = blob;
+			const url = window.URL.createObjectURL(blob);			
+            //------------  
+           thisBlob = window.URL.createObjectURL(blob);   
+            //-------
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			a.href = url;
+			a.download = mimeType === 'video/mp4' ? 'test.mp4' : 'test.webm';
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(() => {
+				document.body.removeChild(a);
+				window.URL.revokeObjectURL(url);
+				}, 100);
+		});
+
+		function handleDataAvailable(event) {
+			
+		console.log('handleDataAvailable', event);
+				if (event.data && event.data.size > 0) {
+				recordedBlobs.push(event.data);
+				
+			let name= "1wq";
+				 save_as (blobs, name) ;
+				
+				}
+		}
+
+		function getSupportedMimeTypes() {
+				const possibleTypes = [
+						'video/webm;codecs=vp9,opus',
+						'video/webm;codecs=vp8,opus',
+						'video/webm;codecs=h264,opus',
+						'video/webm;codecs=av01,opus',
+						'video/mp4;codecs=h264,aac',
+						'video/mp4;codecs=avc1,mp4a.40.2',
+						'video/mp4',
+						];
+					return possibleTypes.filter(mimeType => {
+					return MediaRecorder.isTypeSupported(mimeType);
+					});
+		}
+
+	async function startRecording() {
+							recordedBlobs = [];
+							const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value;
+									const options = {mimeType};
+									if (mimeType.split(';', 1)[0] === 'video/mp4') {
+										// Adjust sampling rate to 48khz.
+										const track = window.stream.getAudioTracks()[0];
+										const {sampleRate} = track.getSettings();
+												if (sampleRate != 48000) {
+													track.stop();
+													window.stream.removeTrack(track);
+													const newStream = await navigator.mediaDevices.getUserMedia({audio: {sampleRate: 48000}});
+													window.stream.addTrack(newStream.getTracks()[0]);
+												}
+									}
+							try {
+									mediaRecorder = new MediaRecorder(window.stream, options);
+									} catch (e) {
+		console.error('Exception while creating MediaRecorder:', e);
+											errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
+											return;
+							}
+
+		console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
+						recordButton.textContent = 'Stop recording';
+						playButton.disabled = true;
+						downloadButton.disabled = true;
+						codecPreferences.disabled = true;
+							mediaRecorder.onstop = (event) => {
+		console.log('Recorder stopped: ', event);
+		console.log('Recorded Blobs: ', recordedBlobs);
+							};
+							mediaRecorder.ondataavailable = handleDataAvailable;
+							mediaRecorder.start();
+		console.log('MediaRecorder started', mediaRecorder);
+				}// end startRecording
+
+
+		function stopRecording() {		
+							mediaRecorder.stop();							
+		      }
+		
+		function myRefreshFunction() {		
+			window.location.reload();									
+		      }		
+
+		function handleSuccess(stream) {
+							recordButton.disabled = false;
+							
+							
+		console.log('getUserMedia() got stream:', stream);
+							window.stream = stream;
+
+							const gumVideo = document.querySelector('video#gum');
+							gumVideo.srcObject = stream;
+
+							getSupportedMimeTypes().forEach(mimeType => {
+								const option = document.createElement('option');
+								option.value = mimeType;
+								option.innerText = option.value;
+								codecPreferences.appendChild(option);
+								});
+					codecPreferences.disabled = false;
+					startRecording()
+		}
+
+		async function init(constraints) {
+						try {
+						const stream = await navigator.mediaDevices.getUserMedia(constraints);
+						handleSuccess(stream);
+						} catch (e) {
+		console.error('navigator.getUserMedia error:', e);
+						errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+						}
+		}
+
+	document.querySelector('button#start').addEventListener('click', async () => {
+	document.querySelector('button#start').disabled = true;
+	const hasEchoCancellation = document.querySelector('#echoCancellation').checked;
+				const constraints = {
+						audio: {
+								echoCancellation: {exact: hasEchoCancellation}
+							},
+						video: {
+								width: 1280, height: 720
+							}
+				};
+				
+	console.log('Using media constraints:', constraints);
+		
+		await init(constraints);
+});
+
+ function save_as (blob, name) {
+// Calculate milliseconds in a year
+const minute = 1000 * 60;
+const hour = minute * 60;
+const day = hour * 24;
+const year = day * 365;
+
+// Divide Date.now() with a year
+//let years = Math.round(Date.now() / year);
+// document.getElementById("datetimeforfile").innerHTML = year+day+hour+minute;
+
+      //  let aDate =  Date("Jan 5, 2030 15:37:25").getTime();
+			const mimeType = codecPreferences.options[codecPreferences.selectedIndex].value.split(';', 1)[0];
+			 blob = new Blob(recordedBlobs, {type: mimeType});
+			const url = window.URL.createObjectURL(blob);
+			
+		//---------------------	
+		  const superBuffer2 = new Blob(recordedBlobs, {type: mimeType});
+             receivedVideo.src = null;
+             receivedVideo.srcObject = null;
+             receivedVideo.src = window.URL.createObjectURL(superBuffer2);
+  receivedVideo.controls = true;
+  receivedVideo.play();
+			
+			// socket.send(JSON.stringify({ 
+			//				act: 'broadcast',
+			//				 message: "new file: "+a.download
+			//				        })); 
+	
+	console.log("Broadcasted " +url);		
+			
+			 name= "video";
+			//--------------
+			const a = document.createElement('a');			
+		a.style.display = 'none';
+			a.href = url;             //    'video_mp4' _ '1wq3.mp4' _ '1wq3
+		  //  let b = "video/mp4 ? "+name+document.getElementById("datetimeforfile").innerHTML+nb_record+".mp4 : "+name+document.getElementById("datetimeforfile").innerHTML+nb_record+".mp4";
+			a.download = name+nb_record+".mp4";
+			
+			a.target = "_blank";
+			a.style.margin = "3px";
+			a.textContent = "Record " + nb_record;
+			//a.download = mimeType === 'video/mp4' ? 'video.mp4' : '+a.download+';
+			//a.download = mimeType === 'video/mp4' ? 'video_stream.mp4' : 'videoStream/mp4';
+			//a.download = b ;
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(() => {
+				document.body.removeChild(a);
+				window.URL.revokeObjectURL(url);
+				}, 100);
+
+            nb_record++;
+			
+	// console.log("Saved as: "+ a.download);		
+	 document.getElementById("savedFile").innerHTML = "Saved as: "+ a.download;
+	 // now get the files data into a video tag in the main form
+	 // this should be playing inline	 
+	 // There is a blob url 							
+    }
+
+</script>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<title>CollaborArt</title>
+<style>				
+.circle { 
+	width:550px;
+	height: 0px;
+	left:160;
+	top:240;
+	border-radius: 5%;
+	position: absolute;
+	transition: all 0.2s;			
+	font-size: 12pt;
+	}
+		.circle.ui-draggable-dragging {
+		transition: none;
+		}				
+	.squareButton  { 
+		height: 20px; 
+		width : 70px;
+		border-radius: %;
+		border:3;
+		position: absolute;			
+		font-size: 12pt;
+		left:200px;
+		top: 40px;
+		min-width:25px;
+		color: transparent;    
+		background-color: transparent ;		
+		overflow: hidden; 
+		}
+	.squareButton.ui-draggable-dragging {
+			transition: none;
+		}							
+	.squareNotification { 
+		width:10px;
+		height: 14px;
+		left:10;
+		top:226;
+		border-radius: 7%;
+		position: absolute;
+		transition: all 0.7s;			
+		font-size: 12pt;
+		overflow: hidden;
+		background-color:'#e6005c';
+		color:lightgreen;
+		opacity: 0.3;
+		z-index:2001;
+	}
+		.squareNotification.ui-draggable-dragging {
+			transition: none;
+		}							
+	.roundRandom1 { 
+		width:0px;
+		height: 0px;
+		left:-50;
+		top:0;
+		border-radius: 100%;
+		position: absolute;		
+		font-size: 34pt;
+		overflow: none;
+		color: transparent;
+		background-color: transparent;
+		opacity: 0;
+		z-index:3000;
+		text-align:center;
+	}
+	.roundRandom2 { 
+		width:0px;
+		height: 0px;
+		left:-50;
+		top:0;
+		border-radius: 100%;
+		position: absolute;		
+		font-size: 34pt;
+		opacity: 0;
+		overflow: none;
+		color: transparent;
+		background-color:transparent;
+		z-index:3000;
+		text-align:center;
+	}
+	</style>
+</head>
+<body>
+<div src="" class="my-div" />
+<script>
+myDiv = document.querySelector(".my-div");
+var circlesJson =[{"id":"05759B76-035D-41B7-947A-9EF906445F9B","x":399,"y":-12,"width":"350","height":"0","zindex":"3","color":"#cce6ff","doDelete":"textarea","text":"<video width=\"320\" height=\"240\" controls=\"\" autoplay=\"\" loop=\"\">\n  <source src=\"https://cdn.free-stock.video/372021/ocean-sunset-nature-coast-outdoors-water-sunset-9058-small.mp4\" type=\"video/mp4\">\n  <source src=\"https://cdn.free-stock.video/372021/ocean-sunset-nature-coast-outdoors-water-sunset-9058-small.mp4\" type=\"video/ogg\">\n  Your browser does not support the video tag.\n</video>","extratext":"<video width=\"320\" height=\"240\" controls=\"\" autoplay=\"\" loop=\"\">\n  <source src=\"https://cdn.free-stock.video/372021/ocean-sunset-nature-coast-outdoors-water-sunset-9058-small.mp4\" type=\"video/mp4\">\n  <source src=\"https://cdn.free-stock.video/372021/ocean-sunset-nature-coast-outdoors-water-sunset-9058-small.mp4\" type=\"video/ogg\">\n  Your browser does not support the video tag.\n</video>"},{"id":"05BB2448-765C-4F31-A9D2-AAD6C2A2B026","x":183,"y":582,"width":"350","height":"0","zindex":"3","color":"#cce6ff","doDelete":"textarea","text":"<font color=\"#e65c00\" size=\"+3\"><b>Flowers and Forests</b></font>","extratext":"<font color=\"#e65c00\" size=\"+3\"><b>Flowers and Forests</b></font>"},{"id":"BAA09171-42D1-4860-8CE8-95BCB110ADD5","x":150,"y":150,"width":"350","height":"0","zindex":"6","color":"#cce6ff","doDelete":"textarea","text":"<figure>\n  <img src=\"./images/myTreesSmallOval.png\" alt=\"CollaborArt\" style=\"width:10%\">\n  <figcaption>Fig.1 - Small  Trees, 3D Art</figcaption>\n</figure>","extratext":"<figure>\n  <img src=\"./images/myTreesSmallOval.png\" alt=\"CollaborArt\" style=\"width:10%\">\n  <figcaption>Fig.1 - Small  Trees, 3D Art</figcaption>\n</figure>"},{"id":"8685D730-AFC1-425D-8E15-110823A092C8","x":282,"y":291,"width":"800","height":"0","zindex":"5","color":"#0099cc","doDelete":"textarea","text":"There is magic in the air","extratext":""},{"id":"DEA6B8D2-B9F5-4FAC-B1E1-9F908D29BCF9","x":0,"y":-35,"width":"425","height":"20","zindex":"2001","color":"#e6005c","doDelete":"notifyblock","text":"&#160;&#160;","extratext":""},{"id":"8D989862-214C-47CA-B31C-F1967A5CCD1E","x":166,"y":87,"width":"350","height":"0","zindex":"3","color":"#cce6ff","doDelete":"textarea","text":"<font color=\"#e65c00\" size=\"+3\"><b>Flowers and Forests</b></font>","extratext":"<font color=\"#e65c00\" size=\"+3\"><b>Flowers and Forests</b></font>"},{"id":"F0249E69-7000-4791-8DB7-A055DC74829D","x":167,"y":113,"width":"350","height":"0","zindex":"1","color":"#cce6ff","doDelete":"textarea","text":"  <style>\n.wrapper {\n  width: 800px;\n  height: 490px;\n  margin: 0 auto;\n  background: #ffffff;\n}\n\n.h_iframe {\n  position: relative;\n}\n\n.ratio {\n  display: block;\n  width: 710px;\n  height: auto;\n}\n\n.h_iframe iframe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  color:white;\n}\n</style> \n\n<br>&nbsp;&nbsp;<br><div class=\"wrapper\">  <div class=\"h_iframe\">  \n  <!-- a opacity set image is preferable .. note the width settings in 4 places -->\n<img src=\"./images/Fishy.JPG\" style=\"opacity: 0.3\" width=\"800\" height=\"450\">\n <font color=\"white\">\n  <iframe class=\"ratio\" src=\"http://localhost/live-view.html\" frameborder=\"none\" width=\"790\" height=\"450\">\n  </iframe><br>&nbsp;&nbsp;&nbsp;<br></font>  <!-- these blanks give something for a mouse pointer to grip on to move the iframe -->\n  </div></div>","extratext":"  <style>\n.wrapper {\n  width: 800px;\n  height: 490px;\n  margin: 0 auto;\n  background: #ffffff;\n}\n\n.h_iframe {\n  position: relative;\n}\n\n.ratio {\n  display: block;\n  width: 710px;\n  height: auto;\n}\n\n.h_iframe iframe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  color:white;\n}\n</style> \n\n<br>&nbsp;&nbsp;<br><div class=\"wrapper\">  <div class=\"h_iframe\">  \n  <!-- a opacity set image is preferable .. note the width settings in 4 places -->\n<img src=\"./images/Fishy.JPG\" style=\"opacity: 0.3\" width=\"800\" height=\"450\">\n <font color=\"white\">\n  <iframe class=\"ratio\" src=\"http://localhost/live-view.html\" frameborder=\"none\" width=\"790\" height=\"450\">\n  </iframe><br>&nbsp;&nbsp;&nbsp;<br></font>  <!-- these blanks give something for a mouse pointer to grip on to move the iframe -->\n  </div></div>"},{"id":"50BAE3EF-24EE-41D1-8E04-249EE17E91D5","x":203,"y":49,"width":"800","height":"0","zindex":"1","color":"#0099cc","doDelete":"textarea","text":"I am the mother page","extratext":""},{"id":"42674C80-126A-4F7E-8972-37B0A90E082C","x":126,"y":347,"width":"800","height":"0","zindex":"1","color":"#0099cc","doDelete":"textarea","text":"Joe updates his page and this iframe gets updated.<br>\nI update this page and it updates also.<br>\nThis is collaboration on steroids.","extratext":""},{"id":"0B5D0E68-25F9-4FD4-9ED4-7B67D7E43301","x":120,"y":23,"width":"350","height":"0","zindex":"1","color":"#cce6ff","doDelete":"textarea","text":"I am live view 1","extratext":"I am live view 1"}];
+var j = circlesJson.length;
+for (var i = 0; i < circlesJson.length; i++) {
+var c = circlesJson[i];	
+const a = document.createElement('a');
+a.id = c.id;
+a.innerHTML = "<div class='circle' id="+c.id+" style='left:"+c.x+"px; top:"+c.y+"px; z-index:"+c.zindex +"; width:"+c.width+"; heigth:"+c.height+";  background-color:"+ c.color+";' >"+c.text+"</div>"; 
+document.body.insertBefore(a, myDiv);
+/* console.log("id: "+ c.id + " left: "+ c.x + " top: "+ c.y + " zindex: "+ c.zindex + " width: "+ c.width + " height: "+ c.height + " doDelete: "+ c.doDelete  + " background-color: "+ c.color + " text: "+ c.text + " extratext: "+ c.extratext);  */
+}
+</script>					
+</body>					
+</html>					  

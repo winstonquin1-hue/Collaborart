@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CollaborArt View</title>
+<style>
+
+html, body {
+  width: 100%;
+  height: 100%;
+   background-size: 100% 100%; 
+   scrollbar-width: none;
+  overflow:hidden;
+}
+
+.full-height {
+    width: 100%;
+    height: 100%;
+    left:0;  
+    top:0;
+    border: 0px transparent;
+ 	border-radius: 0%;
+	border:none;
+    padding: 0px;
+    scrollbar-width: none;	
+}
+		
+.hiddendiv {
+		display: none;
+			color: transparent;
+		    background-color: white;
+}		
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.full-height::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.full-height {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
+</head>
+<script>
+		// What is needed now is an event listner on the div 
+		// and a var to hold th eold value to compare with the new value
+
+     var valueLabel = document.getElementById("value"); // for timer 
+     var myResult = document.querySelector('.myresult');
+     const myDiv = document.querySelector('MYDIV');
+	   
+            var totalSeconds = 0;
+			setInterval(setTime, 1000); 
+
+    function FocusFunction(data){
+	           // Here the data is (or could still be) old file info.
+	           // This file will use the old value (ie. the current file date stamp) 
+			   // in function compare() to compare with the 'data' (which is the file date stamp)
+			   // just obtained by the function called FocusFunction(data). 
+	  
+				document.getElementById("compare").innerHTML =  document.getElementById("myresult2").innerHTML;
+	  
+				if ( data == document.getElementById("myresult2").innerHTML){
+					document.getElementById("compare").innerHTML = "&nbsp;";
+					}
+					else{					
+				         //	 check.innerHTML = "File date stamp changed. Loading new file..." ;
+				         // 	console.log("Fetching the new page.");					
+		    	         //alert("File date stamp changed.\nLoading new file...");
+					
+					     //-- Add the web page into a iframe of div tag.
+					         load_home();   
+                     }// end else	
+	          // Update the date so it can be compared again next time round
+			  // - - - this div is used but is hidden 
+					var element = document.getElementById("myresult2");	
+						element.innerHTML = data;
+        }  // end  FocusFunction(data)
+	
+        
+   function setTime() { 
+		   //--show count
+		   var element = document.getElementById("value"); // used by timer
+		       element.innerHTML = totalSeconds;	
+		   
+		   //-- inc 1 and update count
+            ++totalSeconds;
+			
+			var mySecs = totalSeconds;
+		
+	    if ( mySecs == 1){
+              check.innerHTML = "start" ;
+			    //-- resetting these divs is vital - do not remove
+			    document.getElementById("myresult").innerHTML ="&nbsp;"; 
+                document.getElementById("compare").innerHTML = "&nbsp;";
+			}
+			
+	    if ( mySecs == 2){
+            check.innerHTML = "waiting" ;
+           }
+		   
+		if ( mySecs == 3){
+			--totalSeconds;
+			--totalSeconds;
+			--totalSeconds;			 
+		 
+		  // -- get the file stamp, store it and let 'function comparethese(myDate)' compare it to the last file date stamp
+           var source = new EventSource("collaborart_sse.php?getInfo=getInfo");   		  
+		         source.onopen = function(event) {	  // each time a value can be reset or stored
+			       check.innerHTML = "data" ;	
+                 }; 
+			  
+ 		        source.onmessage = function(event) {		 
+			       comparethese(event.data); 			 
+			       document.getElementById("myresult").innerHTML =event.data; 
+		         };			 
+		  } // if secs = 3
+	  }   // end setTime()
+	
+ 	function comparethese(myDate){ // compare the dates and load a flie if needed or else do nothing
+	  FocusFunction(myDate); 
+     } //  end  -  comparethese()	
+ 
+ 
+    function load_home() { // the polling found that a newer file date stamp exists so it will load the new file.
+     document.getElementById("collaborart").innerHTML='<object type="text/html" class="full-height" data="Collaborart-Viewer.html" /></object>';
+    }  // end load_home()
+ 
+    window.onload = function(){ // Get the last 'view' page straight away then the timer take over. This will cause a slight flicker at 3 seconds 
+                            // after loading this file.
+     document.getElementById("collaborart").innerHTML='<object type="text/html" class="full-height" data="Collaborart-Viewer.html" ></object>';
+
+			 var element = document.getElementById("myresult");					
+			     element.style.left = "-80px"; 
+				  element.style.width = "0px"; 
+				    element.style.height = "0px"; 
+
+    } // end window.onload = function()
+</script>
+<body>
+<div id="collaborart" class="full-height" />Fetching the latest update. Please wait 2 seconds.</div>
+<!-- These are hidden but can be used to store data. They can be visible by changing or removing the class --> 
+<div id="myresult" class="hiddendiv" >Fetching the Data.</div>   <!-- holds number  1 -->
+<div id="myresult2" class="hiddendiv" >Waiting for data.</div>  <!-- holds number 2  -->
+<div id="compare" class="hiddendiv" >0</div>                  <!-- holds counter value --> 
+<label id="value" class="hiddendiv" >0</label>                <!-- also holds counter value --> 
+<label id="check" class="hiddendiv" >&nbsp;</label>                   <!-- holds status --> 
+</body>
+</html>
