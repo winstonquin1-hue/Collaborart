@@ -1,6 +1,17 @@
 Introduction to Collaborart
 
 What is it?
+Intro:
+https://youtu.be/LDYuMkwkn5I?si=MDuvfhoLy-8QiLFm
+Advanced Concepts:
+https://youtu.be/VUVIalo6ips?si=7Vuakd-4vuqfrX9g
+
+Examples:
+The above YouTube channel has a few examples which show more about this app.
+Here is an excellen example:
+https://youtu.be/UbIK-ev90gs?si=qZHOL-BYT8Uimj99
+
+
 
 Collaborart has many uses.
 The app itself is a multi user interactive way to make 
