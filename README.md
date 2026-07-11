@@ -3,6 +3,12 @@ Introduction to Collaborart
 What is it?
 Intro:
 https://youtu.be/LDYuMkwkn5I?si=MDuvfhoLy-8QiLFm
+
+At first the presentation is mostly just about the app, please skip forward to
+2:20 minutes ( to https://youtu.be/LDYuMkwkn5I?t=140 ) to see the action.
+
+
+
 Advanced Concepts:
 https://youtu.be/VUVIalo6ips?si=7Vuakd-4vuqfrX9g
 
