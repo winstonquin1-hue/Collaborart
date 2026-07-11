@@ -46,6 +46,8 @@ By using Collaborart you agree that the author accepts no liability or responsib
 
 This app idea came from Embarcadero's 2 Circles Demo app Presentation on Webkit 
 
+Please search on for CollaborArt on YouTube to see a full presentation and how to use this app.
+
 
 
 
