@@ -1,0 +1,249 @@
+
+    <div class="wrapper">
+
+      <section class="main-controls">
+        <canvas class="visualizer" height="60px"></canvas>
+        <div id="buttons">
+          <button class="record">Record</button>
+          <button class="stop">Stop</button>
+        </div>
+      </section>
+
+      <section class="sound-clips">
+
+
+      </section>
+    </div>
+hrer
+	
+	<div class="invisiblebutton" id="audiodiv">
+	</div>
+
+<script>
+const record = document.querySelector(".record");
+const stop = document.querySelector(".stop");
+const soundClips = document.querySelector(".sound-clips");
+const canvas = document.querySelector(".visualizer");
+const mainSection = document.querySelector(".main-controls");
+const audioDiv = document.querySelector(".audiodiv");
+// Disable stop button while not recording
+stop.disabled = true;
+
+// Visualiser setup - create web audio api context and canvas
+let audioCtx;
+const canvasCtx = canvas.getContext("2d");
+
+// Main block for doing the audio recording
+if (navigator.mediaDevices.getUserMedia) {
+ // console.log("The mediaDevices.getUserMedia() method is supported.");
+
+  const constraints = { audio: true };
+  let chunks = [];
+
+  let onSuccess = function (stream) {
+    const mediaRecorder = new MediaRecorder(stream);
+
+    visualize(stream);
+
+    record.onclick = function () {
+      mediaRecorder.start();
+     // console.log(mediaRecorder.state);
+     
+//	 console.log("Recorder started.");
+      record.style.background = "red";
+
+      stop.disabled = false;
+      record.disabled = true;
+    };
+
+    stop.onclick = function () {
+      mediaRecorder.stop();
+  //    console.log(mediaRecorder.state);
+   //   console.log("Recorder stopped.");
+      record.style.background = "";
+      record.style.color = "";
+
+      stop.disabled = true;
+      record.disabled = false;
+    };
+
+    mediaRecorder.onstop = function (e) {
+      console.log("Last data to read (after MediaRecorder.stop() called).");
+
+      const clipName = prompt(
+        "Enter a name for your sound clip? This names it but does not save it as a file",
+        "MyClip"
+      );
+
+      const clipContainer = document.createElement("article");
+      const clipLabel = document.createElement("p");
+      const audio = document.createElement("audio");
+      const deleteButton = document.createElement("button");
+
+      clipContainer.classList.add("clip");
+      audio.setAttribute("controls", "");
+      deleteButton.textContent = "Delete";
+      deleteButton.className = "delete";
+
+      if (clipName === null) {
+        clipLabel.textContent = "My unnamed clip";
+      } else {
+        clipLabel.textContent = clipName;
+      }
+
+      clipContainer.appendChild(audio);
+      clipContainer.appendChild(clipLabel);
+      clipContainer.appendChild(deleteButton);
+      soundClips.appendChild(clipContainer);
+
+      audio.controls = true;
+      const blob = new Blob(chunks, { type: mediaRecorder.mimeType });
+      chunks = [];
+      const audioURL = window.URL.createObjectURL(blob); // promise me this will play
+      audio.src = audioURL;
+      ///console.log("recorder stopped");
+
+      deleteButton.onclick = function (e) {
+        e.target.closest(".clip").remove();
+      };
+
+      clipLabel.onclick = function () {
+        const existingName = clipLabel.textContent;
+        const newClipName = prompt("Enter a new name for your sound clip?");
+        if (newClipName === null) {
+          clipLabel.textContent = existingName;
+        } else {
+          clipLabel.textContent = newClipName;
+        }
+      };
+    };
+
+    mediaRecorder.ondataavailable = function (e) {
+      chunks.push(e.data);
+
+    };
+  };
+
+  let onError = function (err) {
+    console.log("The following error occured: " + err);
+  };
+
+  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
+} else {
+  console.log("MediaDevices.getUserMedia() not supported on your browser!");
+}
+
+
+
+
+function visualize(stream) {
+  if (!audioCtx) {
+    audioCtx = new AudioContext();
+  }
+
+  const source = audioCtx.createMediaStreamSource(stream);
+
+  const analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048;
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  
+
+	   
+  source.connect(analyser);
+
+  draw();
+
+   function draw() {
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
+
+    requestAnimationFrame(draw);
+
+    analyser.getByteTimeDomainData(dataArray);
+	
+	var u8 = dataArray ;// new Uint8Array([65, 66, 67, 68]);
+// 
+// var b64encoded = btoa(decoder.decode(u8));//reises error - decoder not found
+//const encodedData = btoa(dataArray); // encode a string
+//const decodedData = atob(encodedData); // decode the string//	   
+//console.log("GOT BASE 64: " +encodedData);
+	  const encodedData = btoa(dataArray);
+	  
+	
+	// NOTE: This will probably not work well because its broken snippets which 
+	//        will be network dependant for smootheness of audio output.
+    // document.write(encodedData);// <-<< fails to show 64 bit as text output
+     // note - The audiodiv must be write for the text to be captured or it won't socket.send it!
+
+let consoleLogCapture = [];
+let defaultLog = console.log.bind(console);
+            let defaultError = console.error.bind(console);
+            console.log = function () {
+                defaultLog.apply(console, arguments);
+                consoleLogCapture.push({'type': 'log', 'value': Array.from(arguments)});
+          // alert( consoleLogCapture.push({'type': 'log', 'value': Array.from(arguments)}));
+	//	   document.getElementById("audiodiv").innerHTML =consoleLogCapture.push({'type': 'log', 'value': Array.from(arguments)});
+		  };
+            console.error = function () {
+               defaultError.apply(console, arguments);
+               consoleLogCapture.push({'type': 'error', 'value': Array.from(arguments)});
+		//	   document.getElementById("audiodiv").innerHTML =consoleLogCapture.push({'type': 'log', 'value': Array.from(arguments)});	   
+           };
+        //**  console.log(encodedData);
+        //   console.log(consoleLogCapture);
+		   
+		console.log(b64encoded);
+
+		document.getElementById("audiodiv").innerHTML =   consoleLogCapture;
+		
+		
+		
+	     //   console.log(encodedData);//  <------------------<< HERE !!!!!!!!!!!!!!!!!!!!!!  
+
+ //const decodedData = atob(encodedData); // decode the string  	
+   //  document.getElementById("audiodiv").innerHTML =  btoa(dataArray);	
+	//var decoder = new TextDecoder('utf8');
+ /*	
+	socket.send(JSON.stringify({ 
+							act: 'audio',
+							 message: consoleLogCapture
+							        })); 
+									
+		*/					
+    canvasCtx.fillStyle = "rgb(200, 200, 200)";
+    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = "rgb(0, 0, 0)";
+
+    canvasCtx.beginPath();
+
+    let sliceWidth = (WIDTH * 1.0) / bufferLength;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      let v = dataArray[i] / 128.0;
+      let y = (v * HEIGHT) / 2;
+
+      if (i === 0) {
+        canvasCtx.moveTo(x, y);
+      } else {
+        canvasCtx.lineTo(x, y);
+      }
+
+      x += sliceWidth;
+    }
+
+    canvasCtx.lineTo(canvas.width, canvas.height / 2);
+    canvasCtx.stroke();
+  }
+}
+
+window.onresize = function () {
+  canvas.width = mainSection.offsetWidth;
+};
+
+window.onresize();
+
+</script>

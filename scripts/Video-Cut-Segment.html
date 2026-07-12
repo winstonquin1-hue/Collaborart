@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <video src="" controls="true"></video>
+  <script>
+    (async() => {
+      const video = document.querySelector("video");
+      const mediaStream = video.captureStream();
+      const recorder = new MediaRecorder(mediaStream);
+      let from = 0;
+      let to = 0;
+      recorder.addEventListener("dataavailable", async e => {
+
+        console.log(e, e.data);
+        const blobURL = URL.createObjectURL(e.data);
+        const metadata = await makeVid(blobURL);
+        const {
+          duration, _duration
+        } = metadata;
+        
+        const timeline = (to - from) / 1000;
+        // check if `document.timeline.currentTime` is close to `duration`
+        console.log(duration, _duration, timeline); 
+        const mediaFragmentURI = `${blobURL}#t=${+(timeline - 60).toFixed(3)}`;
+        video.remove();
+        console.log(mediaFragmentURI);
+        const videoFragment = document.createElement("video");
+        videoFragment.controls = true;
+        document.body.appendChild(videoFragment);
+        let videoFragmentStream;
+        let videoFragmentRecorder; 
+
+        videoFragment.addEventListener("canplay", e => {
+          alert("media fragment can play\nclick play to start recording");
+        });
+        videoFragment.addEventListener("play", e => {
+          videoFragmentStream = videoFragment.captureStream();
+          videoFragmentRecorder = new MediaRecorder(videoFragmentStream);
+          videoFragmentRecorder.addEventListener("dataavailable", async e => {
+            console.log("media fragment recording", URL.createObjectURL(e.data));
+            const mediaFragmentBlobURL = URL.createObjectURL(e.data);
+            const mediaFragmentMetadata = await makeVid(blobURL);
+            const {
+              duration: mediaFragmentDuration,
+              _duration: _mediaFragmentDuration
+            } = mediaFragmentMetadata;
+            console.log(mediaFragmentDuration, _mediaFragmentDuration, mediaFragmentBlobURL); // check if `document.timeline.currentTime` is close to `duration`
+          });
+          videoFragmentRecorder.start();
+        });
+        videoFragment.addEventListener("pause", e => {
+          videoFragmentRecorder.stop();
+        });
+        videoFragment.src = mediaFragmentURI;
+      });
+      recorder.addEventListener("start", e => {
+        console.log(e);
+      });
+      recorder.addEventListener("stop", e => {
+        console.log(e);
+      });
+      const src = URL.createObjectURL(await (await fetch("https://upload.wikimedia.org/wikipedia/commons/transcoded/2/22/Volcano_Lava_Sample.webm/Volcano_Lava_Sample.webm.360p.vp9.webm")).blob());
+      video.addEventListener("play", e => {
+        recorder.start();
+        from = document.timeline.currentTime;
+      });
+      video.addEventListener("pause", e => {
+        to = document.timeline.currentTime;
+        recorder.stop();
+      });
+      video.addEventListener("canplay", e => {
+        alert("video can play\nclick play to start recording");
+      });
+
+      function makeVid(url) { // helper to create a video element
+        const v = document.createElement('video');
+        v.preload = 'metadata';
+        return new Promise((res, rej) => {
+          v.onloadedmetadata = e => {
+            console.log(e);
+            // chrome duration bug...
+            // see https://bugs.chromium.org/p/chromium/issues/detail?id=642012
+            // will also occur in next FF versions, in worse...
+            if (v.duration === Infinity) {
+              v.onseeked = e => {
+                v._duration = v.currentTime; // FF new bug never updates duration to correct value
+                v.onseeked = null;
+                v.currentTime = 0;
+                res(v);
+              };
+              v.currentTime = 1e5; // big but not too big either
+            } else {
+              v._duration = v.duration;
+              res(v);
+            }
+          };
+          v.onerror = rej;
+          v.src = url;
+        });
+      };
+
+      video.src = src;
+
+    })();
+  </script>
+</body>
+
+</html>

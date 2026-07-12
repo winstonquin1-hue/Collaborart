@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VIDEO-TIMING-EXAMPLE</title>
+	
+    <script type="text/javascript">
+	
+        var nb_record = 1;
+        var stop_request_animation_frame = false;
+        var current_stream = null;
+		
+		let blobs = [];
+        let recordedBlob = null;
+        let recordedChunks = [];
+	
+
+let mediaRecorder;
+
+
+let stream = new MediaStream;//,  
+var sourceBuffer;		
+  let recorder = new MediaRecorder(stream, {mimeType: "video/webm"});
+	
+		
+        function get_user_stream (canvas_record) {// same as data available
+	
+ //if ( canvas_record == "undefined"){
+ 
+	console.log("get_user_stream -> canvas_record:"+ canvas_record +  " event.data: " +event.data );	
+//	console.log(" get_user_stream: " +requestData());	
+	
+	//}
+            document.getElementById("record_btn").setAttribute("disabled", "disabled");
+            document.getElementById("record_btn_canvas").setAttribute("disabled", "disabled");
+            window.stop_request_animation_frame = false;
+            navigator.mediaDevices.getUserMedia({
+                "video": true,
+                "audio": true
+            }).then(function (stream) {
+			
+
+			
+                let vid = document.createElement("video");
+                let canvas = document.getElementById("video");
+              
+			  window.current_stream = stream;
+			   
+			//if (event.data)
+            //
+			blobs.push( window.current_stream);	  
+
+			
+		   					document.addEventListener("x", gotMediaData, {capture: false});
+							document.body.addEventListener("x", gotMediaData); 
+							
+							 let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });						   
+		                       recording.src = URL.createObjectURL(recordedBlob);							
+									   downloadButton.href = recorder;  
+
+				   
+         					var ev = new Event("x", {bubbles:true})
+							document.getElementById("x").dispatchEvent(ev);
+							
+   	   	        //   let name= "wq";
+				//  save_as (e, name) ;
+			   
+                vid.loop = true;
+                vid.autoplay = true;
+                vid.muted = true;			   
+                vid.addEventListener("loadedmetadata", function () {
+				
+				console.log(" loadedmetadata: " +vid);
+				
+				
+				
+				
+                    draw(canvas.getContext("2d"), vid);									
+                    if (canvas_record) {
+                        record_user_stream(canvas.captureStream());
+                    } else {
+                        record_user_stream(stream);
+                    }
+					
+                });	
+				
+				
+				
+			//  vid.src = URL.createObjectURL(stream);	
+			
+			// what is not happening is the .scr is not handled correctly
+			
+console.log("1 get_user_stream: ok: "+  vid.src);			
+ //    vid.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));			
+//console.log("2 get_user_stream: current_stream ok: "+stream);
+/*
+		
+			**/	
+            }).catch(function (error) {
+
+                console.log("error: " +error);
+ 
+            });
+        
+		
+	}	
+		
+		
+        function draw(context, vid) {
+console.log("draw-> context:"+ context );
+            context.drawImage(vid, 0, 0, 1280, 720);
+            if (!window.stop_request_animation_frame)
+                requestAnimationFrame(draw.bind(this, context, vid));
+        }
+		
+		
+		
+  function save_as (blob, name) {
+		
+console.log("save_as: "+ name);
+			
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.download = name;
+            a.href = url;
+            a.target = "_blank";
+            a.style.margin = "3px";
+            a.textContent = "Record " + nb_record;
+            document.body.appendChild(a);
+            nb_record++;
+        }
+		
+		
+        function record_user_stream (stream) {
+            window.mediaRecorder = new MediaRecorder(stream, {});
+            var buffer = [];
+            window.mediaRecorder.ondataavailable = function (event) {
+                if (event.data.size > 0) {
+                    buffer.push(event.data);
+                    console.log("stored blobs : " + buffer.length);
+                } else {
+                    console.log("null blob", event.data);
+                }
+            };
+			
+			
+			
+    window.mediaRecorder.onstop = function () {
+console.log("mediarecorder stop");
+                window.stop_request_animation_frame = true;
+                document.getElementById("record_btn").removeAttribute("disabled");
+				
+                document.getElementById("record_btn_canvas").removeAttribute("disabled");
+				
+                blob = new Blob(buffer, {"type": "webm"});
+                save_as(blob, "test.webm");
+                try {
+                    window.current_stream.stop();
+                } catch (exception) {
+                    var video_tracks = window.current_stream.getVideoTracks();
+                    for (var i = 0; i < video_tracks.length; i++) {
+                        var track = video_tracks[i];
+                        track.stop();
+                    }
+                    var audio_tracks = window.current_stream.getAudioTracks();
+                    for (var i = 0; i < audio_tracks.length; i++) {
+                        var track = audio_tracks[i];
+                        track.stop();
+                    }
+                }
+            };
+            window.mediaRecorder.start();
+            setTimeout(function () {
+                window.mediaRecorder.stop();
+            }, 5000);
+        }
+		
+   function gotMediaData(e) {
+
+   //  document.getElementById("x").href =downloadButton.href; 
+	 console.log("got-Media-Data: " + e );	
+	 //        document.getElementById("urldiv").innerHTML = "Data: "+ downloadButton.href+ " !!!";
+			 
+	// document.getElementById("urldiv").innerHTML = (e, e.data);		 
+//    console.log(e, e.data);
+    }	
+	
+	
+	
+	
+	
+	
+    </script>
+</head>
+<body>
+    <button id="record_btn" type="button" onclick="get_user_stream();">Start Record webcam</button>
+	
+	<!-- note difference is the TRUE parameter -->
+    <button id="record_btn_canvas" type="button" onclick="get_user_stream(true);">Start Record canvas</button><br />
+	
+    <canvas id="video_canvas"></  style="max-width: 250px;" width="1280" height="720" id="canvas_elt"></canvas>
+   
+   <hr/>
+     <canvas id="canvas_record" > </canvas>
+	 <hr>
+	    <div id="urldiv">1 Info</div> 
+      <div id="urldiv2">2  URL</div> 
+   <a id="downloadButton" class="button">Download</a>
+   <br>
+   Im x viewer<br>
+     <video id="x"  width="160" height="120" playsInline controls autoplay /> </video><br>
+	 Im recording video viewer<br>
+	 	 <video id="recording" width="160" height="120"  playsInline controls autoplay /> </video>
+</body>
+</html>

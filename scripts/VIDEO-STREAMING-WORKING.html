@@ -1,0 +1,284 @@
+<br>
+       <button onclick="startRecording()"> Start Media Recorder</button>&nbsp; &nbsp;&nbsp; &nbsp;
+	   <button onclick="stop()"> Stop Recording </button>&nbsp; &nbsp;&nbsp; &nbsp;  
+	   <button onclick="restart()"> Restart Recording </button>	    
+  <!--   <div id="startButton" class="button">start...</div> -->      
+	 <!--  <div id="stopButton" class="button">Stop....</div>  --> 	 
+<p>	<br>
+	<br>
+	<div id="urldiv2">URL</div> 
+        <video id="recording" width="160" height="120" playsInline controls /> </video>
+	<a id="downloadButton" class="button">Download</a></p><br>
+		Recording <video id="x"  width="160" height="120" playsInline controls > </video> <br>
+  	  <video id="preview" width="160" height="120" controls></video>  
+     <!-- <pre id="log"></pre> -->
+
+   <!--   <video id="video">
+      <div id="startButton" class="button"  >  --->
+	  <canvas id="canvas" > </canvas>	 
+	   </div>	
+  </p>
+  
+    
+<script>
+
+let preview = document.getElementById("preview");
+let recording = document.getElementById("recording");
+//let startButton = document.getElementById("startButton");
+//let stopButton = document.getElementById("stopButton");
+let downloadButton = document.getElementById("downloadButton");  // This is an ANCHOR 
+
+  let blobs = [];
+  let stream;
+  let m ;
+  let recordedChunks = [];
+ 
+let mediaRecorder; 
+ 
+   function restart() {   
+     console.log("restart");
+	  mediaRecorder.start(4000);
+   }
+   
+   
+    function stop() {
+             if (m) {			          
+			// preview.srcObject = stream;					   
+					 const mystream = mediaRecorder.stream;	  
+				     const track = mystream.getVideoTracks()[0];
+                          // imageCapture = new ImageCapture(track);   
+				      m.pause();
+	                 console.log("stop");
+				//preview.srcObject.getTracks().forEach(track => track.stop()); 		   
+					mystream.getTracks().forEach(track => track.stop());   
+               
+	 const options = {
+           audioBitsPerSecond: 128000,
+           videoBitsPerSecond: 2500000,
+           mimeType: "video/webm",
+            }   
+				 mediaRecorder = MediaRecorder(mediaRecorder.stream, options);    
+                           }
+    }
+
+function startRecording(){ 
+  if (navigator.mediaDevices) {
+
+  let canvas = null;
+    //   let recordedBlob = null;
+     //   let recordedChunks = []; 
+  console.log("getUserMedia supported.");
+
+  const constraints = { audio: true, video: true };
+  const chunks = [];
+
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then((stream) => {
+      const options = {
+        audioBitsPerSecond: 128000,
+        videoBitsPerSecond: 2500000,
+        mimeType: "video/webm",
+      };
+	  	 
+	//const
+	mediaRecorder = new MediaRecorder(stream, options);
+	
+	//-------------------------------------------------------
+             mediaRecorder.addEventListener('dataavailable', function (e) {
+				
+			//	 console.log("dataavailable: "+e.data);
+			//	stream.getTracks().forEach(track => track.stop());
+            //  if (!blobs.length) 
+
+			//--trigger !!!!!
+		    // trigger navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+		 
+			//	video.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+				// if (!blobs.length)
+              //       return;				
+				
+				//alert("got ..A.. data:" + blobs.push(event.data));
+				 //	  if (e.data.size > 0) MediaRecorder.recordedChunks.push(e.data);
+                  //  if (e.data.size > 0)  blobs.push(e.data)
+				 //   stream.getTracks().forEach(track => track.stop());
+                 
+				// console.log('Chunk: ' + event.data.size + "Bytes  id: " + blobs.push(event.data)); 				   
+			     //
+		        
+				  	
+	      });   //-- end  mediaRecorder.addEventListener
+
+	//----------------------------------   
+  
+	         m = mediaRecorder; 
+			  mediaRecorder.start(4000);
+			
+			//console.log("EVENT: "+);  
+        
+		    mediaRecorder.ondataavailable = (e) => {     // append blobs for now, we could also upload them to the network.   // alert("got a data:" +e.data);
+			
+			recordedChunks.push(event.data);
+				 
+			 console.log('Chunk: ' + event.data.size + "Bytes  id: " + blobs.push(event.data)); 			
+			
+	         	//document.write(	
+					
+					document.addEventListener("preview", gotMediaData, {capture: false});
+					document.body.addEventListener("preview", gotMediaData);
+					
+					let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+				       recording.src = URL.createObjectURL(recordedBlob);
+					
+							
+					var ev = new Event("preview", {bubbles:true})
+					document.getElementById("preview").dispatchEvent(ev)  
+		          
+				  downloadButton.href = mediaRecorder; // download button is an <ANCHOR!! so store the ref to the media  
+	   	        
+document.getElementById("preview").href =downloadButton.href; 					
+					
+					downloadButton.href = recording.src;	
+//document.getElementById("preview").href =downloadButton.href; 	
+					
+					downloadButton.download = "RecordedVideo.webm";	
+										
+					document.getElementById("urldiv2").innerHTML ="1. btn href (main video stream): <br>"+ downloadButton.href+ "<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;
+
+//**const mystream = mediaRecorder.stream;		
+//** const track = mystream.getVideoTracks()[0];
+                          // imageCapture = new ImageCapture(track);			
+				
+  // stop(preview.srcObject); //<----------------------------------------<<<<
+				
+			     // console.log("track: "+track);   
+
+				   
+	//++different result altogether-->	
+	//document.getElementById("urldiv").innerHTML ="1. recorder: <br>"+  downloadButton.href+ " <br>streaming: " + recorder+"<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   	   
+	// the above gives a uri to a media recorder object			   
+	
+
+
+
+//**	downloadButton.href = recording.src;
+//***	downloadButton.download = "RecordedVideo.webm";
+
+
+
+
+		  
+
+	/*	
+		if (! event.data){
+		//  mediaRecorder.start(500);
+            recordedChunks.push(e.data); 
+		
+		  }
+		  else
+		  {
+		  	mystream.getTracks().forEach(track => track.stop());	
+			//recordedChunks.push(e.data);		  
+             mediaRecorder.start(500);	 
+		  }
+		 */ 
+		 
+     //  console.log(myStream);
+	 //  const canvas = window.canvas = document.querySelector('canvas');
+	// const canvas = document.getElementById("canvas");
+         //    canvas.innerHTML = imageCapture.grabFrame();//"THIS: <video src='"event+ "'></video>";  
+     
+	      //  imageCapture.takePhoto()
+               //    .then(blob => createImageBitmap(blob))
+        
+		       //  canvas = document.getElementById("canvas");
+		    //    canvas.innerHTML = "<img src='"+ imageCapture + "'>";// data;	imageCapture
+			//	const data = canvas.toDataURL("image/png");
+				
+					//	photo.setAttribute("src", data);
+				 
+
+	//canvasDiv.innerHTML = createImageBitmap(imageBitmap) ;// data;
+	//drawCanvas(canvasDiv, imageBitmap);
+
+		//  const canvasDiv = document.getElementById("canvas");
+          //   canvasDiv.innerHTML ="THIS: <video src='"+ event.data+ "'></video>'"; 
+		//++  if (e.data){
+        //**    blobs.push(e.data);
+	
+        // const dataURL =  blobs.push(event.data);
+	//++}
+    }	  
+	  
+	       
+	  
+  console.log("Recorder: "+ mediaRecorder);
+	  
+    //  m.mimeType; // would return 'video/mp4'
+	//  console.log(m);
+	    //   const canvasDiv = document.getElementById("canvas"); 
+        //         canvasDiv.innerHTML ="<source type='video/webm' src='" href={blobUrl}+ "'></video>'";
+        /*    {
+                blobUrl ?
+                    <audio id="player" src={blobUrl} controls></audio>
+                    :
+                    null
+            }*/
+			
+	  //    const canvasDiv = document.getElementById("canvas");
+        //       canvasDiv.innerHTML ="<source type='video/webm' src='"+dataURL + "'></video>'";
+	  
+             //   const dataURL = canvas.toDataURL();
+             //  console.log(dataURL);
+          //  const canvasDiv = document.getElementById("video");
+          //   canvasDiv.innerHTML ="<source type='video/webm' src='"+m.data+ "'/> ";	  
+	  
+	  
+	  
+	  
+      // …
+    })
+   // .catch((error) => {
+    //  console.error(error);
+   // }
+	//);
+}
+
+    function gotMediaData(e) {
+	console.log('gotMediaData - stream : '+document.getElementById("preview").href);// new Blob(recordedChunks, { type: "video/webm" }).recordedBlob[] + " src: " +recording.src);   //  recordedChunks.push(event.data)  ); //recording.src    // //recordedBlob.stream());   // recordedChunks.push(event.data));
+	console.log('gotMediaData - chunk : ' + recording.src);
+	document.getElementById("x").href = recording.src;
+	//		 alert(ev);
+		//	  blobs.push(e.data); 
+			  
+			 //    recordedChunks = []; // this will blanks the captured video chunks 
+				//  recorder = null;				
+			//	 recordedBlob = null;// this will turn off main recorder
+				// ev = null; //   **********************************************stops all further processing
+			//	video.srcObject = null; // destroys the main video area
+		        // stream.getTracks().forEach((track) => track.stop());	// does nothing
+             //   m = null;
+                ////// let recording = document.getElementById("recording"); // nothing
+			}
+			
+			
+			
+function drawCanvas(canvas, img) {
+  canvas.width = getComputedStyle(canvas).width.split('px')[0];
+  canvas.height = getComputedStyle(canvas).height.split('px')[0];
+  let ratio  = Math.min(canvas.width / img.width, canvas.height / img.height);
+  let x = (canvas.width - img.width * ratio) / 2;
+  let y = (canvas.height - img.height * ratio) / 2;
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height,
+      x, y, img.width * ratio, img.height * ratio);
+	  
+	  //  onGrabFrameButtonClick();
+	  	onTakePhotoButtonClick();
+}
+	
+}
+</script>
+	
+	
+

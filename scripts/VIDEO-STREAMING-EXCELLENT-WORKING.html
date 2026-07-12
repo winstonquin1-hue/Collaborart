@@ -1,0 +1,156 @@
+<script>
+
+let preview = document.getElementById("preview");
+let recording = document.getElementById("recording");
+let startButton = document.getElementById("startButton");
+let stopButton = document.getElementById("stopButton");
+let downloadButton = document.getElementById("downloadButton");
+let myData;
+
+        let recordedBlob = null;
+        let recordedChunks = []; 
+
+
+
+
+		
+// Put variables in global scope to make them available to the browser console.
+const video = document.querySelector('video');
+
+
+
+     const canvas = window.canvas = document.querySelector('canvas');
+           canvas.width = 240;
+           canvas.height = 180;
+
+      const button = document.querySelector('button');
+            button.onclick = function() {
+                           canvas.width = video.videoWidth;
+                          canvas.height = video.videoHeight;
+                          canvas.getContext('2d').drawImage(video, 300, 50, canvas.width, canvas.height);
+                   // console.log(video);
+                  };
+
+const constraints = {
+  audio: false,
+  video: true
+};
+
+function handleSuccess(stream) {
+  window.stream = stream; // make stream available to browser console
+  video.srcObject = stream;
+  
+  
+  					try {
+						recorder = new MediaRecorder(stream, {mimeType: "video/webm"});		 
+						} 
+						catch (e) {
+								console.error('Exception while creating MediaRecorder: ' + e);
+						return;
+						}
+						
+							recorder.ondataavailable = (event) => {	
+								//   console.log('Recorder data available Chunk: ' + event.data.size + "Bytes  " + recordedChunks.push(event.data));  	
+						
+						recordedChunks.push(event.data);
+							document.addEventListener("x", gotMediaData, {capture: false});
+							document.body.addEventListener("x", gotMediaData); 
+							
+							var ev = new Event("x", {bubbles:true})
+							document.getElementById("x").dispatchEvent(ev)  
+							
+							// console.log('stream: ' + new Blob(recordedChunks, { type: "video/webm" }));//recordedBlob.stream());   // recordedChunks.push(event.data));   
+						
+				let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+					recording.src = URL.createObjectURL(recordedBlob);
+			
+			//document.getElementById("urldiv2").innerHTML ="1. recorder (download stream to save): <br>"+  downloadButton.href+ " <br>streaming: " + recorder+"<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   
+				
+				    //-- set the <a anchor link
+				   downloadButton.href = recorder;  
+	   	           document.getElementById("recording").href =downloadButton.href; 
+				   
+	//++different result altogether-->	
+	//document.getElementById("urldiv").innerHTML ="1. recorder: <br>"+  downloadButton.href+ " <br>streaming: " + recorder+"<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   	   
+	// the above gives a uri to a media recorder object			   
+				   
+		   
+					downloadButton.href = recording.src;
+					downloadButton.download = "RecordedVideo.webm";
+				
+				//downloadButton2.href = recorder; 
+	   	          // document.getElementById("recording2").href = downloadButton.href;
+			 
+
+//			  document.getElementById("recording").href = downloadButton.href; 	
+     		  document.getElementById("x").href = URL.createObjectURL(recordedBlob); 
+			  
+		//	    document.getElementById("downloadButton2").innerHTML = downloadButton.href;
+		 document.getElementById("recording").href = p; 
+			
+			document.getElementById("urldiv2").innerHTML ="1. btn href (main video stream): <br>"+ downloadButton.href+ "<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;
+			 
+		        // console.log('downloadButton.href: ' + document.getElementById("downloadButton").href);
+		    	// console.log('stream : '+event.data+" and: "+URL.createObjectURL(recordedBlob));// new Blob(recordedChunks, { type: "video/webm" }).recordedBlob[] + " src: " +recording.src);   //  recordedChunks.push(event.data)  ); //recording.src    // //recordedBlob.stream());   // recordedChunks.push(event.data));
+					};						
+  recorder.start(3000);
+  console.log("PREVIEW: " +preview);  //  <--------------------------------------------------------<<<<
+  
+  
+   myData = canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+ //.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+  console.log("myData: " +myData);
+ //write(myData);
+}
+    function gotMediaData(e) {
+	//console.log('stream : '+event.data+" and: "+URL.createObjectURL(recordedBlob));// new Blob(recordedChunks, { type: "video/webm" }).recordedBlob[] + " src: " +recording.src);   //  recordedChunks.push(event.data)  ); //recording.src    // //recordedBlob.stream());   // recordedChunks.push(event.data));
+				//  alert(stream)
+			    // recordedChunks = []; // this will blanks the captured video chunks 
+				//  recorder = null;				
+				// recordedBlob = null;// this will turn off main recorder
+				// ev = null; //   **********************************************stops all further processing
+				// video.srcObject = null; // destroys the main video area
+		        // stream.getTracks().forEach((track) => track.stop());	// does nothing
+                ////// recording = null;
+                ////// let recording = document.getElementById("recording"); // nothing
+			}
+    
+
+function handleError(error) {
+  console.log('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
+}
+
+navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
+</script>
+
+
+<script>
+function doChanged(){
+   alert("changed");
+}
+</script>
+<p>
+    <div id="startButton" class="button">Start Recording	</div>  
+ <hr>  Preview
+     </div><video id="preview" width="160" height="120" autoplay="" muted=""></video>   </div>
+
+       <div id="stopButton" class="button">Stop Recording
+       </div>
+   
+<hr>   Recording
+        <video id="recording" width="160" height="120" controls=""></video>
+		
+		
+        <a id="downloadButton" class="button">Download</a>
+		<video id="x"  width="160" height="120"  autoplay > </video>    
+   
+	
+        <pre id="log"></pre>
+    
+	
+     <video id="video">
+      <div id="startButton" class="button"  > 
+	  <canvas id="canvas" > </canvas>
+
+
+  <div id="urldiv2">URL</div> </p>

@@ -1,0 +1,532 @@
+<body>
+  <!-- <video width="160" height="120"  autoplay/> -->
+     <p>
+	
+	<hr>Recording<br><video id="recording" width="160" height="120" controls autoplay />   <!-- </video><br> --> 
+   
+   <hr>X<br><video id="x"  width="160" height="120" controls autoplay /> <!-- </video>  --> 
+   
+   <br>
+   <div id="urldiv2">URL</div> 
+   <a id="downloadButton" class="button">Download</a>
+	<br><button onclick="vidUrlFunction()" type="button">Get current video URL</button><br>
+	
+
+    <button onclick="start()">Start</button> 
+    <button onclick="stopstart()">Restart</button> 
+    <button onclick="stop()">Stop</button>
+    <br />
+   <hr>Videoaudio<br> <video id="videoaudio" controls autoplay />
+  <hr>Output  <div id="output">first fragment(10 sec)</div>
+	
+	</p>
+<!--   <p><video id="y"  width="160" height="120"  autoplay > </video> </p>
+  <div id="urldiv">URL</div>
+    
+    <a id="downloadButton2" class="button">Download</a></p> 	
+	<p><video id="recording2" width="160" height="120" controls autoplay></video><br>
+	-->
+<script>
+let stream = new MediaStream;//,  
+var sourceBuffer;
+        let recorder = new MediaRecorder(stream, {mimeType: "video/webm"});
+		
+        let recordedBlob = null;
+        let recordedChunks = []; 
+        
+		
+        let downloadButton = document.getElementById("downloadButton"); 
+	//  let downloadButton2 = document.getElementById("downloadButton2"); 
+let videoaudio = document.getElementById("videoaudio");	
+     //------------
+	  const video = document.querySelector("video");
+      const mediaStream = video.captureStream();
+	        let from = 0;
+            let to = 0;
+	//-------------
+	
+
+
+
+let mime = "audio/webm;codecs=opus";
+//let mediaSource = new MediaSource();
+//let appendPromise = Promise.resolve();
+//let needOffsetUpdate = false;
+
+ //let recorder2 = null;
+ 
+     MediaRecorder.onsourceopen = ev => {
+       console.log("MediaRecorder source open", ev);
+     };
+
+    MediaRecorder.onsourceended = ev => {
+       console.log("MediaRecorder source ended", ev);
+     };
+
+    MediaRecorder.onsourceclose = ev => {
+      console.log("MediaRecorder source close", ev);
+     };
+
+    //   MediaRecorder.start e => {
+    //       console.log("MediaRecorder  start: " +e);
+    //  });      
+
+//--------------------------------------------------------------
+	// video.addEventListener("video play", e => {
+     //   recorder.start();
+     //   from = document.timeline.currentTime;
+     // });
+	  
+     // video.addEventListener("video pause", e => {
+     //   to = document.timeline.currentTime;
+     //   recorder.stop();
+    //  });
+	  
+    //  video.addEventListener("video canplay", e => {
+    //    alert("video can play\nclick play to start recording");
+    //  });
+	       
+	/*  MediaRecorder.addEventListener("start", e => {
+        console.log("recorder  start: " +e);
+      });
+      MediaRecorder.addEventListener("stop", e => {
+        console.log("recorder  stop: " + e);
+      });*/
+	  
+//--------------------------------------------------
+
+
+
+    function stop() {
+             if (recorder) {
+                           recorder.stop();
+	                       console.log("stop");
+                           }
+    }
+	
+	function stopstart() {
+			console.log("stop/start");
+			recorder.stop();
+			console.log("stop");
+	    	recorder.start();
+			console.log("start");
+	}
+
+
+function captureUserMedia(callback) {
+  var params = { audio: true, video: false };
+  navigator.getUserMedia(params, (stream) => {
+    callback(stream)
+  }, (err) =>  {
+    callback(null, err)
+  })
+  return
+}
+
+function start() {
+
+ // var params = { audio: true, video: false };
+ // navigator.getUserMedia(params, (stream) => {
+ //   callback(stream) }, (err) =>  {    callback(null, err)
+ // })
+
+const recorder = new MediaRecorder(mediaStream);
+
+//let stream = new  callback;//params;//RecordRTC(stream,  { audio: 'true', mimeType: 'audio/webm', checkForInactiveTracks: 'true' });
+
+		
+//recorder = new MediaRecorder(stream, { audio: 'true', mimeType: 'audio/webm', checkForInactiveTracks: 'true' })			
+				//	recorder.start();			
+					}
+
+
+function getCurTime() { 
+
+      alert(vid.currentTime);
+	  
+} 
+
+function setCurTime() { 
+					let vid = document.getElementById("x");				
+                       vid.currentTime=5;
+	                	alert("x block current time: "+ vid.currentTime);
+} 
+
+
+ 
+  async function gotMedia(stream) {   
+        // |video| shows a live view of the captured MediaStream.
+				var video = document.querySelector('video');
+					video.srcObject = stream;
+console.log(' Recording Started'); 
+					try {
+						recorder = new MediaRecorder(stream, {mimeType: "video/webm"});		 
+						} 
+						catch (e) {
+								console.error('Exception while creating MediaRecorder: ' + e);
+						return;
+						}
+							//----------------------
+							
+							
+							
+							recorder.ondataavailable = (event) => {				
+							
+			  console.log('Data-Available: ' + event.data.size + "Bytes  Data: " + recordedChunks.push(event.data));  
+
+// the data is right here !!!!!
+			  
+							recordedChunks.push(event.data);
+							
+							document.addEventListener("x", gotMediaData, {capture: false});
+							document.body.addEventListener("x", gotMediaData); 
+							
+							var ev = new Event("x", {bubbles:true})
+							document.getElementById("x").dispatchEvent(ev);  
+							
+							// console.log('stream: ' + new Blob(recordedChunks, { type: "video/webm" }));//recordedBlob.stream());   // recordedChunks.push(event.data));   
+						
+				let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+					recording.src = URL.createObjectURL(recordedBlob);
+					
+//----------------------- capture blob to file
+				
+                    const blobURL = URL.createObjectURL(recordedBlob);		
+                   
+				   const metadata = makeVid(blobURL);
+					
+                    const {duration, _duration } = metadata;        
+                    const timeline = (to - from) / 1000;
+        // check if `document.timeline.currentTime` is close to `duration`
+        console.log({duration, _duration }, timeline); 
+         console.log(_duration, timeline); 
+	   const mediaFragmentURI = `${blobURL}#t=${+(timeline - 60).toFixed(3)}`;       
+	   const videoFragment = document.createElement("video");
+	   
+        videoFragment.controls = true;
+
+                //    const para = document.createElement("p");
+                 //   const node = document.createTextNode("<br> what the <br> " +videoFragment);
+                       
+				//	   para.appendChild(node);
+                     //   document.body.appendChild(para);
+
+        let videoFragmentStream;
+        let videoFragmentRecorder;
+		
+		const myElement = document.getElementById("recording");
+	        	myElement.scr= videoFragment;		
+
+//--------------------------------------------------------------------------------
+
+					document.addEventListener("recorder", gotMediaData, {capture: false});
+					document.body.addEventListener("recorder", gotMediaData); 	
+				     
+					//let recordedBlob = new Blob(recordedChunks, { type: "video/webm" }); 
+					 const vid = URL.createObjectURL(recordedBlob);  
+					
+					// note -- maybe this could be the same event to handle both
+					//document.addEventListener("recorder", gotMediaDataToCapture, {capture: false});
+						//	document.body.addEventListener("recorder", gotMediaDataToCapture); 	
+						//var ev = new Event("recorder", {bubbles:true})
+						//	document.getElementById("recorder").dispatchEvent(ev)  			
+  //   video.src = URL.createObjectURL(recordedBlob);	
+					
+					
+			
+			document.getElementById("urldiv2").innerHTML ="1. recorder (download stream to save): <br>"+  downloadButton.href+ " <br>streaming: " + recorder+"<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   
+				
+				    //-- set the <a anchor link
+				   downloadButton.href = recorder;  
+	   	           document.getElementById("recording").href =downloadButton.href; 
+				   
+	//++different result altogether-->	
+	//document.getElementById("urldiv").innerHTML ="1. recorder: <br>"+  downloadButton.href+ " <br>streaming: " + recorder+"<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   	   
+	// the above gives a uri to a media recorder object			   
+				   
+		   
+					downloadButton.href = recording.src;
+					downloadButton.download = "RecordedVideo.mp4";
+
+
+//			  document.getElementById("recording").href = downloadButton.href; 	
+     		  document.getElementById("recording").href = URL.createObjectURL(recordedBlob); 
+			  
+		//	    document.getElementById("downloadButton2").innerHTML = downloadButton.href;
+	//		 document.getElementById("recording2").href = downloadButton.href; 
+			
+		//	document.getElementById("urldiv2").innerHTML ="1. btn href (main video stream): <br>"+ downloadButton.href+ "<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;
+			 
+		        // console.log('downloadButton.href: ' + document.getElementById("downloadButton").href);
+		    	// console.log('stream : '+event.data+" and: "+URL.createObjectURL(recordedBlob));// new Blob(recordedChunks, { type: "video/webm" }).recordedBlob[] + " src: " +recording.src);   //  recordedChunks.push(event.data)  ); //recording.src    // //recordedBlob.stream());   // recordedChunks.push(event.data));
+					};	
+
+
+//-----------------------------------------------------------------------------------
+      recorder.addEventListener("dataavailable", async e => {
+	   console.log("dataavailable: " + e );
+	   console.log(e, e.data);
+	 //  gotMediaData(e);
+      });
+//-----------------------------------------------------------------------
+					
+    	recorder.start(3000);
+	} // end function gotMedia(stream)
+  
+
+    function gotMediaData(e) {
+	
+    console.log("got-Media-Data: " + e );	
+	//const blobURL = //URL.createObjectURL(e.data);
+   // console.log("blobURL: "+ document.getElementById("downloadButton").innerHTML );
+	
+	
+	 // video.src = URL.createObjectURL(recordedBlob);
+	 // 			downloadButton.href = video.src;
+		//	   downloadButton.download = "RecordedVideo.mp4";
+	  
+	//  recordedBlob = null;
+	    //	console.log("stop/start");
+			//recorder.stop();
+			//console.log("stop");
+	    	//recorder.start();
+			//console.log("start");
+     // recorder.start(3000);  
+	/*	  const blobURL = URL.createObjectURL(e.data);		
+          const metadata = makeVid(blobURL);
+		
+		
+        const {duration, _duration } = metadata;        
+        const timeline = (to - from) / 1000;
+		
+        // check if `document.timeline.currentTime` is close to `duration`
+        console.log(duration, _duration, timeline); 
+       
+	   const mediaFragmentURI = `${blobURL}#t=${+(timeline - 60).toFixed(3)}`;
+	*/	
+      //  video.remove();
+		
+//********************************************************************************** console.log("new media fragment: "+ mediaFragmentURI);
+	/*		
+        const videoFragment = document.createElement("video");
+        videoFragment.controls = true;
+        document.body.appendChild(videoFragment);
+        let videoFragmentStream;
+        let videoFragmentRecorder; 
+		//}
+		
+		
+//--
+        videoFragment.addEventListener("canplay", e => {
+          alert("media fragment can play\nclick play to start recording");
+        });
+//--		
+	
+        videoFragment.addEventListener("play", e => {
+          videoFragmentStream = videoFragment.captureStream();
+          videoFragmentRecorder = new MediaRecorder(videoFragmentStream);
+          videoFragmentRecorder.addEventListener("dataavailable", async e => {
+            console.log("media fragment recording", URL.createObjectURL(e.data));
+            const mediaFragmentBlobURL = URL.createObjectURL(e.data);
+            const mediaFragmentMetadata = await makeVid(blobURL);
+            const {
+              duration: mediaFragmentDuration,
+              _duration: _mediaFragmentDuration
+            } = mediaFragmentMetadata;
+            console.log(mediaFragmentDuration, _mediaFragmentDuration, mediaFragmentBlobURL); // check if `document.timeline.currentTime` is close to `duration`
+          });
+          videoFragmentRecorder.start();
+        });
+		
+//--		
+		
+        videoFragment.addEventListener("pause", e => {
+          videoFragmentRecorder.stop();
+        });
+	
+	*/	
+		
+   //     videoFragment.src = mediaFragmentURI;		
+	
+	
+	
+	
+	
+//	console.log('gotMediaData(e) stream : '+event.data);//+" and: "+URL.createObjectURL(recordedBlob));// new Blob(recordedChunks, { type: "video/webm" }).recordedBlob[] + " src: " +recording.src);   //  recordedChunks.push(event.data)  ); //recording.src    // //recordedBlob.stream());   // recordedChunks.push(event.data));
+				//  alert(stream)
+			    // recordedChunks = []; // this will blanks the captured video chunks 
+				//  recorder = null;				
+				// recordedBlob = null;// this will turn off main recorder
+				// ev = null; //   **********************************************stops all further processing
+				// video.srcObject = null; // destroys the main video area
+		        // stream.getTracks().forEach((track) => track.stop());	// does nothing
+                ////// recording = null;
+                ////// let recording = document.getElementById("recording"); // nothing
+			}
+			
+			
+			
+			
+
+	function vidUrlFunction() { 
+					let vid = document.getElementById("x");
+					alert("x block : "+ vid.currentSrc + " network state: "+vid.networkState  + " current time: "+vid.currentTime);
+					
+					let vid2 = document.getElementById("recording");  
+					//alert("recording block: "+  vid2.currentSrc);
+					//alert("recording block : "+ vid.currentSrc + " network state: "+vid.networkState);
+				    alert("recording block : "+ vid.currentSrc + " network state: "+vid.networkState  + " current time: "+vid.currentTime);	
+		} 
+ 
+       function makeVid(url) { // helper to create a video element
+        const v = document.createElement('video');
+        v.preload = 'metadata';
+        return new Promise((res, rej) => {
+          v.onloadedmetadata = e => {
+            console.log(e);
+            // chrome duration bug...            // see https://bugs.chromium.org/p/chromium/issues/detail?id=642012        // will also occur in next FF versions, in worse...
+            if (v.duration === Infinity) {
+              v.onseeked = e => {
+                v._duration = v.currentTime; // FF new bug never updates duration to correct value
+                v.onseeked = null;
+                v.currentTime = 0;
+                res(v);
+              };
+              v.currentTime = 1e5; // big but not too big either
+            } else {
+              v._duration = v.duration;
+              res(v);
+            }
+          };
+          v.onerror = rej;
+          v.src = url;
+        });
+      };
+ 
+ 
+
+/*
+
+
+audio.src = URL.createObjectURL(mediaSource);// <----------------------------<<<<
+async function start() {
+  if (!stream) {
+    stream = await navigator.mediaDevices.getUserMedia({
+      audio: true
+    });
+  }
+  if (!recorder2) {
+   
+   recorder2 = new MediaRecorder(stream, { mimeType: mime });
+   
+
+   recorder2.onstop = async () => {
+      await appendPromise;
+      if (sourceBuffer && !sourceBuffer.updating) {
+        const endTime = sourceBuffer.buffered.end(
+          sourceBuffer.buffered.length - 1
+        );
+       // sourceBuffer.timestampOffset = endTime;
+        console.info(`stop, end is now ${endTime}`);
+      } 
+	     else 
+	       {
+             needOffsetUpdate = true;
+             }
+      };
+  }
+  
+  recorder2.start(500);
+  await new Promise(r => (recorder2.onstart = r));
+  
+  
+  if (!sourceBuffer) {
+    sourceBuffer =  mediaSource.addSourceBuffer(mime);
+    sourceBuffer.onupdate = ev => console.info("update", ev);
+    sourceBuffer.onabort = ev => console.warn("ABORT", ev);
+    sourceBuffer.onerror = ev => console.error("ERROR", ev);
+    sourceBuffer.onupdateend = ev => {
+      const endTime = sourceBuffer.buffered.end(
+        sourceBuffer.buffered.length - 1
+      );
+      console.info(`updateend, end is now ${endTime}`, ev);
+     
+
+	// if (needOffsetUpdate) {
+      //  sourceBuffer.timestampOffset = endTime;
+   //     needOffsetUpdate = false;
+   //   }
+	  
+    };
+  }
+  
+  recorder2.ondataavailable = async event => {
+    console.log(`dataavailable size=${event.data.size}`);
+    let data = await (appendPromise = appendPromise.then(() =>
+      blobToArray(event.data)
+    ));
+   // sendToAnotherClient(data, event.data.type);
+  };
+}
+
+
+
+function stop() {
+  if (recorder2) {
+    recorder2.stop();
+  }
+}
+
+function stopstart() {
+  stop();
+  start();
+}
+//another client
+var cache = []; // minicache
+
+function sendToAnotherClient(data, recType) {
+  // mediaSource dont ready
+  if (!sourceBuffer || sourceBuffer.updating) {
+    cache.push(...data);
+    return;
+  }
+  if (cache.length) {
+    data = [...cache, ...data];
+    cache = [];
+  }
+  sourceBuffer.appendBuffer(Uint8Array.from(data));
+  console.log(`Appended buffer. Updating=${sourceBuffer.updating}`);
+}
+
+// some support function
+function blobToArray(blob) {
+  const reader = new FileReader();
+  let callback, fallback;
+  let promise = new Promise((c, f) => {
+    callback = c;
+    fallback = f;
+  });
+
+  function onLoadEnd(e) {
+    reader.removeEventListener("loadend", onLoadEnd, false);
+    if (e.error) fallback(e.error);
+    else callback([...new Uint8Array(reader.result)]);
+  }
+
+  reader.addEventListener("loadend", onLoadEnd, false);
+  reader.readAsArrayBuffer(blob);
+  return promise;
+}
+
+*/
+
+
+
+		/*function test(e) {			//--needs to have a debugger debug(e.target, e.currentTarget, e.eventPhase)			//     console.log(e.target, e.currentTarget, e.eventPhase)			// alert(e.eventPhase)}*/
+
+	
+	navigator.mediaDevices.getUserMedia({video: true, audio: true})
+       .then(gotMedia)
+       .catch(e => { console.error('getUserMedia() failed: ' + e); });
+</script>
+</body>

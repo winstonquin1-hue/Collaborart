@@ -1,0 +1,261 @@
+<html>
+<body>
+<br>
+ <a id="downloadButton" class="button">Download</a>
+ <br>
+  <a id="downloadButton2" class="button">Download 2</a>
+ <br>
+   <div id="urldiv">1 Info</div> 
+      <div id="urldiv2">2  URL</div> 
+   <br>
+   Im x viewer<br>
+     <video id="x"  width="160" height="120" playsInline controls autoplay /> </video><br>
+	 Im recording video viewer<br>
+	 	 <video id="recording" width="160" height="120"  playsInline controls autoplay /> </video>
+
+<!-- 	  -->
+<script>
+  var recordedChunks = [];  //  let recordedChunks = []; 
+   var  stream; 
+ //  let window.stream = stream; // make stream available to browser console
+        
+		let recordedBlob = null;    
+        let recorder;
+  let blobs = null;
+  
+  function gotMedia(stream) {
+   
+  handleSuccess(stream);
+  
+  	//  console.log('gotMedia -> stream: ' + stream  );//recordedBlob.stream());   // recordedChunks.push(event.data));  		
+			 
+    // |video| shows a live view of the captured MediaStream.
+   //   var video = document.querySelector('video');
+   //    video.src = URL.createObjectURL(stream);
+
+   // var recorder = null;
+   try {
+       //    recorder = new MediaRecorder(stream, {mimeType: "video/webm"});
+	       recorder = new MediaRecorder(stream, {video:true, audio:true});
+              } catch (e) {
+              console.error('Exception while creating MediaRecorder: ' + e);
+                 return;
+               }
+
+          recorder.ondataavailable = (event) => {
+		  
+                        console.log(' Recorded chunk of size ' + event.data.size + " Bytes");			 
+                        recordedChunks.push(event.data);
+	  
+	  					document.addEventListener("x", gotMediaData, {capture: false});
+				    	document.body.addEventListener("x", gotMediaData); 
+						
+						
+//SURELY this should be after blobURL						
+							var ev = new Event("x", {bubbles:true})
+							document.getElementById("x").dispatchEvent(ev);
+				
+				           let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+						   
+		                       recording.src = URL.createObjectURL(recordedBlob);			
+                             const blobURL = URL.createObjectURL(recordedBlob);	//??	
+            			//	const metadata = makeVid(blobURL);
+						
+						
+						
+						
+
+				/*document.addEventListener("recorder", gotMediaData, {capture: false});
+		    	document.body.addEventListener("recorder", gotMediaData); 	*/
+				      
+					 const vid = URL.createObjectURL(recordedBlob);      
+
+
+				   downloadButton.href = recorder;  
+	   	           document.getElementById("x").href =vid; 
+			
+		 
+			
+				//downloadButton2.href =downloadButton.href; 
+				  
+	//++different result altogether-->	
+	//document.getElementById("urldiv").innerHTML ="1. recorder: <br>"+  downloadButton.href+ " <br>streaming: " + recorder+"<br><br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   	   
+	// the above gives a uri to a media recorder object			   
+			 			   
+		   
+					downloadButton.href = recording.src;
+					downloadButton.download = "RecordedVideo.mp4";
+					
+					
+					
+					
+makeVid(recording.src);
+//doPreview();
+
+
+                 // document.getElementById("recording").href = downloadButton.href;
+
+			// document.getElementById("x").href = vid;
+			 
+			  
+				//  downloadButton.href = recording.src;
+				//  downloadButton.download = "RecordedVideo.mp4";	
+     		    //  document.getElementById("recording").href = URL.createObjectURL(recordedBlob); 
+  
+//** document.getElementById("recording").href = vid; 
+			//	document.getElementById("recording").href = vid; 
+				 //  const metadata = makeVid(blobURL);				
+			 //  console.log(' recording.src ' + recording.src);
+			 
+//document.getElementById("urldiv2").innerHTML = "\n vid:\nvideo.src "+ vid + "<br> recorder (download stream to save):\nvideo.src "+recording.src+ "<br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   
+
+//document.getElementById("urldiv2").innerHTML= "<video src='"+recording.src	+"'></video>";
+	
+	//downloadButton2.href = recording.src;
+	
+	console.log('\nrecordedChunks[0]: ' +recordedChunks[0].size + "\nBlob: " + recordedBlob.size);
+
+	 
+	 recordedChunks = [];
+ //stream.getTracks().forEach(track => track.stop());	
+   };
+
+   recorder.start(4000);
+	
+  }
+  
+  
+    function gotMediaData(e) {
+	// console.log("got-Media-Data: " + e );	
+	         document.getElementById("urldiv").innerHTML = "Data: "+ e+ " !!!";
+    console.log(e, e.data);
+    }	
+
+
+
+  
+     function makeVid(url) {  
+ 
+ console.log("makeVid(url): " + url);
+
+        const v = document.createElement('video');
+		
+       v.preload = 'metadata';
+	   
+  console.log("1. v.currentTime v: "+ v + " ...  v.currentTime: "+v.currentTime );	
+		
+        return new Promise( (res, rej) => {
+        v.onloadedmetadata = e => {
+		  
+ console.log("v.onloadedmetadata: "+e);
+  v.duration = null;
+            // chrome duration bug...            // see https://bugs.chromium.org/p/chromium/issues/detail?id=642012        // will also occur in next FF versions, in worse...
+            if (v.duration === Infinity) {
+              v.onseeked = e => {
+			  
+			   v.currentTime =  v.currentTime;// force var update
+			  
+                v._duration = v.currentTime; // FF new bug never updates duration to correct value
+	console.log("v._duration: v: "+ v + " ...  v._duration: "+v._duration  );			
+                v.onseeked = null;
+				
+                v.currentTime = 0;
+	           console.log("2. v.currentTime v: "+ v + " ...  v.currentTime: "+v.currentTime );	
+		doPreview();
+//handleSuccess(stream);		
+     res(v);// result 
+	 
+              };
+			  
+              v.currentTime = 1e5; // big but not too big either
+			  console.log("3. v.currentTime v: "+ v + " ...  v.currentTime: "+v.currentTime );
+			  
+            } else {
+              v._duration = v.duration;
+			   console.log("4. else v._duration: (no change) "+ v + " ...  v._duration: "+v._duration );
+              res(v);
+            }
+          };
+		  
+          v.onerror = rej;
+		  
+          v.src = url;
+		  
+        });
+		
+      };
+	  
+	  
+	  
+	  
+	  function doPreview()
+{
+//console.log("Stopped>  now at-> doPreview()" );
+
+   // if (!blobs.length)
+  //      return;
+    // Concatenate blobs to preview the recorded content
+  //  recording.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+
+// now actually draw the canvas	
+		         downloadButton.href = recorder;
+		console.log("doPreview()--> downloadButton.href: " + downloadButton.href);		 
+	   	          document.getElementById("recording").href =downloadButton.href; 
+				  
+				  downloadButton.href = recording.src;
+				  downloadButton.download = "RecordedVideo.mp4";	
+     		  
+    document.getElementById("recording").href =downloadButton.href;// URL.createObjectURL(recordedBlob); 
+	document.getElementById("urldiv2").innerHTML = "recording.src "+recording.src;	   
+
+	//makeVid(document.getElementById("recording").href)
+	//	console.log("doPreview()--> Start: " + x.start + "\nEnd: " + x.end);
+	//console.log("doPreview()--> Video Source: "+video.src+ "\ndoPreview()--> recording.src "+recording.src   );
+}
+
+function handleSuccess(stream) {
+ //recordedChunks.push(event.data);
+  
+ 
+ //   window.stream = stream; // make stream available to browser console
+ //   video.srcObject = stream; 
+
+ console.log('handleSuccess ->  video.srcObject: ' +  stream  );
+//	recorder.start(4000);	
+   /*
+  					try {
+						  handleSuccess = new MediaRecorder(stream, {mimeType: "video/webm"});
+						 console.log('handleSuccess -> handleSuccess: ' + handleSuccess.mimeType  );
+						 
+						     var video = document.querySelector('video');
+                              video.src = URL.createObjectURL(stream);
+
+         // var recorder = null;
+                      try {
+                          recorder = new MediaRecorder(stream, {mimeType: "video/webm"});
+                             } catch (e) {
+                                 console.error('Exception while creating MediaRecorder: ' + e);
+                                    return;
+                                }
+
+                 recorder.ondataavailable = (event) => {
+          console.log(' Recorded chunk of size ' + event.data.size + "B");
+          recordedChunks.push(event.data);
+	//	
+	
+	  } 					 
+						} 
+						catch (e) {
+								console.error('Exception while creating MediaRecorder: ' + e);
+						return;
+						}		
+		*/		 
+	}						
+ 
+  navigator.mediaDevices.getUserMedia({video: true, audio: true})
+      .then(gotMedia)
+      .catch(e => { ('getUserMedia() failed: ' + e); });
+
+</script>
+</body>
+</html>

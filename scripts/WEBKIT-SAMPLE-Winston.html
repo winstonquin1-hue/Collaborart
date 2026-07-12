@@ -1,0 +1,346 @@
+<html>
+<body>
+<div>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="startRecording()">start recording </button> &nbsp;&nbsp;&nbsp;&nbsp;<button onclick="endRecording()">end recording</button>
+   <p> <div id="urldiv2">URL</div></p> 
+   <p><a id="downloadButton" class="button">Download</a></p>
+   <p><div id="time"></div></p>
+   <hr>Vid Recording
+   <p><video  id="recording"  width="320" height="240" playsInline controls></video></p>
+   <p> Vid x<video id="x" width="320" height="240"/></video></p>
+    <hr></div>
+
+
+<script>
+        window.addEventListener("message", (event) => {                 
+			 console.log(`Received window message: ${event.data}`)
+              });
+
+	var nb_record = 1;
+	let blobs = [];
+    let recordedBlob = null;
+    let recordedChunks = [];
+	let mediaRecorder;
+	let stream = new MediaStream;//,  
+	var sourceBuffer;		
+	let recorder = new MediaRecorder(stream, {mimeType: "video/webm"});
+	let name;
+
+	  const video = document.querySelector("video");
+      const mediaStream = video.captureStream();
+	        let from = 0;
+            let to = 0;
+
+     recorder.onsourceopen = ev => {
+       console.log("MediaRecorder source OPEN", ev);
+     };
+
+    recorder.onsourceended = ev => {
+       console.log("MediaRecorder source ENDED", ev);
+     };
+
+    recorder.onsourceclose = ev => {
+      console.log("MediaRecorder source CLOSE", ev);
+     };
+
+    //-- Set the date we're counting down to
+    var countDownDate = new Date("Jan 5, 2030 15:37:25").getTime();
+
+    //-- Update the count down every 1 second
+    let x = setInterval(function() {
+
+//---------------------- T i m e r    S e t u p ---------------------------------------------------
+       
+	   var now = new Date().getTime(); // Get today's date and time
+        var distance = countDownDate - now;  // Find the distance between now and the count down date
+    
+      //-- Time calculations for days, hours, minutes and seconds
+       var days =0;// Math.floor(distance / (1000 * 60 * 60 * 24));    
+       var hours = 0;// Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+       var minutes = 0;//Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+       var seconds = Math.floor((distance % (50 * 60)) / 1000);
+    
+    //-- Output the result in an element with id="time"
+       document.getElementById("time").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+   
+            if (seconds = "0") {
+		                       endRecording()
+                               //  clearInterval(x);
+                               //  document.getElementById("time").innerHTML = "EXPIRED 1 ";
+                              //  takepicture();  //  <--------------------------------------------------------<<<<<
+                              }
+   
+             // If the count down is over, write some text 
+              if (distance < 0) {
+                                clearInterval(x);
+                               //  document.getElementById("time").innerHTML = "EXPIRED 2";
+	                            //takepicture();
+  }
+}, 5000);
+
+//----------------------------------------------------------------------------------------------------------------------------------------------
+			function supportsRecording(mimeType){
+						if (!window.MediaRecorder)return false;							
+						if (!MediaRecorder.isTypeSupported) return mimeType.startsWith("audio/mp4") || mimeType.startsWith("video/mp4");						
+						return MediaRecorder.isTypeSupported(mimeType);
+            }
+			
+//----------------------------------------------------------------------------------------------------------------------------------------------
+
+	async function startRecording(){  // started from button press
+                     
+				    //------------------------
+						function getCurTime() {
+							alert(vid.currentTime);	  
+				        } 
+                    //------------------------
+		            	function setCurTime() { 
+						let vid = document.getElementById("x");				
+						vid.currentTime=5;
+alert("x block current time: "+ vid.currentTime);
+			            } 
+                   //-------------------------   
+			          console.log("Started Recording");
+
+			          stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+			          mediaRecorder = new MediaRecorder(stream);
+			          mediaRecorder.ondataavailable = (event) => {
+														         // Append blobs for now, so they can be uploaded to a network.
+														        if (event.data)
+															        blobs.push(event.data);
+														        }
+					  mediaRecorder.onstop = doPreview;
+					  // Receive x second blobs
+					  mediaRecorder.start(1000);
+    } // end function startRecording()
+	
+	
+//----------------------------------------------------------------------------------------------------------------------------------	
+
+		function endRecording(){	
+		
+//console.log("endRecording");
+						if (!blobs.length)
+						return;
+		
+						const blobURL = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+	 
+							document.addEventListener("recorder", gotMediaData3, {capture: false});
+							document.body.addEventListener("recorder", gotMediaData3);										
+							document.addEventListener("x", gotMediaData, {capture: false});
+							document.body.addEventListener("x", gotMediaData); 							
+							
+							var ev = new Event("x", {bubbles:true})
+							document.getElementById("x").dispatchEvent(ev); 
+							
+							let recordedBlob = new Blob(blobs, { type: "video/webm" });
+				           	recording.src = URL.createObjectURL(recordedBlob);
+					
+console.log("recording.src: "+ recording.src);
+						
+						/* TimeRanges Object Properties:
+							length - get the number of seekable ranges in the audio/video
+							start(index) - get the start position of a seekable range
+							end(index) - get the end position of a seekable range*/	
+
+                    //-----------------------------			
+	                //const blobURL = URL.createObjectURL(Blob);// recordedBlob);					
+					
+					// this calls makevid and puts the result into metadata
+                   
+				   const metadata = makeVid(blobURL);// metadata is the result for the promise	
+			
+                    //console.log("metadata.res:" +metadata);// +" metadata.rejected:" +metadata.rejected); // is an object promise -which- return new Promise((res, rejected)					
+					
+                 	//		console.log("\nVideo info: " + metadata.length(0) + "\nStart: " + metadata.start(0) + "\nvideoFragment end: "  + metadata.end(0));				
+                    // console.log("seekable start: " + metadatastart(0) + " start End: "  +metadata.seekable.end(0));
+				
+					
+					//-- make this x seconds as per timer timing
+                    const {duration, _duration } = metadata; 
+					
+					from = 3;  // ?????new Date() ;// Date("Jan 5, 2030 15:37:25").getTime() - 5; 
+					to = 5;    // ????
+					
+                    const timeline = (to - from);/// 1000;
+					
+                    // check if `document.timeline.currentTime` is close to `duration`
+                        //  console.log("Duration metadata:");
+                        //  console.log("\nfrom " + from +" \nto: " + to + " \ntimeline: " + timeline);		 
+                        //  console.log("Timeline:");
+                        //  console.log(_duration, timeline); 	
+	
+	                const mediaFragmentURI = `${blobURL}#t=${+(timeline - 60).toFixed(3)}`; 
+	                const videoFragment = document.createElement("video");
+	
+                          videoFragment.controls = true;
+                         let videoFragmentStream;
+                         let videoFragmentRecorder;
+						 
+	            	const myElement = document.getElementById("recording");
+	             	myElement.scr= videoFragment;
+				
+	//console.log("\nVideo info: " + myElement.seekable.start(0) + "\nStart: " + myElement.seekable.start(0) + "\nvideoFragment: "  + myElement.seekable.end(0));	
+
+				document.addEventListener("recorder", gotMediaData2, {capture: false});
+				document.body.addEventListener("recorder", gotMediaData2); 	
+							  
+    	video.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+	            //     document.getElementById("urldiv2").innerHTML ="video.src "+video.src;
+		        //     document.getElementById("urldiv2").innerHTML =" recorder (download stream to save): <br>video.src "+video.src+ " <br>" +` recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`;	   
+			    
+				  downloadButton.href = recorder;
+				  
+	   	          document.getElementById("recording").href =downloadButton.href; 				   	   
+				  downloadButton.href = recording.src;
+				  downloadButton.download = "RecordedVideo.mp4";	
+     		      document.getElementById("recording").href = URL.createObjectURL(recordedBlob); 			
+	      
+		     let name= "1wq";
+				 save_as (blobs, name) ;					
+
+		/*		//let blobURL = new Blob(recordedChunks, { type: "video/webm" }); 							
+	           const vid = URL.createObjectURL(recordedBlob); 			
+				    //-- set the  anchor link
+		               recorder.addEventListener("dataavailable", async e => {
+	                   console.log("data available: " + e );			 
+	                   console.log(e, e.data);
+	           //  gotMediaData(e);
+      })*/ 		
+    }  // end endRecording()
+
+//----------------------------------------------------------------------------------------------------------------------------------	
+
+    function gotMediaData(e) {	   
+   console.log("got-Media-Data 1: " + e );	
+		   	      //        let name= "1wq";
+				   //  save_as (e, name) ;	
+	}
+//----------------------------------------------------------------------------------------------------------------------------------	
+	
+    function gotMediaData2(e) {	
+    console.log("got-Media-Data 2: " + e );	
+			 // let name= "2wq";
+				//  save_as (e, name) ;
+	}	
+//----------------------------------------------------------------------------------------------------------------------------------	
+	
+    function gotMediaData3(e) {	
+    console.log("got-Media-Data 3: " + e );	
+				 // let name= "3wq";
+				//  save_as (e, name) ;	
+	}
+//----------------------------------------------------------------------------------------------------------------------------------	
+
+
+    function save_as (blob, name) {
+	
+	// if (nb_record > 1 ){
+			//  console.log("save_as: "+ name);		
+        //    var url = URL.createObjectURL(blob);
+		var url =  new Blob(blobs, { type: "video/webm" });// URL.createObjectURL();
+           
+		   var a = document.createElement("a");
+            a.download = name+nb_record;
+            a.href = downloadButton.href ;//url;
+            a.target = "_blank";
+            a.style.margin = "3px";
+            a.textContent = "Record " + nb_record;
+            document.body.appendChild(a);
+            nb_record++;
+		  console.log("saved as: "+ a.download);	
+	//}		
+    }
+		
+//----------------------------------------------------------------------------------------------------------------------------------	
+	
+	function doPreview(){
+		console.log("doPreview()" );
+
+				if (!blobs.length)
+					return;
+			
+			   	            let name= "1wq";
+				  save_as (blobs, name)				;
+					
+					
+				// Concatenate blobs to preview the recorded content
+				video.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+				// now actually draw the canvas	
+		         downloadButton.href = recorder;
+console.log("doPreview()--> downloadButton.href: " + downloadButton.href);		 
+	   	          document.getElementById("x").href =downloadButton.href; 
+				  
+				  downloadButton.href = recording.src;
+				  downloadButton.download = "RecordedVideo.mp4";	
+     		  
+				document.getElementById("x").href =video.src;// URL.createObjectURL(recordedBlob); 
+	
+		//console.log("doPreview()--> Start: " + recording.src.start + "\nEnd: " + recording.src.end);
+	console.log("doPreview()--> Video Source: "+video.src+ "\ndoPreview()--> recording.src "+recording.src   );
+    
+
+	}
+	 
+	 
+//----------------------------------------------------------------------------------------------------------------------------------	
+
+	// Helper to create a video element.
+	// This is called by 'const metadata = makeVid(blobURL)' and gets the result into 'metadata'
+	// Where metadata is an object promise. --> return new Promise((res, rejected)
+
+	//note that first got-Media-Data : [object Event]
+
+     function makeVid(url){  
+	 
+			console.log("makeVid(url): " + url);
+			
+			
+						const v = document.createElement('video');		
+						v.preload = 'metadata';	   
+						//  console.log("1. v.currentTime v: "+ v + " ...  v.currentTime: "+v.currentTime );
+						
+document.getElementById("urldiv2").innerHTML ="makeVid(url) -- "+ url;
+			 	
+				return new Promise( (res, rejected) => {
+						v.onloadedmetadata = e => {				  
+						//console.log("v.onloadedmetadata: "+e);
+ 
+				v.duration = null;
+				// chrome duration bug...            // see https://bugs.chromium.org/p/chromium/issues/detail?id=642012        // will also occur in next FF versions, in worse...
+				if (v.duration === Infinity) {
+					v.onseeked = e => {			  
+				              	v.currentTime =  v.currentTime;// force var update			  
+					        	v._duration = v.currentTime; // FF new bug never updates duration to correct value
+					   	console.log("duration: "+v._duration  );			
+					        	v.onseeked = null;				
+						        v.currentTime = 0;
+						//console.log("2. v.currentTime v: "+ v + " ...  v.currentTime: "+v.currentTime );	
+			   
+			          //doPreview();					  
+			          res(v);// result 
+	                      } 
+			  
+                         v.currentTime = 1e5; // big but not too big either
+			           //  console.log("3. v.currentTime v: "+ v + " ...  v.currentTime: "+v.currentTime );
+			       } 
+				   else 
+				       {
+                           v._duration = v.duration;
+			               console.log("4. else v._duration: (no change) "+ v + " ...  v._duration: "+v._duration );
+                           res(v);
+                       }
+                    } // end v.onloadedmetadata = e =>
+		  
+          v.onerror = rejected;		  
+          v.src = url;		  
+        });
+ doPreview();
+		
+      }
+	  
+	  
+</script>
+</body>
+</html>

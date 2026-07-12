@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>record play</title>
+  </head>
+<script>
+var stream, recorder, sourceBuffer;
+let audio = document.getElementById("audio");
+let mime = "audio/webm;codecs=opus";
+let mediaSource = new MediaSource();
+let appendPromise = Promise.resolve();
+let needOffsetUpdate = false;
+
+
+mediaSource.onsourceopen = ev => {
+  console.log("sourceopen", ev);
+};
+mediaSource.onsourceended = ev => {
+  console.log("sourceended", ev);
+};
+mediaSource.onsourceclose = ev => {
+  console.log("sourceclose", ev);
+};
+
+audio = URL.createObjectURL(mediaSource);
+async function start() {
+  if (!stream) {
+    stream = await navigator.mediaDevices.getUserMedia({
+      audio: true
+    });
+  }
+  if (!recorder) {
+    recorder = new MediaRecorder(stream, { mimeType: mime });
+    recorder.onstop = async () => {
+      await appendPromise;
+      if (sourceBuffer && !sourceBuffer.updating) {
+        const endTime = sourceBuffer.buffered.end(
+          sourceBuffer.buffered.length - 1
+        );
+        sourceBuffer.timestampOffset = endTime;
+        console.info(`stop, end is now ${endTime}`);
+      } else {
+        needOffsetUpdate = true;
+      }
+    };
+  }
+  recorder.start(500);
+  await new Promise(r => (recorder.onstart = r));
+  if (!sourceBuffer) {
+    sourceBuffer =  mediaSource.addSourceBuffer(mime);
+    sourceBuffer.onupdate = ev => console.info("update", ev);
+    sourceBuffer.onabort = ev => console.warn("ABORT", ev);
+    sourceBuffer.onerror = ev => console.error("ERROR", ev);
+    sourceBuffer.onupdateend = ev => {
+      const endTime = sourceBuffer.buffered.end(
+        sourceBuffer.buffered.length - 1
+      );
+      console.info(`updateend, end is now ${endTime}`, ev);
+      if (needOffsetUpdate) {
+        sourceBuffer.timestampOffset = endTime;
+        needOffsetUpdate = false;
+      }
+    };
+  }
+  recorder.ondataavailable = async event => {
+    console.log(`dataavailable size=${event.data.size}`);
+    let data = await (appendPromise = appendPromise.then(() =>
+      blobToArray(event.data)
+    ));
+    sendToAnotherClient(data, event.data.type);
+  };
+}
+
+function stop() {
+  if (recorder) {
+    recorder.stop();
+  }
+}
+
+function stopstart() {
+  stop();
+  start();
+}
+
+//another client
+var cache = []; // minicache
+
+function sendToAnotherClient(data, recType) {
+  // mediaSource dont ready
+  if (!sourceBuffer || sourceBuffer.updating) {
+    cache.push(data);
+    return;
+  }
+  if (cache.length) {
+    data = [cache, data];
+    cache = [];
+  }
+  sourceBuffer.appendBuffer(Uint8Array.from(data));
+  console.log(`Appended buffer. Updating=${sourceBuffer.updating}`);
+}
+
+// some support function
+function blobToArray(blob) {
+  const reader = new FileReader();
+  let callback, fallback;
+  let promise = new Promise((c, f) => {
+    callback = c;
+    fallback = f;
+  });
+
+  function onLoadEnd(e) {
+    reader.removeEventListener("loadend", onLoadEnd, false);
+    if (e.error) fallback(e.error);
+    else callback([...new Uint8Array(reader.result)]);
+  }
+
+  reader.addEventListener("loadend", onLoadEnd, false);
+  reader.readAsArrayBuffer(blob);
+  return promise;
+}
+</script>
+
+
+  <body>
+    <button onclick="start()">Start</button>
+    <button onclick="stopstart()">Restart</button>
+    <button onclick="stop()">Stop</button>
+    <br />
+    <audio id="audio" controls autoplay></audio>
+    <div id="output">first fragment(10 sec)</div>
+  </body>
+</html>

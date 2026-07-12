@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Stream Pump</title>
+</head>
+<body>
+<h1>Simple Stream Pump </h1>
+<p>This needs to be a picture from a URL because the fetch relies on http to fetch it.<br>
+If not the following error is raised...  TypeError: Failed to fetch at STREAM_PUMP.html:21:3<br>
+Where 21 is the line with http request... fetch('./distribution/images/gridwork.png') 
+<br>and 3 is where the 'f' in 'fetch' is found at pos 3. </p>
+<p>The left tortoise is the original, the right one is created using a custom stream.</p>
+<img src="./distribution/images/gridwork.png" width="150" height="150" alt="Tortoise Original">
+<img src="." width="150" height="150" alt="Tortoise Copy" id="target">
+<script>
+  const image = document.getElementById('target');
+
+  // Fetch the original image
+  fetch('./distribution/images/gridwork.png')
+  // Retrieve its body as ReadableStream
+  .then(response => response.body)
+  .then(rs => {
+    const reader = rs.getReader();
+
+    return new ReadableStream({
+      async start(controller) {
+        while (true) {
+          const { done, value } = await reader.read();
+
+          // When no more data needs to be consumed, break the reading
+          if (done) {
+            break;
+          }
+
+          // Enqueue the next data chunk into our target stream
+          controller.enqueue(value);
+        }
+
+        // Close the stream
+        controller.close();
+        reader.releaseLock();
+      }
+    })
+  })
+  // Create a new response out of the stream
+  .then(rs => new Response(rs))
+  // Create an object URL for the response
+  .then(response => response.blob())
+  .then(blob => URL.createObjectURL(blob))
+  // Update image
+  .then(url => image.src = url)
+  .catch(console.error);
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+
+---------------------------------------------------------------------------------
+----------------------------- VIDEO CAPTURE ---------------------
+
+
+  <iframe width="710" height="800" src="./Video-Capture-Single-Frame-to-png-photobooth.html" frameBorder="0">
+</iframe><br><br>
+
+
+// this gets an iframe to take a snapshot and opens the frame capture html file in the iframe
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+
+<button onclick="openWin()">Snap</button>
+<button onclick="closeWin()">Done</button>
+
+<script>
+let myWindow;
+
+function openWin() {
+  myWindow = window.open("Video-Capture-Single-Frame-to-png.html", "", "width=800,height=600");
+}
+
+function closeWin() {
+  myWindow.close();
+}
+</script>
+
+
+
+//////////////////////// ---------- ------///////////////--------- ---------- ----------- ------------/////////////////
+
+
+GOOD WORKING STRAIGHT VIDEO CAP 
+
+
+<video autoplay width="320" height="210"></video>
+
+
+<script>
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: true })
+    .then((localMediaStream) => {
+      const video = document.querySelector("video");
+      video.srcObject = localMediaStream;
+    })
+    .catch((error) => {
+      console.log("Rejected!", error);
+    });
+
+//document.getElementById("63DEAD03-2607-473E-BFBC-28A64BEC2C60").innerHTML =" <video autoplay width='320' height='210'></video>";
+// Find the canvas element to capture
+const canvasElt = document.querySelector("B8CB3DC5-E97E-4F15-B03F-C0CBD8B11D8D");
+
+// Get the stream
+const stream = canvasElt.captureStream(25); // 25 FPS
+
+// var elementr1 = document.getElementById("DF3E305F-3040-4A16-87A9-D9B1631B9360");
+ //   elementr1.innerHTML = " <video autoplay width='320' height='210'>"+stream +" </video>";;	 
+//document.getElementById("63DEAD03-2607-473E-BFBC-28A64BEC2C60").innerHTML ="bozo";  //" <video autoplay width='320' height='210'>"+stream +" </video>";
+
+// Do things to the stream
+// E.g. Send it to another computer using an RTCPeerConnection
+//      pc is an RTCPeerConnection created elsewhere
+//stream.getTracks().forEach((track) =>  
+                                  //  socket.send(JSON.stringify({ 
+								//	act: 'broadcast',
+							      //  message:stream							       
+								//	}));
+							 console.log("here",stream);	
+							//	);									
+
+//stream.getTracks().forEach(  (track) => pc.addTrack(track, stream)       );
+</script>
+
+

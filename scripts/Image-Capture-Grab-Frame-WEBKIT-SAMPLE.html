@@ -1,0 +1,63 @@
+ IT WORKS
+<html>
+<body>
+<button onclick="startRecording()">start</button><br>
+<button onclick="endRecording()">end</button>
+
+ <video width="160" height="120" muted autoplay playsInline  />  
+<video id="video" autoplay  />
+
+
+<script>
+
+const video = document.querySelector("video");
+
+   function supportsRecording(mimeType) {
+   
+        if (!window.MediaRecorder)
+	        return false;
+            if (!MediaRecorder.isTypeSupported)
+	        return mimeType.startsWith("audio/mp4") || mimeType.startsWith("video/webm");
+            return MediaRecorder.isTypeSupported(mimeType);
+
+		let blobs = [];
+		let stream;	
+		let mediaRecorder;	
+		
+	async function startRecording()
+				{
+					stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true, audioBitsPerSecond: 128000, videoBitsPerSecond: 2500000, mimeType: "video/webm" });
+						mediaRecorder = new MediaRecorder(stream);  
+								mediaRecorder.ondataavailable = (event) => {
+																	// Let's append blobs for now, we could also upload them to the network.
+															if (event.data)	
+															blobs.push(event.data);			
+															// doPreview();
+														//	video.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+														console.log('Data-Available: ' + event.data.size + "Bytes  Data: " + blobs.push(event.data));  	
+									}	
+						mediaRecorder.onstop = doPreview;
+						// Let's receive 1 second blobs
+						mediaRecorder.start(1000);
+				}
+
+		function endRecording(){
+					// Let's stop capture and recording
+					mediaRecorder.stop();
+					stream.getTracks().forEach(track => track.stop());
+			}
+			
+		function doPreview(){
+							console.log('Data-Available: ' + event.data );  
+							if (!blobs.length)
+							return;
+							//	const video = document.querySelector("video");
+							// Let's concatenate blobs to preview the recorded content
+							video.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+		
+							//console.log('Data-Available: ' + event.data.size + "Bytes  Data: " + recordedChunks.push(event.data));  
+			}
+			
+</script>
+</body>
+</html>
