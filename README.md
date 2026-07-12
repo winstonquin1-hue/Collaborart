@@ -61,7 +61,9 @@ this app is to watch a video or two available through the links provided.
 Collaborart is free and the author accepts no liability or responsibility at all.
 By using Collaborart you agree that the author accepts no liability or responsibility at all.
 
-This app idea stemmed from Embarcadero's 2 Circles Demo app Presentation on Webkit 
+This app idea stemmed from Embarcadero's 2 Circles Demo app Presentation on Webkit.
+
+Project was done using Delphi version 10.4 
 
 Please search on for CollaborArt on YouTube to see a full presentation and how to use this app.
 
