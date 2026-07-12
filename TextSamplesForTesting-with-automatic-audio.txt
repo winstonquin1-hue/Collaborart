@@ -1,0 +1,1932 @@
+
+
+
+<audio id="audioblock1"> <source src="./audio/loruimVoice1.mp4" type="audio/mpeg" preload=""></audio> 
+<audio id="audioblock2"> <source src="./audio/LorumIpsum2.mp4" type="audio/mpeg" preload=""></audio>
+<style>
+body {
+  height: 900px;
+  width: 9000px;
+transition: all 2.2s;
+}
+</style>
+
+<script>
+	    let a1 = document.getElementById("audioblock1");
+                      a1.addEventListener('ended', foo);
+	              a1.pause();
+	              a1.currentTime = 0;	
+		
+	    let a2 = document.getElementById("audioblock2");
+                   a2.addEventListener('ended', bar);
+	           a2.pause();
+	          a2.currentTime = 0;	
+
+function scrollWin() { 
+		
+		
+
+    window.scrollTo(1300, 0);
+    a1.play();
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "E0755398-EB7E-43A2-BFEE-176BC6D1AF34", 
+                         x:  1300,  
+                         y:  20 								
+                         })); }
+
+function foo(){
+	    a1.pause();
+	    a1.currentTime = 0;	
+
+	    a2.pause();
+	    a2.currentTime = 0;	
+  window.scrollTo(2600, 0);
+	 a2.play();
+	}
+
+
+function bar(){
+	    a1.pause();
+	    a1.currentTime = 0;	
+
+	    a2.pause();
+	    a2.currentTime = 0;	
+  window.scrollTo(0, 0);
+
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "E0755398-EB7E-43A2-BFEE-176BC6D1AF34", 
+                         x:  935,  
+                         y:  126 								
+                         }));
+	}
+</script>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="but1" onclick="scrollWin()">Page 1</button><br><br>
+
+//----------------------------------------------------
+
+
+
+
+
+<audio id="audioblock1"> <source src="./audio/wow1.mp3" type="audio/mpeg" preload=""></audio>
+<audio id="audioblock2"> <source src="./audio/wow2.mp3" type="audio/mpeg" preload=""></audio>
+<style>
+body {
+  height: 900px;
+  width: 9000px;
+transition: all 2.2s;
+}
+#myImg {
+  width: 200px;
+  height: 400px;
+  object-fit: cover;
+  object-position: 0% 0%;
+  animation: mymove 5s infinite;
+}  
+
+@keyframes mymove {
+  0% {
+    object-position: 0% 0%;
+  }
+ 
+   50% {
+    object-position: 60% 40%;
+  }
+  100% {
+    object-position: 100% 100%;
+  }
+}
+</style>
+
+<script>
+function scrollWin1() { 
+	     let a1 = document.getElementById("audioblock1"); 
+		     a1.addEventListener('ended', audio1Ended);
+
+a1.pause();
+	    a1.currentTime = 0;	
+		
+a2.pause();
+	    a2.currentTime = 0;	
+document.getElementById("6D569409-2161-4254-B19D-0B96B69D0DB7").innerHTML = "<img  src='http://whocan.ie/images/LadiesWear3.jpg' id='myImg' width='240' height='300'>";	
+
+     window.scrollTo(1300, 0);
+       a1.play();
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "61B86750-4FAE-4861-9E70-486DF830A615", 
+                         x:  1300,  
+                         y:  20 								
+                         })); 
+						 }
+  						 
+function audio1Ended(){
+	    a1.pause();
+	    a1.currentTime = 0;	
+
+	     let a2 = document.getElementById("audioblock2");
+             a2.addEventListener('ended', audio2Ended);		
+		
+	document.getElementById("6D569409-2161-4254-B19D-0B96B69D0DB7").innerHTML = "<img  src='http://whocan.ie/images/LadiesWear3.jpg' id='myImg' width='240' height='300'>";	
+  
+  window.scrollTo(2600, 0);
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "61B86750-4FAE-4861-9E70-486DF830A615", 
+                         x:  2600,  
+                         y:  20 								
+                         })); 
+						 	
+	
+	 a2.play();
+	 
+	 
+	}	
+	
+	
+function audio2Ended(){
+	    a1.pause();
+	    a1.currentTime = 0;	
+
+	    a2.pause();
+	    a2.currentTime = 0;	
+  
+  window.scrollTo(0, 0);
+	
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "61B86750-4FAE-4861-9E70-486DF830A615", 
+                         x:  216,  
+                         y:  99 								
+                         })); 
+						 	
+	
+	 //a2.play();
+	// loop forever ---> ha ha !! scrollWin1();
+	}	
+</script>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="but2" onclick="scrollWin1()">Show</button><br><br>
+
+
+
+
+
+<body>
+<p><img  src="http://whocan.ie/images/LadiesWear3.jpg" alt="Paris" id="myImg" width="240" height="300">
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+
+
+<font color="#00ccff" style="font-size: 40px">👈</font> 
+<style>
+body {
+  height: 900px;
+  width: 9000px;
+transition: all 2.2s;
+}
+</style>
+<script>
+function scrollWinBack() { 
+    window.scrollTo(0, 0);
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "E0755398-EB7E-43A2-BFEE-176BC6D1AF34", 
+                         x:  935,  
+                         y:  126 								
+                         }));
+
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "EB148359-EB77-4FA3-965B-F7A08FFCDF6D", 
+                         x:  935,  
+                         y:  170 								
+                         }));
+}
+
+</script>
+Back <button id="but1" onclick="scrollWinBack()">Index</button><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function scrollWin2_1() {
+  window.scrollTo(2600, 0);
+    socket.send(JSON.stringify({			
+                              act: 'move',
+                               id: "51B581C3-9DC5-4E70-8598-BEB3B01EA277", 
+                         x:  2600,  
+                         y:  20 								
+                         }));
+
+
+}
+</script>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="but2" onclick="scrollWin2_1()">Page 2</button><br>
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.mockofun.com/tutorials/add-grid-to-photo/
+
+
+****************************   C U S T O M     B U T T O N S **********************	
+	
+----- Used with random numbers 1 and 2  -----------------------------------------
+
+
+            the 6 is the seed to use, as in six numbers on a cube.
+myRandomChange1(6,0)  
+              the 0 is used by the server to store the newly generated random number and pass it to the function called myRandomChange1(6,0)
+There is no need to change the value the 0 as it serves no purpose here.			  
+
+
+		<table>
+			<tr><td>Roll the Dice</td></tr>
+			<tr><td>                              
+			<button id="randomNum1" onClick="myRandomChange1(6,0)">No. 1</button>  
+			<button id="randomNum2" onClick="myRandomChange2(6,0)">No. 2</button>
+			<td></tr>
+		</table>
+
+
+<table>
+<tr><td>Pick a Card</td></tr>
+<tr><td>                               
+  <button  id="randomNum1" onClick="myRandomChange1(52,0)">No. 1</button> 
+<td></tr>
+</table><br>
+
+
+<table>
+<tr><td><font color="DodgerBlue" size="+2">Best of 100</font></td></tr>
+<tr><td>  <br>                            
+  <button  id="randomNum1" onClick="myRandomChange1(100,0)" >Bozo</button>  <br>
+  <button  id="randomNum2" onClick="myRandomChange2(100,0)">Chico</button><br>
+<td></tr>
+</table><br>
+
+
+<table>
+<tr><td><font color="#00ccff" style ="font-size: 18px">Spin to Win</font></td></tr>
+<tr><td>                               
+  <button  id="randomNum1" onClick="myRandomChange1(10,0)">No. 1</button> 
+<td></tr>
+</table><br>
+
+
+
+
+
+<table>
+<tr><td>Pick 5 Cards</td></tr>
+<tr><td>                              
+  <button  id="randomNum1" onClick="myRandomChange1(52,0)">No. 1</button>&#160;
+  <button  id="randomNum1" onClick="myRandomChange1(52,0)">No. 2</button>&#160;
+  <button  id="randomNum1" onClick="myRandomChange1(52,0)">No. 3</button>&#160;
+  <button  id="randomNum1" onClick="myRandomChange1(52,0)">No. 4</button>&#160;
+  <button  id="randomNum1" onClick="myRandomChange1(52,0)">No. 5</button> 
+<td></tr>
+</table><br>
+
+
+
+//---------------------------------------------------------------------------------------------------------
+//  ------ ------- paragraph text for using Edge screen reader - best on ms Windows------------------------
+//---------------------------------------------------------------------------------------------------------  
+  
+<p>
+Designer verwenden Lorem Ipsum, um Räume zu füllen, in denen sie Inhalte platzieren möchten, wenn sie Modelle oder Entwurfskopien eines endgültigen Designs erstellen. Mit Lorem ipsum können Designer an einem Design arbeiten, ohne darauf warten zu müssen, dass die Autoren den eigentlichen Inhalt erstellen!!!!!!!!!
+</p>
+
+<p>
+Abaklami basebenzisa i-lorem ipsum ukugcwalisa izikhala lapho bafuna ukubeka khona okuqukethwe lapho bedala ama-mockups noma amakhophi asalungiswa omklamo wokugcina. I-Lorem ipsum ivumela abaklami ukuthi basebenze edizayini ngaphandle kokulinda ababhali ukuthi bakhe okuqukethwe kwangempela!!!!!!!!
+</p>
+
+<p>
+Ontwerpers gebruiken lorem ipsum om ruimtes te vullen waar ze inhoud willen plaatsen bij het maken van mockups of conceptkopieën van een definitief ontwerp. Met Lorem ipsum kunnen ontwerpers aan een ontwerp werken zonder te wachten tot de schrijvers de daadwerkelijke inhoud hebben gemaakt!!!!!!!!!
+</p>
+
+<p>
+Les concepteurs utilisent Lorem ipsum pour remplir les espaces où ils souhaitent placer du contenu lors de la création de maquettes ou de brouillons de copies d'une conception finale. Lorem ipsum permet aux concepteurs de travailler sur un design sans attendre que les rédacteurs créent le contenu réel!!!!!!!!!
+</p>
+
+<p>
+Designers use lorem ipsum to fill spaces where they want to place content when creating mockups or draft copies of a final design. Lorem ipsum allows designers to work on a design without waiting for writers to create the actual content.
+</p>
+
+
+//----------------------------------------------------------------------------------------------------
+     -----------   V I D E O ---------------------
+//------------------------------------------------------------------------------------------------------
+
+
+//------------  video - sources - put in tables -------------------------------------
+// this allows the video to have a grip to use to drag the video around on the screen
+
+
+<video width="320" height="240" controls autoplay>
+  <source src="C:\Users\winst\Pictures\Video Projects\chatStorybook.mp4" type="video/mp4">
+  <source src="C:\Users\winst\Pictures\Video Projects\chatStorybook.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+
+<video width="320" height="240" controls autoplay>
+  <source src="./images/lionhyhena.mp4" type="video/mp4">
+  <source src="./images/lionhyhena.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+
+<video width="1600" height="900" autoplay loop>
+  <source src="./images/sun-rays-forest-trees.mp4" type="video/mp4">
+  <source src="./images/sun-rays-forest-trees.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+
+
+// ************* table with video in an iframe  **************** //
+<head><style>
+th, td {
+  border-style: inset;
+}
+</style>
+</head><body>
+<table style="width:320px" height="210px"><tr><td>Video on chatterMe
+<video width="320" height="240" controls autoplay>
+  <source src="C:\Users\winst\Pictures\Video Projects\chatStorybook.mp4" type="video/mp4">
+  <source src="C:\Users\winst\Pictures\Video Projects\chatStorybook.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video></td></tr></table>
+</body>
+
+
+//---------------bad examples -  Video  needs to have a grip  ie. something to use to move it--------------------------------
+
+<video width="320" height="240" controls autoplay>
+  <source src="C:\Users\winst\Pictures\Video Projects\chatStorybook.mp4" type="video/mp4">
+  <source src="C:\Users\winst\Pictures\Video Projects\chatStorybook.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+
+<video width="320" height="240" controls autoplay>
+  <source src="./images/lionhyhena.mp4" type="video/mp4">
+  <source src="./images/lionhyhena.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+
+
+
+---------------------   I M A G E S ----------------------------------
+
+<img src="./images/freeafrican.za.net\images\blank.gif" width="640" Height="100">
+
+<img src="./images/celtForest.jpg"  width="640" Height="295"    style="opacity: 0.2">
+
+<img src="./images/collaborart.png"  width="793" Height="173"      style="opacity: 0.4" >
+
+<img src="C:\Users\winst\Videos\Captures\collaborart-windows-app-screenshot.png"  width="255" Height="373" >
+
+<img src="C:\Users\winst\Videos\Captures\Collaborart-AdminScreenshot-Part1.png"  width="374" Height="279" >
+
+<img src="C:\Users\winst\Videos\Captures\Collaborart-AdminScreenshot-Part2.png"  width="374" Height="398" >
+
+<img src="C:\Users\winst\Videos\Captures\Collaborart-AdminScreenshot-Part3.png"  width="374" Height="245" >
+
+<img src="C:\Users\winst\Videos\Captures\collaborart-windows-app-screenshot.png"  width="510" Height="746" >
+
+<img src="./images/freeafrican.za.net\images\Fishy.JPG"  width="640" Height="144">
+
+<img src="./images/flowers.jpg"  width="640" Height="295"      style="opacity: 0.5" >
+<img src="./images/grid-with-numbers.jpg"  width="500" Height="599">
+
+<img id= "myImageW" src="http://whocan.ie/images/LadiesWear3.jpg" alt="Paris" id="myImg" width="270" height="420">
+
+
+<img id= "myImageW" src="./images/LadiesWear3.jpg" id="LadiesWear3" width="294" height="429">
+
+<img src="./images/freeafrican.za.net\images\black.png" width="290" Height="490">
+
+<img src="./images/freeafrican.za.net\images\blank.gif" width="640" Height="0"> 
+<img src="./images/love.gif"  width="178" Height="111">
+<img src="./images/magic.gif"  width="368" Height="81">
+
+<img src="./images/smalltrees.png"  width="125" Height="200">
+
+<img src="./images/smokyForest.jpg"  width="640" Height="295">
+
+<img src="./images/Straws.png"  width="240" Height="178">
+<img src="./images/pointer.png"  width="40" Height="40">
+
+<img src="./images/Straws.png"  width="800" Height="600">
+<img src="./images/sunRayForest.jpg"  width="640" Height="295">
+<img src="./images/TrianglePageA4.png"  width="1021" Height="1318">
+<img src="./images/white-square.png"  width="16" Height="100">
+
+<img src="./images/1000x1000-grid.png"  width="1000" Height="1000">
+
+<img src="./images/white-square.png"  width="740" Height="650">
+<img src="./images/white-square.png"  width="800" Height="100">
+<img src="./images/world2.gif"  width="76" Height="76" style="opacity: 0.5">
+
+<img src="./images/10x10grid.png"  width="640" Height="640">
+<img src="C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\icons\icon144.png"  width="144" Height="144">
+
+<img src="./images/kingfish-tiny.png"  width="35" Height="35">
+<img src="./images/kingfish-tiny-white-bg.png"  width="38" Height="38">
+<img src="./images/white-square.png"  width="25" Height="700">
+
+
+<img src="./images/arrow-for-animation-animated-gif.gif"  width="250" Height="44">
+
+<img src="./images/arrow-for-animation-animated-gif.gif"  width="125" Height="22">
+<img src="./images/arrow-for-animation-animated-gif.gif"  width="63" Height="11">
+
+<table>
+<tr><td>                    
+  <button id="randomNum1" onClick="myRandomChange1(52,0)"  ><img src="./images/world2.gif"  width="76" Height="76"></button> 
+<td></tr>
+</table>
+
+<img src="./images/magic.gif"  width="245" Height="53">
+
+
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function1(){
+
+  function1(){
+   $("p").fadeIn(7000);
+  } 
+  }
+</script>
+</head>
+<body>
+<p>
+<img src="./images/magic-stars-gif.gif"  width="245" Height="53">
+</p>
+</body>
+
+
+
+
+
+10x10grid
+<img src="./images/world.gif"  width="76" Height="76">
+//------------------------ image with captions --------------------------------------------------------
+<figure>
+  <img src="pic_trulli.jpg" alt="Trulli" style="width:100%">
+  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+</figure>
+
+
+
+//-----------------------------------------------------------------------------------
+//------------------------- T E X T -------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+<font color="white" style ="font-size: 30px"><b>I'd rather be fishing!</b>🐟</font>
+<font color="#00ccff" style ="font-size: 30px"><b>I'd rather be fishing!</b>🐟</font>
+<font color="#00ccff" size="+2"><b>Quick Grid Game </b></font>
+
+
+
+<font color="dodgerblue" size="+1"><b>This table is in an &#60;iframe&#62; with a link to an externally <br>sourced PHP file with a result from a MYSQL database query.</b></font>
+
+
+<img src="./images/collaborart.png"  width="793" Height="173"      style="opacity: 0.4" >
+
+<center><font color="#e65c00" size="+3"><b>Translating Text</b></font><br><br><br>
+<font color="#e65c00" size="+2"><b>A different approach to translations</b></font><br><br>
+<font color="#e65c00" size="+1"><b>Use a browser to set the language after that, when as you enter text it is translated.<br><br></b></font>
+<font color="#e65c00" size="+1"><b>To position the text, first select it, then use Ctrl + End to get to the end of the existing text.<br><br>
+Use Ctrl + Home to jump back to the top. Entering a paragraph at a time gives better control and is faster.</b></font>
+</center>
+
+
+
+<p id="p1" style="color:dodgerblue; font-size:18pt;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a basic video<br></b></p>
+
+<p id="p1" style="color:dodgerblue; font-size:16pt;"><b>Using a different approach to transitions.<br></b></p><b>
+<p id="p1" style="color:dodgerblue; font-size:14pt;"><b>By using zoom-out the browsers canvas be a huge workspace.<br></b>
+</p><p id="p1" style="color:dodgerblue; font-size:14pt;"><b>Trigger the display to move to any point using event driven actions.</b></p>
+ <p></p><p id="p1" style="color:dodgerblue; font-size:14pt;"><b>Here HTML 5 animation, video and audio tracks are used together.<br><br></b></p></b>
+
+
+
+<center>
+<font color="#e65c00" size="+3"><b>Another Way To Translate Text</b></font><br><br>
+<font color="#e65c00" size="+2"><b>A different approach to translations</b></font><br>
+<font color="#e65c00" size="+1"><b>Use a browser to set the language.<br>As you enter text it is translated.<br></b></font>
+
+<font color="#e65c00" size="+1"><b>To position the text, first select it, then use Ctrl + End to get to the end<br>of the existing text.<br><br>Use Ctrl + Home to jump back to the top.</b></font>
+</center>
+
+
+<font color="#e65c00" size="+3"><b>Flowers and Forests</b></font>
+
+<p color="#e65c00"  style="color:dodgerblue; font-size:10pt;"><b>Yummy</b></p>
+
+<font color="#e65c00" size="10px" ><b>£2 for two Chances </b></font>
+<font color="DodgerBlue" size="10px"><b>Good Luck</b></font>
+
+<font color="DodgerBlue" size="+2"><b>Bozo&#160;&#160; 🐋</b></font>
+<font color="DodgerBlue" size="+2"><b>Fishes&#160;&#160; 🐟&#160;&#160;or Wales&#160;&#160;🐋</b></font>
+🐋   👈
+<font color="#00ccff" style ="font-size: 40px">👈</font>
+
+<font color="#00ccff" style="font-size: 30px">£2 for 2 Spins</font>
+
+<font color="#00ccff" style="font-size: 30px">🐋 £6</font>
+
+<font color="#00ccff" style="font-size: 30px">🐟 £3</font>
+
+
+<font color="#00ccff" style ="font-size: 40px">🐟</font>
+<font color="#00ccff" style ="font-size: 40px">😊</font>
+
+<font color="#00ccff" style ="font-size: 40px">🐋</font>
+<font color="#00ccff" style ="font-size: 40px">🐋</font>
+<font color="#00ccff" style ="font-size: 40px">🐋</font>
+
+<font color="#00ccff" size="+1">🐟</font><br><br>
+<font color="#00ccff" size="+2">🐟</font><br><br>
+<font color="#00ccff" size="+3">🐟</font><br>
+<font color="#00ccff" size="+4">🐟</font>  <br><br><br><br>
+
+
+<font color="#00ccff" size="+1">😊</font>
+<font color="#00ccff" size="+2">😊</font>
+<font color="#00ccff" size="+3">😊</font>
+<font color="#00ccff" size="+4">😊</font>
+<table  width="550" border="0 solid hidden" ><tr border="0 solid hidden"><td border="0 solid hidden">
+
+
+
+//-- * * *  THIS IS TO SET A COLUMNS WIDTH - THE HTML FILE HAS .circle { 	width:450px; WHICH IS A DEFAULT CONTAINER SIZE  +++ * **  *** *
+
+// This <div> tag gives control over the width within the boundaries of the .circle in the html css part.
+
+<div style="color:blue; width:940px">
+Lorem ipsum is derived from the Latin "dolorem ipsum" roughly translated as "pain itself." Lorem ipsum presents the sample font and orientation of writing on web pages and other software applications where content is not the main concern of the developer.
+</div>
+
+<div style="color:blue; width:40px">
+Lorem ipsum is derived from the Latin "dolorem ipsum" roughly translated as "pain itself." Lorem ipsum presents the sample font and orientation of writing on web pages and other software applications where content is not the main concern of the developer.
+</div>
+
+<div style="color:blue; width:240px">
+<font color="DodgerBlue" size="+2"><b>Fishes&#160;&#160; 🐟&#160;&#160;or Wales&#160;&#160;🐋</b></font>
+</div>
+
+//-------
+
+
+
+</td></tr>
+
+</table>
+
+<div style="color:blue; width:"240" style ="font-size: 10pt">
+<br>First to row 10 wins! <br>
+Left is the number of rows to move down.<br>Right is the number of rows to move from the left.<br>
+If you land on your opponent's square you win.<br>
+</div>
+
+<font color="silver" size="+2"><b>It was<br>nail-biting! </b> </font>😊
+
+<font color="white" size="+2"><b>LET'S GO SHOPPING</b> </font>
+
+colors:   #5c8a8a darkblue gray
+
+
+  
+//----------------------------------------------------------------------------------------------------
+     -----------   -------------      I F R A M E    W I T H   PHP -  S Q L    --------------------   --
+//------------------------------------------------------------------------------------------------------
+
+
+<style>
+.wrapper {
+  width: 710px;
+  height: 140px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+.h_iframe {
+  position: relative;
+}
+
+.h_iframe .ratio {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.h_iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color:white;
+}
+</style> 
+</iframe>
+
+<br>&#160;<br><div class="wrapper">  <div class="h_iframe">  
+  <!-- a transparent image is preferable -->
+<img src="./images/freeafrican.za.net\images\Fishy.JPG"   style="opacity: 0.3"  width="710" Height="150">
+ <font color="white">
+  <iframe class="ratio" src="http://whocan.ie/dbtest.php" frameBorder="0">
+</iframe>
+<br><br></font>
+  </div></div>
+  
+  
+  
+  //-- - - - - -- -- --plain iframe  - - -
+  
+  <iframe width="710" height="280" src="http://whocan.ie/dbtest.php" frameBorder="0">
+</iframe><br><br>
+ 
+
+
+ //-- - - - - -- -- -- - - - iframe to local file
+<html><head><style>
+#div1 {
+  position: relative;
+  margin: auto;
+  height: 150px;
+  width: 250px;
+  padding: 10px;
+  border: 1px solid black;
+  perspective: 125px;
+  animation: mymove 5s infinite;
+}
+@keyframes mymove {
+  50% {perspective-origin: 10px 50%;}
+}
+#div2 {
+  padding: 50px;
+  position: absolute;
+  border: 1px solid black;
+  background-color: coral;
+  transform: rotateX(45deg);
+}
+</style></head><body>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+<font color="white">
+<br>Admin Menu &#160;&#160;<br>
+<iframe left="640" top="80" width="440" height="220" src="admin-module-localhost.html" >
+</font></iframe>
+</body>
+
+
+//-------------------------------------------------------------------------------------------------------
+     -----------   -------------    TABLES   --------------------   -------------
+//-------------------------------------------------------------------------------------------------------
+
+
+
+//--------- Tables  give - -  W I D T H    C O N T R O L    F O R    T E X T ---*-*-*-*-*-*-*-*-*---------------
+
+<table  width="640" border="0px solid white" ><tr border="0px solid white"  ><td border="0px solid white" >
+<font color="#5c8a8a" size="+2"><b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.<br>  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+</font></tr></td> </table>
+
+<table  width="640" border="0px solid white" ><tr border="0px solid white"  ><td border="0px solid white" >
+<font color="#5c8a8a" size="+2">Lorem ipsum is derived from the Latin “dolorem ipsum” roughly translated as “pain itself.” Lorem ipsum presents the sample font and orientation of writing on web pages and other software applications where content is not the main concern of the developer.
+</font></tr></td> </table>
+
+  Note that using tags does not give control over width.
+ Changing the width wont work!   
+<div style="color:#ffcc00 width:980">
+<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+</div>
+
+
+
+
+----- WITH RECESSED BORDER AND A VIDEO  - AND VIDEO
+// Note: this table style will be inhereited by the other tables in the form!
+
+<head>
+<style>
+th, td {
+  border-style: inset;
+}
+</style>
+</head>
+<body>
+<table style="width:100%">
+  <tr>
+    <td><center>Safari in Africa </center><video width="320" height="240" controls autoplay>
+  <source src="./images/lionhyhena.mp4" type="video/mp4">
+  <source src="./images/lionhyhena.mp4" type="video/ogg">
+  Your browser does not support the video tag.
+</video></td>
+  </tr>
+</table>
+</body>
+
+
+<h1 style="color:blue;text-align:center;">Big Top Circus</h1>
+
+
+
+<table class="table" width="640" border="0">
+  <tr><th align="center"> Some videos. </th> <th align="center"> Some videos. </th> 
+  <th align="center"> Some videos. </th>  </tr>
+  <tr> <td v-align="center" align="center">
+  
+  <iframe width="210" height="320" src="https://www.youtube.com/embed/waIcLwDKxQw"  title="torporMemes - Chatterbox" frameborder="0" allowfullscreen>
+</iframe><br>&#160;
+</td><td> Press play when ready. 
+</td>    
+<td><br>&#160;<br>
+ 
+ put in a <br> so the thing has a handle to drag around on screen
+ <iframe left="0" top="0" width="210" height="320" src="https://www.youtube.com/embed/CWdezxeWEpk"  title="torporMemes - Chatterbox" frameborder="0" allowfullscreen>
+</iframe><br>audio track<br>
+
+<p>
+ <iframe left="0" top="0" width="250" height="150" src="C:\Users\winst\Videos\Captures\collaborart-page3-audio-final.mp4"  title="audio1" frameborder="0" autoplay>
+</iframe><br>audio track<br>
+</p>
+
+
+</td>
+  </tr>  <tr>
+    <td> Presented by Bozo at the clown factory. </td> <td> </td> <td>Assisted by Chico and the Team. </td>
+  </tr>
+</table>
+
+
+// ------------------- table for buttons on/off ---------
+// style for flat table with plain border
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+
+//----------- another table --------------------------------------
+
+<head> <style>
+th, td {
+  border-style: inset;
+  background-color: lightblue;
+  border: 1px solid #333333;
+  width: 140px;
+  height: 60px;
+  opacity: 0.5;   
+}
+</style></head><body>
+<table style="width:"200px">
+  <tr>
+    <th colspan="3"><font size="+2">&#160;&#160;🌎&#160;&#160; </font>Sailing around the world<font size="+2">&#160;&#160;🌎&#160;&#160;</font> </th>
+  </tr>
+  
+   <tr><td><b>Select a document</b></td> <td style="width:"90px">&#160;&#160;&#160;&#160;&#160;Show&#160;&#160;&#160;&#160;&#160;</td><td>&#160;&#160;&#160;&#160;&#160;Hide&#160;&#160;&#160;&#160;&#160;</td></tr>  
+  <tr>
+    <td>Sailing Basics</td><td>&#160;&#160;&#160;&#160;</td><td>&#160;&#160;&#160;&#160;</td>
+  </tr>
+  <tr>
+    <td>Boating Safety</td><td>&#160;&#160;&#160;&#160;</td> <td>&#160;&#160;&#160;&#160;</td>
+  </tr>
+   <tr><td >Maps and Map Reading</td><td>&#160;&#160;&#160;&#160;</td> <td>&#160;&#160;&#160;&#160;</td>
+  </tr>   
+  
+</table></body>
+
+
+
+-------------  and another 
+
+<table class="textarea" width="788" border="5px solid white" ><tr border="0"><td border="0px" >
+<img src="http://whocan.ie/images/LadiesWear3.jpg" width="64" Height="102">
+</table>
+
+
+===================== table WITH heavy over styling 
+
+<style>
+.xtablex {
+    float: left;
+    border-collapse: separate; /* Don't collapse */
+    border-spacing: 0;
+}   
+
+.xtablex th {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+    background-color: lightblue;
+}
+
+.xtablex thead {
+    position: sticky;
+    top: 0px;
+}
+
+.xtablex td {
+    /* For cells, apply the border to one of each side only (right but not left, bottom but not top) */
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.xtablex th:first-child,
+tablex td:first-child {
+    /* Apply a left border on the first <td> or <th> in a row */
+    border-left: 1px solid black;
+}
+
+.xtablex thead tr:first-child th {
+    border-top: 1px solid black;
+    padding: 0px 10px;
+    width: 100px;
+}
+
+.xtablex tbody tr:nth-child(even) {
+    background-color: lightgrey;
+}
+
+.xtablex tbody td:nth-child(odd) {
+    padding: 0px 50px;
+}
+
+.xtablex tbody td:nth-child(even) {
+    padding: 0px 10px;
+}
+
+</style>
+<table class="xtablex" width="640">
+  <tr>
+    <th> Company </th>    <th> Contact </th>    <th> Country </th>
+  </tr>  <tr>
+    <td> <br>&#160;<br><br>
+ <iframe width="210" height="320" src="https://www.youtube.com/embed/waIcLwDKxQw"  title="torporMemes - Chatterbox" frameborder="0" allowfullscreen>
+</iframe><br><br>
+
+
+
+<br>&#160;<br> </td>    <td> Maria Anders </td>    <td><br>&#160;<br><br>
+ <iframe left="0" top="0" width="210" height="320" src="https://www.youtube.com/embed/CWdezxeWEpk"  title="torporMemes - Chatterbox" frameborder="0" allowfullscreen>
+</iframe>
+<br>&#160;<br></td>
+  </tr>  <tr>
+    <td> Centro comercial Moctezuma </td>    <td> Francisco Chang </td>    <td> Mexico </td>
+  </tr>
+</table><br><br><br><br>
+
+
+//-------------------------------------------------------------------------------------------------------
+     -----------   -------------    EFFECTS   --------------------   -------------
+//-------------------------------------------------------------------------------------------------------
+
+#parallax{
+  border-radius: 90%;
+}
+
+// - - - - - - parallax 
+This effect is amazing. Its possible to have  awindow view into the background image.
+Changing things around her can produce unexpected but awesome results
+
+<head>
+<style>
+.parallax {
+  /* The image used   background-image: url("file://C:/Users/winst/Desktop/celtForest.jpg");    */
+   background-image: url("http://whocan.ie/images/LadiesWear3.jpg"); 
+ 
+/*  <img src="./images/celtForest.jpg"  width="640" Height="295"    style="opacity: 0.2">  */
+  /* Set a specific height */
+  min-height: 250px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color:white;
+  border-radius: 90%;
+}
+
+
+</style>
+</head><body>
+<p>See the unseen</p>
+<div class="parallax"></div>
+<div style="height:240px;background-color:dodgerblue;font-size:14px">
+
+Move this around to see the effect in action.<br>
+<head>
+<style>
+th, td {
+  border-style: none;
+}
+</style>
+</head>
+<body>
+<center>
+
+<table  width="320" border="0px solid white" ><tr border="0px solid white"  ><td border="0px solid white" >
+<font color="white" size="+1"><b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.<br>  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+</font></tr></td> </table></center>
+</body>
+</div></body>
+
+
+
+// another version of the pralax
+
+
+<style>
+.parallax {
+  /* The image used  */ 
+background-image: url("file:///C:/Users/winst/Desktop/celtForest.jpg");    
+/*   background-image: url("http://whocan.ie/images/LadiesWear3.jpg"); */
+ 
+/*  <img src="./images/celtForest.jpg"  width="640" Height="295"    style="opacity: 0.2">  */
+  /* Set a specific height */
+  min-height: 250px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color:white;
+  border-radius: 100%;
+}
+
+
+</style>
+<div class="parallax"></div>
+<div style="height:140px;background-color:white;font-size:14px">
+
+
+<style>
+th, td {
+  border-style: inset;
+   border-radius: 90%;
+}
+</style>
+
+
+<center>
+
+<table width="20" border="0px solid white"><tbody><tr border="0px solid blue"><td border="0px solid white">
+<font color="white" size="+1">So what<br><br><br><br>
+</font></td></tr> </tbody></table></center>
+
+</div>
+
+
+
+
+
+
+// - - - - fade in / out
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $("p").fadeOut(1000);
+  });
+  $(".btn2").click(function(){
+    $("p").fadeIn(1000);
+  });
+});
+</script>
+</head>
+<body>
+
+<button class="btn1">Fade out</button>
+<button class="btn2">Fade in</button>
+
+<p>This is a paragraph.</p>
+
+</body>
+
+
+
+//-------------------  animated picture border -- edge moves-----------------------------------------------------
+
+<head><style> 
+#myAniPic {
+  width: 64px;
+  height: 102px;
+  border: 5px solid black;
+  animation: mymovep 5s infinite;
+}
+@keyframes mymovep {
+  40% {border-start-end-radius: 25px;}
+}
+</style></head><body><p>
+<div id="myAniPic"><img src="http://whocan.ie/images/LadiesWear3.jpg" width="64" Height="102">
+</div></body>
+
+
+
+//---- html Text area tag -  -  -  NOTE:  clients will not see the text in it  --
+ <textarea id="view"  border="none" name="view" rows="5" cols="100">
+ <font size="8pt">
+Lorem ipsum is derived from the Latin “dolorem ipsum” roughly translated as “pain itself.” Lorem ipsum presents the sample font and orientation of writing on web pages and other software applications where content is not the main concern of the developer.
+ </font></textarea>
+
+<div style="color:#00ace6; width:980">
+Lorem ipsum is derived from the Latin “dolorem ipsum” roughly translated as “pain itself.” Lorem ipsum presents the sample font and orientation of writing on web pages and other software applications where content is not the main concern of the developer.
+</div>
+
+
+
+
+//----------------------  animated - - good sample------
+
+<head>
+<style> 
+#myImg {
+  width: 200px;
+  height: 400px;
+  object-fit: cover;
+  object-position: 0% 0%;
+  animation: mymove 5s infinite;
+}  
+
+@keyframes mymove {
+  0% {
+    object-position: 0% 0%;
+  }
+ 
+   50% {
+    object-position: 60% 40%;
+  }
+  100% {
+    object-position: 100% 100%;
+  }
+}
+</style>
+</head>
+<body>
+<p><img  src="http://whocan.ie/images/LadiesWear3.jpg" alt="Paris" id="myImg" width="240" height="300">
+</body>
+
+
+
+//--------- animation ------ squashes and opens - - - up and then goes back down-------------------------------------------------------------
+
+<style> 
+#myDIV2 {
+  height: 300px;
+  background-color: opal;
+  color: white;
+  animation: mymove 15s infinite;
+}
+@keyframes mymove {
+  50% {height: 0px;}
+}
+</style><body> <div id="myDIV2"> C R A Z Y  -  R I V E R<br>
+ <img id="myDIV2" src="http://whocan.ie/images/LadiesWear3.jpg" alt="Paris" id="myImg" width="270" height="420">
+</div></body>
+
+
+
+//-------------------------------------------------------------------------------------------------------
+     -----------   -------------   S C R I P T S   --------------------   -------------
+//-------------------------------------------------------------------------------------------------------
+
+
+
+//-------------------- remove class ------------------------------------
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p:last").removeClass("intro").addClass("main");
+  });
+});
+</script>
+<style>
+.intro {
+  color: red;
+}
+.main {
+  background-color: yellow;
+}
+</style>
+</head>
+<body>
+
+<h1>This is a heading</h1>
+
+<p>This is another paragraph.</p>
+<p class="intro">This is a paragraph.</p>
+
+<button>Change class name of the last p element</button>
+
+</body>
+
+
+===============================   glow -- not good -- causes heavy cpu work 
+
+<head><meta name="viewport" content="width=640, initial-scale=1">
+<style>
+body {
+  background-color: none;
+  font-family: cursive;
+}
+
+.glow {
+  font-size: 8px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+</style></head><body><h1 class="glow">CollaborArt</h1>   </body></html> 
+
+
+//-------------------------------------------------------------------------------------------------------
+     -----------   -------------     O B J E C T S  --------------------   -------------
+//-------------------------------------------------------------------------------------------------------
+
+<object width="400" height="400" data="helloworld.swf"></object>
+
+// WONT WORK - CANT DRAG
+<object width="400" height="400" data="./images/lionhyhena.mp4">  <param name="autoplay" value="true"></object>
+
+//WILL WORK !? has a line which says MY OBJECT to use to drag with it 
+<!-- <object data="./images/freeafrican.za.net\index.html" width="800" height="200"> -->
+<object width="300" height="200" data="./images/lionhyhena.mp4">  <param name="autoplay" value="true">
+MY OBJECT</object>
+
+
+*******************************************************************************************
+
+****************************** Image overlay  - Collaborart presentation *******************	
+
+*******************************************************************************************
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  font-size: 10px;
+}
+
+.container {
+  position: relative;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.container img {vertical-align: middle;}
+
+.container .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 1135px;
+/*  height: 600px */
+  padding: 20px;
+}
+</style>
+<body>
+<h2><font color="brown"><b>CollaborArt 1.0</b</font></h2> 
+<div class="container">
+ <img src="./distribution/images/flowers.jpg" alt="Notebook"    style="width:800; height:600; opacity: 0.2" >
+ <div class="content"><font color="brown">	
+	<p>By nature, it's very powerful and very easy to use. The power of HTML 5 lets you produce highly attractive documents, videos, presentations and more. 
+	<br><br>Collaborate on a single document in real time and experience the power of collaboration. <br>CollaborArt implements a browser which gives you all the functionality of your browser, which include: full screen, zoom in and out, print, screen reader, recording, snapshot and screen casting. Work quickly and even with multiple people working on the same document together, at once, in real time.</p>
+	Having direct access to the Internet while making documents gives you unbelievable possibilities. Like opening web pages in i-frames which might have a SQL result or link to a video or audio file and put it in your document or presentation. Use anything out there in real time. Not only that, CollaborArt has some powerful built-in features like animation buttons and a random number generator for game building.</p>
+	The server comes in Microsoft Windows and Android versions and they are identical.</font>
+  <br></div>
+  
+</div>
+</body>
+
+
+//-------------------------------
+
+<font color="brown" size="-1">Concept and Development by Winston Wyndham-Quin</font>
+<font color="brown" size="+2">Collaborate like never before.</font>
+
+<h2><font color="brown"><b>The Client Menu</b></font></h2><font color="brown"><b> </b></font>
+<div width:"40px">
+<font color="brown" size="+1">The art of collaboration.</font>
+</div>
+
+<font color="brown" size="+2">Runs on MS Windows and Android.</font>
+
+<font color="brown" size="+2">Easy to use Admin Module.</font>
+
+<font color="brown" size="+2">Easy access to all files.</font>
+
+<font color="brown" size="+2">Cross Platform Integration.</font>
+
+<font color="brown" size="+2">Enter some some text. <br>Plain text or HTML text.</font>
+
+<font color="brown" size="+2">Click on "Text".</font>
+
+<font color="brown" size="+2">Click on "Update View".</font>
+
+<font color="brown" size="+2">Position the text.</font> 
+
+<font color="brown" size="+2">The Hide button moves things.</font> 
+
+<font color="brown" size="+2">1. Select the text.<br>2. Name the button.<br>3. Click on Hide.<br> <br>Its so easy!<br><br>The how-to videos on YouTube show more about this.</font> 
+
+<font color="brown" size="+2">The text you enter here gives you awesome creative ability.</font> 
+
+<font color="#00ccff" style ="font-size: 40px">👈 👉</font>
+
+<font color="DodgerBlue" size="+2"><b>Fishing&#160;&#160; 🐟</b></font>
+
+<font color="brown" size="+2">Layers give depth control.</font> 
+
+
+<font color="brown" size="+1"><b>A table with a link to external PHP with result from a MYSQL database query.</b></font>
+
+
+
+
+// -------------------------
+
+<style> 
+#myDIV2 {
+  height: 300px;
+  background-color: opal;
+  color: white;
+  animation: mymove 15s infinite;
+}
+@keyframes mymove {
+  50% {height: 0px;}
+}
+</style><body> <div id="myDIV2"> C R A Z Y  -  R I V E R<br>
+ <img id="myDIV2" src="http://whocan.ie/images/LadiesWear3.jpg" alt="Paris" id="myImg" width="270" height="420">
+</div></body>
+
+
+<img src="./images/freeafrican.za.net\images\black.png" width="290" Height="490">
+
+ <img id="myimg" src="http://whocan.ie/images/MensWear1.jpg" alt="Paris" width="135" height="210">
+<img id="mypic1" src="http://whocan.ie/images/fashion1SM.jpg" alt="Paris" width="135" height="210">
+
+<img src="./distribution/images/collaborart.png"  width="793" Height="173"      style="opacity: 0.4" >
+
+<font color="brown" size="+2">Set free your creative talent.</font> 
+
+ put in a <br> so the thing has a handle to drag aroundon screen
+ <iframe left="0" top="0" width="210" height="320" src="https://www.youtube.com/embed/CWdezxeWEpk"  title="torporMemes - Chatterbox" frameborder="0" allowfullscreen>
+</iframe><br>Video of ChatterMe<br>
+
+<img id="mypic2" src="./distribution/images/collaborart-windows-app-screenshot.-noshading.png" alt="CollaborArt Menu Screenshot" width="244" height="358">
+<img id="mypic2a src="C:/Users/winst/Videos/Captures/collaborart-server-snapshot-with-client.png" alt="CollaborArt Menu Screenshot" width="361" height="423">
+<font color="#e65c00" size="+3"><b>Flowers and Forests</b></font>
+    <h4>Welcome to the world of Collaborart.</h4>
+	
+	
+<img id="mypic3" src="C:/Users/winst/Videos/Captures/menu.png" alt="CollaborArt Menu Screenshot" width="82" height="419">
+
+<p>
+ <iframe left="0" top="0" width="250" height="150" src="./distribution/audio/collaborart-page3-audio-final.mp4"  title="audio1" frameborder="0" autoplay>
+</iframe><br>audio track<br>
+</p>
+
+
+<p>
+ <iframe left="0" top="0" width="250" height="150" src="./distribution/audio/hamburger.mp4"  title="audioh1" frameborder="0" autoplay>
+</iframe><br>audio track<br>
+</p>
+
+
+
+<font color="brown">
+The client menu system is easy to use. <br>An uncluttered workspace with only 7 main buttons and a text input box. 
+With all menu options clearly visible, a pleasant end user experience is enjoyed with an easy workflow. The menu also provides information about the text ares on display and makes it easy to identify and update items.
+<br><br>
+A collection of viewers for different modes are included. These are for presentations, games, screen recording and printing.
+These preview modes are great for fine tuning the layout of a document in a 'what you see is what you get' fashion, still editable but without a menu being visible.
+Having the ability to work in full screen, with or without a menu is a real pleasure.
+<br><br>
+CollaborArt is a paradigm shift in presentaion techniques and has new tools which were unavailable until now. Over the next few minutes you will see this amazing package and its features at work.
+Only the most important features are shown but they reveal the full impact of CollaborArt.
+</font>
+	
+	
+<font color="brown" >The Server is easy to use.</font>	
+*******************************************************************************************************
+
+
+
+<img src="./images/collaborart.png"  width="793" Height="173"      style="opacity: 0.4" >
+
+<font color="#e65c00" size="+3"><b>Stylesheets and Scripting</b></font>
+<font color="#e65c00" size="+2"><b>Exploring powerful features and concepts. </b></font>
+
+<font color="#e65c00" size="+3"><b>The End</b></font>
+files
+<img src="C:/Users/winst/Pictures/collaborart-advanced-1.png"  width="188" Height="268"  style="opacity: 0.9" >
+audio files
+<img src="C:/Users/winst/Pictures/collaborart-advanced-2.png"  width="471" Height="172"  style="opacity: 0.9" >
+picture files
+<img src="C:/Users/winst/Pictures/collaborart-advanced-3.png"  width="682" Height="244"  style="opacity: 0.9" >
+magic 60
+<img src="C:/Users/winst/Pictures/collaborart-advanced-4.png"  width="569" Height="232"  style="opacity: 0.9" >
+magic href
+<img src="C:/Users/winst/Pictures/collaborart-advanced-5.png"  width="363" Height="180"  style="opacity: 0.9" >
+
+Link to github
+<img src="C:/Users/winst/Pictures/collaborart-advanced-13.png"  width="563" Height="458"  style="opacity: 0.9" >
+
+<font color="#00ccff" style ="font-size: 40px">👈</font>
+<font color="#00ccff" style ="font-size: 40px">👉</font>
+
+
+
+random css view
+<img src="C:/Users/winst/Pictures/collaborart-advanced-6.png"  width="321" Height="215"  style="opacity: 0.9" >
+function my random change 1
+<img src="C:/Users/winst/Pictures/collaborart-advanced-7.png"  width="372" Height="327"  style="opacity: 0.9" >
+magic  add classes to 
+<img src="C:/Users/winst/Pictures/collaborart-advanced-8.png"  width="581" Height="103"  style="opacity: 0.9" >
+
+
+html audio tag - dont use collaborart-advanced-9.png use
+<img src="C:/Users/winst/Pictures/collaborart-advanced-10.png"  width="629" Height="238"  style="opacity: 0.9" >
+<font color="#e65c00" size="+2"><b>Attaching audio to a random number </b></font>
+
+capturing audio number
+<img src="C:/Users/winst/Pictures/collaborart-advanced-11.png"  width="340" Height="348"  style="opacity: 0.9" >
+
+random button set in html
+<img src="C:/Users/winst/Pictures/collaborart-advanced-12.png"  width="386" Height="90"  style="opacity: 0.9" >
+
+
+
+when adding an item a div tag is made
+<img src="C:/Users/winst/Pictures/collaborart-advanced-14.png"  width="402" Height="53"  style="opacity: 0.9" >
+
+<img src="C:/Users/winst/Pictures/collaborart-advanced-15.png"  width="542" Height="174"  style="opacity: 0.9" >
+
+<img src="C:/Users/winst/Pictures/collaborart-advanced-16.png"  width="427" Height="86"  style="opacity: 0.9" >
+
+
+
+
+//////////////////// svg ///////////////////////////////////////////////////////////
+
+<body>
+<style>
+@import "https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap";
+:root {
+  --wavy-text-body-bg-color: #c44569;
+  --wavy-text-body-color: #fff;
+  --wavy-text-font-family: "Fascinate Inline", sans-serif;
+  --wavy-text-animation-speed: 1s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font: 1em/160% sans-serif;
+ // margin: 0;
+//  background-color: var(--wavy-text-body-bg-color);
+ // color: var(--wavy-text-body-color);
+}
+
+svg {
+  fill: currentColor;
+  max-width: 100%;
+  vertical-align: baseline;
+}
+
+.site-container0 {
+  padding: 2em;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+#wavy-text {
+  font-family: var(--wavy-text-font-family);
+  font-size: 72px;
+}
+
+#wavy-text .char {
+  transform: translateY(0);
+  transform-origin: center;
+  animation: wavyText var(--wavy-text-animation-speed) ease-in-out infinite;
+}
+
+#wavy-text .char:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+#wavy-text .char:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+#wavy-text .char:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+#wavy-text .char:nth-child(4) {
+  animation-delay: 400ms;
+}
+
+#wavy-text .char:nth-child(5) {
+  animation-delay: 500ms;
+}
+
+@keyframes wavyText {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25%,
+  50% {
+    transform: translateY(10%);
+  }
+}
+</style>
+<div class="site-container0">
+  <svg width="400" height="120" id="wavy-text">
+    <g>
+      <text y="50%" class="char">
+        T
+      </text>
+      <text y="50%" x="20%" class="char">
+        r
+      </text>
+      <text y="50%" x="40%" class="char">
+        e
+      </text>
+      <text y="50%" x="60%" class="char">
+        a
+      </text>
+      <text y="50%" x="80%" class="char">
+        t
+      </text>
+    </g>
+  </svg>
+</div>
+
+</body>
+
+
+----------------------------------------------------
+<svg width="800px" height="800px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M551.424 0H176.128c-47.104 0-85.504 38.4-85.504 85.504v852.992c0 47.104 38.4 85.504 85.504 85.504h375.296c47.104 0 85.504-38.4 85.504-85.504V85.504c0-47.104-38.4-85.504-85.504-85.504M312.832 68.096h102.4c9.216 0 16.896 7.68 16.896 16.896s-7.68 16.896-16.896 16.896h-102.4c-9.216 0-16.896-7.68-16.896-16.896-0.512-9.216 7.168-16.896 16.896-16.896m51.2 921.6c-28.16 0-51.2-23.04-51.2-51.2s23.04-51.2 51.2-51.2 51.2 23.04 51.2 51.2-23.04 51.2-51.2 51.2m238.592-136.704H124.928V170.496h477.696v682.496z" fill="#FFA28D" /><path d="M853.504 66.56h-218.112c1.536 6.144 2.048 12.288 2.048 18.432v45.056h88.576c8.704 0 15.872 7.168 15.872 15.872s-7.168 15.872-15.872 15.872h-88.576v64H901.12v637.952h-264.192v54.784c8.192-13.824 23.552-23.04 40.448-23.04 26.624 0 47.616 21.504 47.616 47.616 0 26.624-21.504 47.616-47.616 47.616-19.968 0-36.864-12.288-44.032-29.696-10.24 35.328-43.008 61.44-81.92 61.44h301.568c44.032 0 79.872-35.84 79.872-79.872V146.432c0.512-44.032-35.84-79.872-79.36-79.872z" fill="#5FFFBA" /></svg>
+//////////////////////////////////
+
+<body>
+<style>
+:root {
+  --p-topping-color: #c44569;
+  --p-base-color: #f7f1e3;
+  --p-stick-color: #eab543;
+  --p-drop-color: var(--p-topping-color);
+  --p-drop-right-speed: 3.5s;
+  --p-drop-left-speed: 2.5s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font: 1em/160% sans-serif;
+  margin: 0;
+ // background-color: #ddd;
+}
+
+svg {
+  fill: currentColor;
+  max-width: 100%;
+  vertical-align: baseline;
+}
+
+.site-container1 {
+  padding: 2em;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+#popsicle .topping {
+  fill: var(--p-topping-color);
+}
+
+#popsicle .base {
+  fill: var(--p-base-color);
+}
+
+#popsicle .stick {
+  fill: var(--p-stick-color);
+}
+
+#popsicle .drop {
+  transform: scale(2);
+  fill: var(--p-topping-color);
+}
+
+#popsicle .drop-left {
+  animation: dropLeft var(--p-drop-left-speed) ease-in-out infinite;
+  opacity: 0;
+}
+
+#popsicle .drop-right {
+  animation: dropRight var(--p-drop-right-speed) ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes dropLeft {
+  0%,
+  5% {
+    transform: translate(450px, 525px) scale(2.5);
+  }
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(450px, 900px) scale(2);
+    opacity: 0;
+  }
+}
+@keyframes dropRight {
+  0%,
+  5% {
+    transform: translate(575px, 415px) scale(2.5);
+  }
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(575px, 900px) scale(2);
+    opacity: 0;
+  }
+}
+
+</style>
+
+<div class="site-container1">
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 1000 1000" id="popsicle">
+    <path class="topping" d="M0 0 C1.35085693 0.29801514 1.35085693 0.29801514 2.72900391 0.60205078 C52.93161498 11.94799386 98.7317994 40.45154237 126.75390625 84.2265625 C145.58328242 114.67586902 152.15808312 146.97662707 152.14044189 182.37583923 C152.1430284 184.45568047 152.14604236 186.53552121 152.1494453 188.61536127 C152.15748441 194.31373675 152.15930313 200.01209962 152.16004276 205.71048009 C152.16189861 211.86258808 152.16944841 218.0146896 152.17617798 224.16679382 C152.19044434 238.3089772 152.19628391 252.45115641 152.20086992 266.59334525 C152.20320926 273.58597917 152.20681219 280.57861228 152.2105653 287.57124556 C152.22339464 311.52150241 152.23411626 335.4717588 152.2375679 359.422019 C152.23778953 360.92380789 152.23801132 362.42559678 152.23823325 363.92738566 C152.23845389 365.43271816 152.23867437 366.93805066 152.2388947 368.44338316 C152.23933724 371.46315062 152.23978436 374.48291808 152.24023438 377.50268555 C152.24039846 378.62576534 152.24039846 378.62576534 152.24056586 379.77153361 C152.24419802 404.05906841 152.26012723 428.3465734 152.28342474 452.63409679 C152.30802931 478.33130028 152.32174094 504.02848673 152.32293582 529.72570235 C152.32310727 532.5471567 152.32332269 535.36861104 152.32357025 538.19006538 C152.32362602 538.88475265 152.32368179 539.57943991 152.32373925 540.2951783 C152.32488886 551.46416257 152.33590272 562.63311616 152.35045731 573.80209007 C152.36483418 585.02880402 152.36780026 596.25547925 152.36001733 607.48220342 C152.35610982 613.56163001 152.35704568 619.64095351 152.37107468 625.72036743 C152.38380648 631.2885393 152.38262226 636.85653052 152.37048396 642.42470212 C152.3685258 644.43601535 152.37161091 646.44734134 152.38032833 648.45863663 C152.45061674 665.77573961 150.85154427 679.38999588 138.8125 692.8125 C128.89880426 702.12197501 116.72411241 704.30874329 103.73071289 704.22705078 C101.90038513 704.22748886 101.90038513 704.22748886 100.03308105 704.22793579 C96.7049907 704.22678532 93.37715178 704.21678957 90.04910588 704.20278788 C86.56443737 704.19024281 83.07976512 704.18910705 79.59507751 704.18673706 C73.0043671 704.18053335 66.41372343 704.16413763 59.82304233 704.14403808 C52.3163817 704.12164446 44.80971779 704.11067696 37.30303204 704.10064721 C21.86864944 704.07977036 6.43433334 704.04461607 -9 704 C-8.99723462 705.09883451 -8.99446924 706.19766903 -8.99162006 707.32980156 C-8.92499071 734.07966125 -8.87570812 760.82951017 -8.84456348 787.57943535 C-8.82910145 800.51555202 -8.80802453 813.45161385 -8.77368164 826.38769531 C-8.74375907 837.66414048 -8.72442017 848.94054592 -8.71773452 860.21702969 C-8.71382713 866.18659517 -8.70465785 872.156047 -8.68280983 878.12557602 C-8.66239966 883.74796383 -8.65617541 889.3701915 -8.66067696 894.99261284 C-8.65985379 897.05249464 -8.65391528 899.11238198 -8.64238358 901.17223167 C-8.56894812 914.97012047 -8.6162377 926.96773891 -18 938 C-25.55334624 945.03136703 -33.73706148 947.97164934 -44 948 C-53.1226195 947.36418107 -61.14849811 943.41462516 -67.375 936.6875 C-73.67303947 928.64099631 -75.15565823 920.2272529 -75.12025452 910.23649597 C-75.12153615 908.91314215 -75.12153615 908.91314215 -75.12284368 907.56305391 C-75.12449057 904.60736358 -75.11899003 901.65173002 -75.11352539 898.69604492 C-75.11324332 896.57710776 -75.11340164 894.4581705 -75.1139679 892.3392334 C-75.1142551 886.5855722 -75.10837069 880.8319318 -75.10139394 875.07827544 C-75.0951477 869.06580062 -75.09455559 863.05332534 -75.09336853 857.04084778 C-75.09025897 845.6547762 -75.08205062 834.26871421 -75.07201904 822.88264686 C-75.06084628 809.92026369 -75.05534452 796.95788007 -75.05032361 783.99549329 C-75.03986771 757.33032354 -75.0222755 730.66516231 -75 704 C-75.63499861 704.00276538 -76.26999722 704.00553076 -76.9242382 704.00837994 C-92.40807527 704.07476612 -107.89186252 704.12434184 -123.37580681 704.15543652 C-130.86387127 704.17087513 -138.35184046 704.19190678 -145.83984375 704.22631836 C-152.36989507 704.25631319 -158.89987736 704.27559683 -165.42999566 704.28226548 C-168.88448712 704.28616076 -172.33878117 704.29525161 -175.79320908 704.31719017 C-179.65888796 704.34153913 -183.52437747 704.34196355 -187.39013672 704.34057617 C-189.08947105 704.35675491 -189.08947105 704.35675491 -190.82313538 704.3732605 C-203.91126685 704.32260395 -214.54308379 700.25147661 -224.25 691.375 C-232.91520386 682.21865098 -236.3235221 670.49510754 -236.25447559 658.17468071 C-236.25768207 657.31772399 -236.26088855 656.46076728 -236.26419219 655.57784218 C-236.27248357 652.71058873 -236.26657082 649.84354465 -236.26069641 646.97628784 C-236.26371753 644.89791226 -236.26760681 642.81953779 -236.27228898 640.74116528 C-236.28258376 635.0324981 -236.28038331 629.32389362 -236.27610838 623.61522126 C-236.27364368 617.45673076 -236.28265246 611.29825546 -236.29014587 605.13977051 C-236.30290462 593.07233165 -236.30469066 581.00492028 -236.30234561 568.93747781 C-236.30051169 559.12282746 -236.30227465 549.30818363 -236.30657005 539.49353409 C-236.30717246 538.08252705 -236.30777366 536.67152002 -236.30837366 535.26051299 C-236.30928094 533.13406568 -236.31018961 531.00761838 -236.31110601 528.88117108 C-236.31953638 509.10751175 -236.32387099 489.33385488 -236.31969929 469.56019402 C-236.31954291 468.81474966 -236.31938654 468.0693053 -236.31922542 467.30127172 C-236.31841967 463.52327957 -236.3175739 459.74528742 -236.31671212 455.96729527 C-236.31654103 455.21701286 -236.31636994 454.46673045 -236.31619367 453.69371221 C-236.31584701 452.17645481 -236.31549848 450.65919742 -236.31514808 449.14194002 C-236.30979769 425.56352463 -236.31770152 401.98514669 -236.33618164 378.40673828 C-236.35693566 351.89624048 -236.36761731 325.38576589 -236.36360615 298.87525952 C-236.36321084 296.04346856 -236.36284929 293.21167759 -236.36250877 290.37988663 C-236.36241804 289.68266779 -236.36232731 288.98544896 -236.36223383 288.26710228 C-236.36107139 277.77495043 -236.36768963 267.2828221 -236.37832069 256.79067612 C-236.39041739 244.84010489 -236.39160499 232.88958694 -236.37953053 220.93901037 C-236.37366203 214.8482421 -236.37248574 208.75757433 -236.38453293 202.6668129 C-236.39546115 197.07640605 -236.39220663 191.48618278 -236.37827124 185.89578427 C-236.37564314 183.88756997 -236.37793049 181.87934096 -236.38600711 179.87114118 C-236.53422019 140.22438857 -226.18185396 103.70313619 -202 72 C-201.32710938 71.10152344 -200.65421875 70.20304687 -199.9609375 69.27734375 C-189.4940529 55.88053971 -176.95954014 43.70040274 -163 34 C-161.97519531 33.28070313 -160.95039063 32.56140625 -159.89453125 31.8203125 C-136.74047913 16.27362517 -111.26453338 5.6807992 -84 0 C-83.26249512 -0.16371094 -82.52499023 -0.32742187 -81.76513672 -0.49609375 C-56.44744904 -5.91931165 -25.2333703 -5.75861003 0 0 Z " transform="translate(542,28)" />
+    <path class="base" d="M0 0 C8.478204 7.74330682 11.89272037 15.51525347 12.42163086 27.04443359 C12.65661385 39.7919799 9.94794349 51.34523404 6.66015625 63.58691406 C3.52542542 75.54937848 1.01607354 87.71220553 -0.83984375 99.9375 C-0.94707764 100.64366455 -1.05431152 101.3498291 -1.16479492 102.07739258 C-1.52575559 104.61090117 -1.84305576 107.14711244 -2.15234375 109.6875 C-2.27411484 110.65681961 -2.27411484 110.65681961 -2.39834595 111.64572144 C-3.82592108 123.1896212 -4.49838566 134.59094894 -4.46801758 146.22192383 C-4.46483973 148.75319918 -4.48852412 151.283319 -4.51367188 153.81445312 C-4.57648335 169.62229327 -2.09348777 184.56035234 2.03515625 199.8125 C2.33413818 200.91706543 2.63312012 202.02163086 2.94116211 203.15966797 C6.60215791 216.09272877 12.11832303 231.48040103 23.53515625 239.5625 C33.72802156 245.24220168 49.19622262 245.57715946 60.390625 242.8125 C70.55393336 238.89659919 77.72913371 232.25426236 82.84765625 222.6875 C99.51771194 184.74118901 88.97323249 134.17207928 75.84765625 96.73828125 C71.78807972 84.35340128 70.30074121 68.37749625 75.58984375 56.171875 C76.00492188 55.35203125 76.42 54.5321875 76.84765625 53.6875 C77.50121094 52.39585937 77.50121094 52.39585937 78.16796875 51.078125 C83.84362159 40.84334119 92.18458649 33.35244641 102.72265625 28.3125 C111.5932702 26.53837721 120.31368882 27.08491722 128.0078125 32.09375 C136.29969715 38.66526232 139.85370039 48.13705479 141.41015625 58.39453125 C141.56324289 59.76222843 141.70863769 61.13080135 141.84765625 62.5 C141.92959229 63.25772705 142.01152832 64.0154541 142.09594727 64.79614258 C142.70716705 70.68241677 143.13572273 76.57606035 143.54638672 82.47924805 C144.46965667 107.46454677 144.46965667 107.46454677 155.84765625 128.6875 C166.38075736 135.52136043 177.8205363 136.17200824 190.078125 134.15625 C194.7194856 132.8642525 198.48507238 131.26024536 201.84765625 127.6875 C206.02091614 118.99817674 204.3055593 109.94561041 201.28515625 101.1875 C200.45883444 98.8586602 199.6163429 96.53660707 198.76367188 94.21728516 C197.1033022 89.63179726 195.57664981 85.0014915 194.03515625 80.375 C193.73343506 79.48554688 193.43171387 78.59609375 193.12084961 77.6796875 C192.83862549 76.84050781 192.55640137 76.00132812 192.265625 75.13671875 C192.01578857 74.39768311 191.76595215 73.65864746 191.50854492 72.8972168 C189.80999229 67.21801476 189.56795579 61.76191254 189.47265625 55.875 C189.43527344 55.01068359 189.39789062 54.14636719 189.359375 53.25585938 C189.27233796 46.84896622 190.69653058 42.61682277 194.84765625 37.6875 C200.89299262 32.79978123 206.66202941 31.39843179 214.34765625 31.375 C215.61609375 31.35824219 216.88453125 31.34148437 218.19140625 31.32421875 C223.52417192 31.85407688 226.70950653 33.54935028 230.47265625 37.3125 C239.69849299 49.38618346 239.25250496 64.54257486 239.22265625 79 C239.22333603 80.27932907 239.22333603 80.27932907 239.22402954 81.58450317 C239.19870727 97.91089143 237.63480624 113.59361693 234.84765625 129.6875 C234.70924316 130.51169434 234.57083008 131.33588867 234.42822266 132.18505859 C233.66108321 136.70666875 232.77983738 141.19734042 231.84765625 145.6875 C231.316641 148.27788142 230.78849044 150.86880483 230.26367188 153.46044922 C229.91549049 155.17527395 229.56297159 156.88922668 229.20507812 158.60205078 C225.0859687 178.71758218 223.827032 203.4157223 231.84765625 222.6875 C232.29625 223.76837891 232.29625 223.76837891 232.75390625 224.87109375 C235.25198898 230.36083202 237.99911229 233.39270729 243.59765625 235.9375 C249.21671583 237.23420606 254.42260268 237.77612818 259.66015625 235 C262.71739558 232.78200284 264.5748408 230.66040177 266.84765625 227.6875 C266.91784524 250.0366271 266.97069282 272.38573593 267.00309277 294.73495102 C267.0185388 305.11288902 267.03958493 315.4907584 267.07397461 325.86865234 C267.10394639 334.91768099 267.12324769 343.96665991 267.12992173 353.01573682 C267.13382084 357.80383541 267.14293683 362.5917918 267.16484642 367.37984467 C267.18533463 371.89420167 267.19146531 376.40835901 267.18697929 380.9227581 C267.18779901 382.57221248 267.19369076 384.22167411 267.20527267 385.87108803 C267.31417545 402.19225782 264.86594857 415.0065005 253.66015625 427.5 C243.74646051 436.80947501 231.57176866 438.99624329 218.57836914 438.91455078 C216.74804138 438.91498886 216.74804138 438.91498886 214.8807373 438.91543579 C211.55264695 438.91428532 208.22480803 438.90428957 204.89676213 438.89028788 C201.41209362 438.87774281 197.92742137 438.87660705 194.44273376 438.87423706 C187.85202335 438.86803335 181.26137968 438.85163763 174.67069858 438.83153808 C167.16403795 438.80914446 159.65737404 438.79817696 152.15068829 438.78814721 C136.71630569 438.76727036 121.28198959 438.73211607 105.84765625 438.6875 C105.85042163 439.78633451 105.85318701 440.88516903 105.85603619 442.01730156 C105.92266554 468.76716125 105.97194813 495.51701017 106.00309277 522.26693535 C106.0185548 535.20305202 106.03963172 548.13911385 106.07397461 561.07519531 C106.10389718 572.35164048 106.12323608 583.62804592 106.12992173 594.90452969 C106.13382912 600.87409517 106.1429984 606.843547 106.16484642 612.81307602 C106.18525659 618.43546383 106.19148084 624.0576915 106.18697929 629.68011284 C106.18780246 631.73999464 106.19374097 633.79988198 106.20527267 635.85973167 C106.27870813 649.65762047 106.23141855 661.65523891 96.84765625 672.6875 C89.29431001 679.71886703 81.11059477 682.65914934 70.84765625 682.6875 C61.72503675 682.05168107 53.69915814 678.10212516 47.47265625 671.375 C41.17461678 663.32849631 39.69199802 654.9147529 39.72740173 644.92399597 C39.7261201 643.60064215 39.7261201 643.60064215 39.72481257 642.25055391 C39.72316568 639.29486358 39.72866622 636.33923002 39.73413086 633.38354492 C39.73441293 631.26460776 39.73425461 629.1456705 39.73368835 627.0267334 C39.73340115 621.2730722 39.73928556 615.5194318 39.74626231 609.76577544 C39.75250855 603.75330062 39.75310066 597.74082534 39.75428772 591.72834778 C39.75739728 580.3422762 39.76560563 568.95621421 39.77563721 557.57014686 C39.78680997 544.60776369 39.79231173 531.64538007 39.79733264 518.68299329 C39.80778854 492.01782354 39.82538075 465.35266231 39.84765625 438.6875 C39.21265764 438.69026538 38.57765903 438.69303076 37.92341805 438.69587994 C22.43958098 438.76226612 6.95579373 438.81184184 -8.52815056 438.84293652 C-16.01621502 438.85837513 -23.50418421 438.87940678 -30.9921875 438.91381836 C-37.52223882 438.94381319 -44.05222111 438.96309683 -50.58233941 438.96976548 C-54.03683087 438.97366076 -57.49112492 438.98275161 -60.94555283 439.00469017 C-64.81123171 439.02903913 -68.67672122 439.02946355 -72.54248047 439.02807617 C-74.2418148 439.04425491 -74.2418148 439.04425491 -75.97547913 439.0607605 C-89.0636106 439.01010395 -99.69542754 434.93897661 -109.40234375 426.0625 C-118.37247852 416.58393654 -121.47761819 404.67603489 -121.39285278 391.99377441 C-121.39456163 391.04772197 -121.39627048 390.10166953 -121.39803112 389.12694883 C-121.40131184 385.97322611 -121.39034567 382.81971858 -121.37939453 379.66601562 C-121.37883011 377.39885462 -121.37914758 375.13169326 -121.38027954 372.86453247 C-121.38085285 366.72054192 -121.36910195 360.57662962 -121.35513163 354.43265724 C-121.34262072 348.00780256 -121.34145348 341.58294604 -121.33908081 335.15808105 C-121.33357288 324.37783195 -121.32108436 313.597617 -121.30322266 302.81738281 C-121.28484882 291.71647281 -121.27069968 280.61557059 -121.26220703 269.51464844 C-121.26168158 268.82974124 -121.26115614 268.14483405 -121.26061477 267.43917209 C-121.25800459 264.00300082 -121.2554772 260.56682951 -121.25299096 257.13065815 C-121.23227653 228.64958572 -121.19691757 200.1685444 -121.15234375 171.6875 C-120.82234375 171.6875 -120.49234375 171.6875 -120.15234375 171.6875 C-120.05759766 172.81671875 -120.05759766 172.81671875 -119.9609375 173.96875 C-118.6473378 185.362499 -115.00636572 198.66416353 -105.98046875 206.4296875 C-95.31877183 213.76529948 -83.72738559 213.79185129 -71.15234375 212.6875 C-61.10032229 210.36459763 -53.49101392 204.64013556 -47.90234375 196.0625 C-42.24759526 185.65198948 -40.49288312 175.49322863 -40.71484375 163.75 C-40.73023193 162.48148193 -40.74562012 161.21296387 -40.76147461 159.90600586 C-41.30137086 133.21225702 -47.6831572 107.18512442 -55.6015625 81.7890625 C-57.54468343 75.50660096 -59.25333534 69.16124733 -60.96484375 62.8125 C-61.26712891 61.6997168 -61.56941406 60.58693359 -61.88085938 59.44042969 C-62.30334961 57.86503418 -62.30334961 57.86503418 -62.734375 56.2578125 C-62.98421143 55.32727051 -63.23404785 54.39672852 -63.49145508 53.43798828 C-66.99083376 38.87426453 -65.76282769 24.17972702 -58.578125 10.93359375 C-52.84899841 1.90825734 -43.53146032 -3.28477008 -33.21484375 -5.6875 C-21.6121651 -7.51557477 -9.38064032 -7.75814388 0 0 Z " transform="translate(427.15234375,293.3125)" />
+    <path class="stick" d="M0 0 C21.78 0 43.56 0 66 0 C66.0677474 27.85981356 66.12299958 55.71956031 66.15543652 83.57943535 C66.17089855 96.51555202 66.19197547 109.45161385 66.22631836 122.38769531 C66.25624093 133.66414048 66.27557983 144.94054592 66.28226548 156.21702969 C66.28617287 162.18659517 66.29534215 168.156047 66.31719017 174.12557602 C66.33760034 179.74796383 66.34382459 185.3701915 66.33932304 190.99261284 C66.34014621 193.05249464 66.34608472 195.11238198 66.35761642 197.17223167 C66.43105188 210.97012047 66.3837623 222.96773891 57 234 C49.44665376 241.03136703 41.26293852 243.97164934 31 244 C21.8773805 243.36418107 13.85150189 239.41462516 7.625 232.6875 C1.32696053 224.64099631 -0.15565823 216.2272529 -0.12025452 206.23649597 C-0.12110894 205.35426009 -0.12196337 204.47202421 -0.12284368 203.56305391 C-0.12449057 200.60736358 -0.11899003 197.65173002 -0.11352539 194.69604492 C-0.11324332 192.57710776 -0.11340164 190.4581705 -0.1139679 188.3392334 C-0.1142551 182.5855722 -0.10837069 176.8319318 -0.10139394 171.07827544 C-0.0951477 165.06580062 -0.09455559 159.05332534 -0.09336853 153.04084778 C-0.09025897 141.6547762 -0.08205062 130.26871421 -0.07201904 118.88264686 C-0.06084628 105.92026369 -0.05534452 92.95788007 -0.05032361 79.99549329 C-0.03986771 53.33032232 -0.02152687 26.66516449 0 0 Z " transform="translate(467,732)" />
+
+    <g class="drop drop-left">
+      <path d="M7.502 19.423c2.602 2.105 6.395 2.105 8.996 0c2.602 -2.105 3.262 -5.708 1.566 -8.546l-4.89 -7.26c-.42 -.625 -1.287 -.803 -1.936 -.397a1.376 1.376 0 0 0 -.41 .397l-4.893 7.26c-1.695 2.838 -1.035 6.441 1.567 8.546z" />
+    </g>
+
+    <g class="drop drop-right">
+      <path d="M7.502 19.423c2.602 2.105 6.395 2.105 8.996 0c2.602 -2.105 3.262 -5.708 1.566 -8.546l-4.89 -7.26c-.42 -.625 -1.287 -.803 -1.936 -.397a1.376 1.376 0 0 0 -.41 .397l-4.893 7.26c-1.695 2.838 -1.035 6.441 1.567 8.546z" />
+    </g>
+  </svg>
+</div>
+</body>
+
+
+
+//////////////////////////////   R O T A T E D    T E X T   I N    B L O C K  /////////////////////////////////
+
+
+
+<style>
+div#myRot3Div {
+  transform: rotate(0deg);
+  width: 450px;
+  height: 70px;
+  background-color: transparent;
+ border: 0px solid ffcc99;
+   font-family: "Harrington Regular", Times, serif;
+   font-size: 50px;
+   text-align:center;
+   color:  #ffcc99;  
+}
+</style>
+<div id="myRot3Div">
+ Winter Clearance Sale
+</div>
+
+//---------------------------------
+<style>
+div#myRotDiv2 {
+  transform: rotate(-20deg);
+  width: 350px;
+  height: 70px;
+  background-color: blue;
+  border: 3px solid lightblue;
+   font-family: "Harrington Regular", Times, serif;
+   font-size: 50px;
+   text-align:center;  
+color: cyan; 
+}
+</style>
+<div id="myRotDiv2">
+Price Drop !
+</div>
+//----------------------------------
+
+<style>
+div#myRotDiv {
+  transform: rotate(-20deg);
+  width: 350px;
+  height: 70px;
+  background-color: blue;
+  border: 3px solid lightblue;
+   font-family: "Harrington Regular", Times, serif;
+   font-size: 50px;
+   text-align:center;  
+color: cyan; 
+}
+</style>
+<div id="myRotDiv">
+Price Drop !
+</div>
+
+
+
+
+
+
+
+
+<p id="p1" style="color:#e65c00; font-size:18pt;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a basic video<br></b></p>
+
+<p id="p1" style="color:#e65c00; font-size:16pt;"><b>Using a different approach to transitions.<br></b></p><b>
+<p id="p1" style="color:#e65c00; font-size:14pt;"><b>By using zoom-out the browsers canvas be a huge workspace.<br></b>
+</p><p id="p1" style="color:#e65c00; font-size:14pt;"><b>Trigger the display to move to a point with event driven actions which handle the audio-end event, .<br><br></b></p></b>
+
+
+
+-------------  W U F O O   -----------------------------------------
+-- This needs svg text to be made when needed - use online svg converter
+
+<style>
+
+aside {
+  width: 25%;
+  min-width: 250px;
+  max-width: 500px;
+  margin: 25px auto;
+}
+
+.wufoo-ad-wrap {
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+}
+
+.wufoo-ad {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wufoo-letter {
+  animation: kaboom 5s ease alternate infinite;
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  &:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+}
+@keyframes kaboom {
+  90% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.text-1, .text-2, .text-3 {
+  fill: white;
+  font-size: 63px;
+  font-family: Sans-Serif;
+}
+
+.text-1 {
+  animation: hideshow 10s ease infinite;
+}
+.text-2 {
+  opacity: 0;
+  animation: hideshow 10s 1.5s ease infinite;
+}
+.text-3 {
+  opacity: 0;
+  animation: hideshow 10s 3s ease infinite;
+}
+@keyframes hideshow {
+  0% { opacity: 1; }
+  10% { opacity: 1; }
+  15% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+#trex {
+  transform: translateY(150px);
+  animation: popup 10s 6.5s ease infinite;
+}
+@keyframes popup {
+  0% {
+    transform: translateY(150px);
+  }
+  34% {
+    transform: translateY(20px);
+  }
+  37% {
+    transform: translateY(150px);
+  }
+  100% {
+    transform: translateY(150px);
+  }
+}
+
+</style>
+<aside>
+  <div class="wufoo-ad-wrap">
+<svg version="1.1" class="wufoo-ad" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 600" enable-background="new 0 0 400 400" xml:space="preserve">
+<rect fill="#668cff" width="600" height="600" border="2px"></rect>
+<g>
+
+
+<path fill="#e6ecff" class="wufoo-letter" d="M60.858,129.642L30.163,60.579l20.81-4.05l9.402,26.003c2.916,8.116,6.081,17.52,8.701,24.691l0.215-0.041
+	c-0.514-8.361-0.703-17.343-0.806-26.452l-0.565-27.5l20.703-4.029l9.933,27.012c2.895,8.01,5.3,15.223,7.852,23.188l0.215-0.042
+	c-0.493-8.254-0.875-17.086-1.237-25.811L104.5,46.113l19.63-3.82l-3.737,75.764l-21.132,4.112L88.923,94.79
+	c-2.304-6.121-4.585-12.691-7.221-21.084l-0.214,0.041c0.491,8.812,0.84,15.758,0.806,22.444l0.02,29.276L60.858,129.642z"></path>
+<path class="wufoo-letter" fill="#e6ecff" d="M148.403,62.895l-5.803,41.331c-1.549,11.036,1.356,17.843,9.039,18.921
+	c7.79,1.095,12.381-4.108,14.007-15.686l5.803-41.33l19.583,2.75l-5.651,40.249c-3.16,22.505-16.007,32.285-36.456,29.414
+	c-20.016-2.811-28.977-15.211-25.68-38.689l5.575-39.708L148.403,62.895z"></path>
+<path class="wufoo-letter" fill="#e6ecff" d="M186.189,51.906l47.135-3.928l1.333,16.002l-27.431,2.286l1.134,13.607l25.799-2.151l1.324,15.894
+	l-25.799,2.149l2.323,27.867l-19.704,1.642L186.189,51.906z"></path>
+<path class="wufoo-letter" fill="#e6ecff" d="M307.834,96.642c0,23.716-14.208,38.799-36.94,38.799c-22.843,0-35.41-17.159-35.41-37.597
+	c0-21.421,14.098-38.47,36.612-38.47C295.812,59.374,307.834,76.969,307.834,96.642z M256.358,97.517
+	c0,13.77,6.011,22.295,15.519,22.295s15.082-9.289,15.082-22.515c0-12.677-5.683-22.294-15.191-22.294
+	C262.369,75.002,256.358,83.964,256.358,97.517z"></path>
+<path class="wufoo-letter" fill="#e6ecff" d="M369.837,78.776c0,23.717-14.207,38.799-36.94,38.799c-22.842,0-35.409-17.159-35.409-37.597
+	c0-21.421,14.098-38.471,36.612-38.471C357.815,41.508,369.837,59.104,369.837,78.776z M318.361,79.65
+	c0,13.771,6.011,22.296,15.519,22.296c9.509,0,15.082-9.29,15.082-22.514c0-12.679-5.682-22.296-15.19-22.296
+	C324.372,57.136,318.361,66.098,318.361,79.65z"></path>
+<text transform="matrix(1 0 0 1 134.1416 285.127)" class="text-1">break</text>
+<text transform="matrix(1 0 0 1 112 285.127)" class="text-2">the</text>
+<text transform="matrix(1 0 0 1 39 285.127)" class="text-3">barrier</text>
+</g></svg>
+  </div>
+</aside>
+
+---------------------------------------------------------------------------------
+
+
+
+----------------------------- VIDEO CAPTURE ---------------------
+
+
+// this gets an iframe to take a snapshot
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+
+<button onclick="openWin()">Snap</button>
+<button onclick="closeWin()">Done</button>
+
+<script>
+let myWindow;
+
+function openWin() {
+  myWindow = window.open("Video-Capture-Single-Frame-to-png.html", "", "width=800,height=600");
+}
+
+function closeWin() {
+  myWindow.close();
+}
+</script>
+
+
+
+//////////////////////// ---------- ------///////////////--------- ---------- ----------- ------------/////////////////
+
+
+GOOD WORKING STRAIGHT VIDEO CAP 
+
+
+<video autoplay width="320" height="210"></video>
+<script>
+  navigator.mediaDevices
+    .getUserMedia({ video: true, audio: true })
+    .then((localMediaStream) => {
+      const video = document.querySelector("video");
+      video.srcObject = localMediaStream;
+    })
+    .catch((error) => {
+      console.log("Rejected!", error);
+    });
+
+//document.getElementById("63DEAD03-2607-473E-BFBC-28A64BEC2C60").innerHTML =" <video autoplay width='320' height='210'></video>";
+// Find the canvas element to capture
+const canvasElt = document.querySelector("video");
+
+// Get the stream
+const stream = canvasElt.captureStream(25); // 25 FPS
+
+ var elementr1 = document.getElementById("DF3E305F-3040-4A16-87A9-D9B1631B9360");
+    elementr1.innerHTML = " <video autoplay width='320' height='210'>"+stream +" </video>";;	 
+//document.getElementById("63DEAD03-2607-473E-BFBC-28A64BEC2C60").innerHTML ="bozo";  //" <video autoplay width='320' height='210'>"+stream +" </video>";
+
+// Do things to the stream
+// E.g. Send it to another computer using an RTCPeerConnection
+//      pc is an RTCPeerConnection created elsewhere
+//stream.getTracks().forEach((track) =>  
+                                  //  socket.send(JSON.stringify({ 
+								//	act: 'broadcast',
+							      //  message:stream							       
+								//	}));
+							 console.log("here",stream);	
+							//	);									
+
+//stream.getTracks().forEach(  (track) => pc.addTrack(track, stream)       );
+</script>
+
+

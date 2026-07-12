@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/02/17 15:22:00.000.059,C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\WebKitServerCircles.dproj=C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborArt.dproj</Transaction>
+    <Transaction>2024/02/17 20:49:20.000.922,C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\Unit1.pas=C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborartUnit.pas</Transaction>
+    <Transaction>2024/02/17 20:49:20.000.922,C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\Unit1.fmx=C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborartUnit.fmx</Transaction>
+    <Transaction>2024/02/17 21:06:42.000.896,C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborartUnit.pas=C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\Unit1.pas</Transaction>
+    <Transaction>2024/02/17 21:06:42.000.896,C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborartUnit.fmx=C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\Unit1.fmx</Transaction>
+    <Transaction>2024/02/18 07:11:52.000.413,C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborArt.dproj=C:\Users\winst\Documents\Embarcadero\Studio\Projects\delphi-websocket-master-Circles-bad\2-Circles\CollaborArt.dproj</Transaction>
+    <Transaction>2024/05/12 19:51:18.000.072,=C:\Program Files (x86)\Embarcadero\Studio\21.0\source\Indy10\Protocols\IdMultipartFormData.pas</Transaction>
+    <Transaction>2024/05/12 20:17:21.000.438,C:\Program Files (x86)\Embarcadero\Studio\21.0\source\Indy10\Protocols\IdMultipartFormData.pas=</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="HA270LML" Android64="HA270LML"/>
+	</ActiveMobileDevice>
+</BorlandProject>
